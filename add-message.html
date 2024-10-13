@@ -24,7 +24,7 @@
       </div>
       <div>
         <a
-          href="add-message.html"
+          href="index.html"
           class="add-message-link"
           style="
             background-color: #fff;
@@ -34,8 +34,20 @@
             text-decoration: none;
             font-size: 1em;
           "
-          >Leave a Message |</a
+          >Return to Homepage</a
         >
+        <a
+          href="search.html"
+          class="add-message-link"
+          style="
+            background-color: #fff;
+            color: #ff6600;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+          "
+          >Search Messages</a>
       </div>
     </header>
 
@@ -86,12 +98,24 @@
         .getElementById("submit-message")
         .addEventListener("submit", submitMessage);
 
+      function containsProfanity(message) {
+        const profanities = ["cunt", "whore", "fuck", "bitch", "asshole"];
+        const regex = new RegExp(profanities.join("|"), "i"); // Case-insensitive match
+        return regex.test(message);
+      }
+
       async function submitMessage(event) {
         event.preventDefault(); // Prevent form reload
 
         const yourHabbo = document.getElementById("your-habbo").value;
         const friendHabbo = document.getElementById("friend-habbo").value;
         const message = document.getElementById("message").value;
+
+        // Check for profanity
+        if (containsProfanity(message)) {
+          alert("Please make your message kinder and avoid using offensive language.");
+          return;
+        }
 
         const data = {
           fields: {
