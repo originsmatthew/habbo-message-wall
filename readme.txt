@@ -1,0 +1,1 @@
+This script was created by Remotive of Habbo UK and was released by Valtriviord and HabboArchive.NET with permission.
