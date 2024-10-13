@@ -310,3 +310,19 @@ footer {
   text-align: center;
   margin-top: 20px; /* Space between message box and time */
 }
+.add-message-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.add-message-link:hover {
+  background-color: #ff3300;
+}
