@@ -8,9 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
       .addEventListener("submit", submitMessage);
   }
 
-  // Check if we're on the homepage to load messages and handle pagination
+  // Check if we're on the homepage to load messages
   if (currentPath.includes("index.html")) {
     fetchMessages();
+  }
+
+  // Check if we're on the search page to load search functionality
+  if (currentPath.includes("search.html")) {
+    document
+      .getElementById("searchInput")
+      .addEventListener("input", searchMessages);
   }
 });
 
@@ -60,7 +67,7 @@ async function submitMessage(event) {
   }
 }
 
-// Pagination logic
+// Pagination logic for index.html
 let currentPage = 1;
 const messagesPerPage = 10;
 
@@ -153,4 +160,55 @@ function displayMessages(messages, page, totalPages) {
     `;
     container.innerHTML += messageBox;
   });
+}
+
+// Search functionality for search.html
+async function searchMessages() {
+  const searchInput = document
+    .getElementById("searchInput")
+    .value.toLowerCase();
+  const messagesContainer = document.getElementById("messagesContainer");
+  messagesContainer.innerHTML = "<p>Searching...</p>";
+
+  if (searchInput.length === 0) {
+    messagesContainer.innerHTML = "<p>Start typing a name to search...</p>";
+    return;
+  }
+
+  const airtableToken =
+    "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
+  const airtableBaseURL =
+    "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
+
+  try {
+    const response = await fetch(
+      `${airtableBaseURL}?filterByFormula={Approved}=TRUE()`,
+      {
+        headers: {
+          Authorization: `Bearer ${airtableToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const result = await response.json();
+    const messages = result.records;
+
+    // Filter messages by "Your Habbo Name" or "Friend Habbo Name"
+    const filteredMessages = messages.filter((message) => {
+      const yourHabbo = message.fields["Your Habbo Name"].toLowerCase();
+      const friendHabbo = message.fields["Friend Habbo Name"].toLowerCase();
+      return (
+        yourHabbo.includes(searchInput) || friendHabbo.includes(searchInput)
+      );
+    });
+
+    if (filteredMessages.length > 0) {
+      displayMessages(filteredMessages);
+    } else {
+      messagesContainer.innerHTML = "<p>No messages found.</p>";
+    }
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    messagesContainer.innerHTML = "<p>Failed to load messages.</p>";
+  }
 }
