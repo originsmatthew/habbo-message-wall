@@ -8,49 +8,48 @@
   </head>
   <body>
     <header
+  style="
+    display: flex;
+    justify-content: flex-start; /* Changed to left-align the content */
+    align-items: center;
+    padding: 20px;
+  "
+>
+  <div>
+    <img src="logo.png" alt="Habbo Wall of Kindness" />
+    <p class="subheading">
+      Send a message to a special Habbo to show them how much they mean to
+      you.
+    </p>
+  </div>
+  <div style="margin-left: auto;"> <!-- Moved navigation to the far right -->
+    <a
+      href="index.html"
+      class="add-message-link"
       style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
+        background-color: #fff;
+        color: #ff6600;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1em;
       "
+      >Return to Homepage</a
     >
-      <div>
-        <img src="logo.png" alt="Habbo Wall of Kindness" />
-        <p class="subheading">
-          Send a message to a special Habbo to show them how much they mean to
-          you.
-        </p>
-      </div>
-      <div>
-        <a
-          href="index.html"
-          class="add-message-link"
-          style="
-            background-color: #fff;
-            color: #ff6600;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1em;
-          "
-          >Return to Homepage</a
-        >
-        <a
-          href="search.html"
-          class="add-message-link"
-          style="
-            background-color: #fff;
-            color: #ff6600;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1em;
-          "
-          >Search Messages</a>
-      </div>
-    </header>
-
+    <a
+      href="search.html"
+      class="add-message-link"
+      style="
+        background-color: #fff;
+        color: #ff6600;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1em;
+      "
+      >Search Messages</a>
+  </div>
+</header>
     <!-- Form to submit a kind message -->
     <section class="form-container">
       <h2>Add a Kind Message</h2>
