@@ -1,0 +1,231 @@
+/* Font-face declarations */
+@font-face {
+  font-family: "Volter Goldfish";
+  src: url("fonts/Volter (Goldfish).ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Volter Goldfish Bold";
+  src: url("fonts/Volter-Bold (Goldfish).ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* General body styling */
+body {
+  font-family: "Volter Goldfish", Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styling */
+header {
+  background-color: #ffc107;
+  padding: 20px;
+  color: #fff;
+}
+
+h1,
+h2 {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+/* Main container for messages */
+#messagesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Styling for each message box */
+.message-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+}
+
+/* Avatar container */
+.avatar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Avatar styling */
+.avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+.avatar img {
+  width: 100px;
+  height: auto;
+}
+
+/* Names under avatars */
+.avatar p {
+  margin-top: 10px;
+  font-family: "Volter Goldfish", Arial, sans-serif;
+  font-size: 1.2em;
+}
+
+/* Message content styling */
+.message-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+  flex-grow: 1;
+}
+
+/* Pixel-styled speech bubble */
+.pixel-message {
+  background-color: #f9d71c; /* Yellow bubble color */
+  padding: 15px 25px;
+  border: 2px solid #000;
+  font-family: "Volter Goldfish", Arial, sans-serif;
+  font-size: 1.2em;
+  color: #000;
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+  margin: 0 20px;
+}
+
+/* Adding a triangle for the speech bubble effect */
+.pixel-message::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -20px; /* Adjust for sender */
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent #f9d71c transparent transparent;
+  border-right-color: #000; /* Black border on the right side of the triangle */
+}
+
+/* Sender avatar facing right */
+.avatar.sender img {
+  transform: scaleX(1); /* Default orientation */
+}
+
+/* Recipient avatar - removing the flip */
+.avatar.recipient img {
+  transform: none; /* No flip */
+}
+
+/* Form container for add message */
+.form-container {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px;
+  font-family: "Volter Goldfish", Arial, sans-serif;
+  font-size: 1em;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff3300;
+}
+
+/* Footer styling */
+footer {
+  margin-top: 30px;
+}
+
+.add-message-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.add-message-link:hover {
+  background-color: #ff3300;
+}
+
+/* Responsive styling for mobile */
+@media (max-width: 600px) {
+  .form-container {
+    width: 90%;
+  }
+
+  h1,
+  h2 {
+    font-size: 2em;
+  }
+
+  button {
+    font-size: 1em;
+    padding: 10px;
+  }
+}
