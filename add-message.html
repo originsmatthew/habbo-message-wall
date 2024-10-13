@@ -10,18 +10,19 @@
     <header
   style="
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 20px;
+    max-width: 100%;
   "
 >
-  <div>
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
     <img src="logo.png" alt="Habbo Wall of Kindness" />
-    <p class="subheading">
+    <p class="subheading" style="margin: 0;">
       Send a message to a special Habbo to show them how much they mean to you.
     </p>
   </div>
-  <div>
+  <div style="margin-left: auto;"> <!-- Ensures navigation stays to the right -->
     <a
       href="index.html"
       class="add-message-link"
@@ -32,6 +33,7 @@
         border-radius: 5px;
         text-decoration: none;
         font-size: 1em;
+        margin-left: 10px;
       "
       >Return to Homepage</a>
     <a
