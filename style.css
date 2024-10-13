@@ -304,3 +304,9 @@ footer {
   color: #333; /* Optional: You can change the color for better contrast */
   margin-top: 5px; /* Optional: Add margin to adjust the spacing */
 }
+.submission-time {
+  font-size: 0.85em; /* Make font slightly smaller */
+  color: #666; /* Subtle color */
+  text-align: center;
+  margin-top: 20px; /* Space between message box and time */
+}

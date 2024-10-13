@@ -74,7 +74,13 @@ function displayMessages(messages) {
     const yourHabbo = message.fields["Your Habbo Name"];
     const friendHabbo = message.fields["Friend Habbo Name"];
     const kindMessage = message.fields["Message"];
-    const submissionTime = new Date(message.createdTime).toLocaleString("en-US", { timeZone: "UTC" });
+    const createdTime = new Date(message.createdTime);
+    const submissionDate = createdTime.toLocaleDateString("en-GB");
+    const submissionTime = createdTime.toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
 
     const messageBox = `
       <div class="message-box">
@@ -84,9 +90,11 @@ function displayMessages(messages) {
             <p>${yourHabbo}</p>
           </div>
           <div class="message-content">
-            <div class="pixel-message">
-              <p>${kindMessage}</p>
-              <p class="submission-time">Submitted on: ${submissionTime} UTC</p>
+            <div class="pixel-message-container">
+              <div class="pixel-message">
+                <p>${kindMessage}</p>
+              </div>
+              <p class="submission-time">Submitted on: ${submissionDate} @ ${submissionTime} UTC</p>
             </div>
           </div>
           <div class="avatar recipient">
