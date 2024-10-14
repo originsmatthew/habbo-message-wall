@@ -59,6 +59,16 @@ nav a:hover {
   background-color: #ff3300;
 }
 
+/* Ensure URLs remain orange */
+a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 /* Mobile-specific adjustments for header */
 @media (max-width: 600px) {
   header img {
@@ -128,7 +138,7 @@ nav a:hover {
 
 .avatar img {
   width: auto;
-  height: 150px; /* Adjusted size to match the original */
+  height: 150px; /* Adjusted size to 150px for desktop */
   border-radius: 50%;
 }
 
@@ -184,6 +194,88 @@ nav a:hover {
   margin-top: 20px;
 }
 
+/* Pagination styling */
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#pagination button {
+  margin: 0 10px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Volter Goldfish Bold"; /* Ensure the correct font is applied */
+}
+
+#pagination button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Form container for add message */
+.form-container {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px;
+  font-family: "Volter Goldfish", Arial, sans-serif;
+  font-size: 1em;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff3300;
+}
+
 /* Footer styling */
 footer {
   text-align: center;
@@ -205,30 +297,6 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Pagination styling */
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-#pagination button {
-  margin: 0 10px;
-  background-color: #ff6600;
-  color: white;
-  border: none;
-  padding: 5px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#pagination button:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
-}
-
 /* Mobile-specific adjustments for message boxes */
 @media (max-width: 600px) {
   .message-box {
@@ -237,7 +305,7 @@ footer a:hover {
   }
 
   .avatar img {
-    height: 60px;
+    height: 80px; /* Slightly smaller avatars for mobile */
   }
 
   .pixel-message {
