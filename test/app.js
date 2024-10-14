@@ -156,6 +156,17 @@ function initializeAddMessagePage(submissionsOpen) {
     const friendHabboName = document.getElementById("friend-habbo").value;
     const message = document.getElementById("message").value;
 
+    // Profanity filter - add words as necessary
+    const prohibitedWords = ["cunt", "whore", "fuck", "nonce", "pedo", "bastard", "bitch", "wanker"];
+    const containsProhibitedWord = prohibitedWords.some(word =>
+      message.toLowerCase().includes(word)
+    );
+
+    if (containsProhibitedWord) {
+      alert("Please make your message kinder and avoid using inappropriate language.");
+      return; // Stop form submission
+    }
+
     const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
     const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
 
