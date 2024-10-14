@@ -435,14 +435,14 @@ footer a:hover {
 /* Styling for avatar and prize images */
 .avatar img,
 .prize-image img {
-  height: 150px;  /* Fixed height */
+  height: 75px;  /* Fixed height */
   width: auto;    /* Maintain original aspect ratio */
 }
 
 @media (max-width: 600px) {
   .avatar img,
   .prize-image img {
-    height: 100px; /* Smaller height for mobile */
+    height: 85px; /* Smaller height for mobile */
     width: auto;   /* Maintain original aspect ratio */
   }
 }
