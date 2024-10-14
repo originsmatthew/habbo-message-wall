@@ -559,3 +559,10 @@ footer a:hover {
   flex: 1;
   padding: 0 20px;
 }
+
+/* Avatar fix for aspect ratio */
+.avatar img {
+  width: auto;
+  height: 50px;
+  border-radius: 50%;
+}
