@@ -7,67 +7,30 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header
-      style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-      "
-    >
-      <div>
-        <img src="logo.png" alt="Habbo Wall of Kindness" />
-        <p class="subheading">
-          Your message will be reviewed and added to the Wall of Kindness once
-          approved.
-        </p>
-      </div>
-      <div>
-        <a
-          href="index.html"
-          class="add-message-link"
-          style="
-            background-color: #fff;
-            color: #ff6600;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1em;
-          "
-          >Return to Homepage |</a
-        >
-      </div>
-    </header>
+    <div id="header-placeholder"></div> <!-- Placeholder for header -->
 
-    <section>
+    <section style="text-align: center; padding: 20px;">
       <h1>Thank You for Your Submission!</h1>
-      <p>
-        Your message will be reviewed and added to the Wall of Kindness once
-        approved.<br /><br />
-
-        For any queries, please feel free to contact Matthew on Habbo Origins
-        US.
-      </p>
-      <a href="index.html" class="return-home-link">Return to Homepage</a>
+      <p>Your message will be reviewed and added to the Wall of Kindness once approved.</p>
+      <p>Return to the <a href="index.html" style="color: #ff6600; text-decoration: none;">homepage</a> or <a href="search.html" style="color: #ff6600; text-decoration: none;">search for messages</a>.</p>
     </section>
 
-    <footer style="font-size: 0.8em; color: #999; padding: 0 20px">
-  <p>
-    We are not affiliated with, endorsed, sponsored, or specifically approved by Sulake Oy or its Affiliates. We may use the trademarks and other intellectual property of Habbo, which is permitted under the Habbo Fan Site Policy. The use of this Habbo Imager kindly provided by
-    <a href="https://www.habboera.com" target="_blank">HabboEra</a>.
-  </p>
-  <p>
-    Page created and maintained by
-    <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a>.
-  </p>
-  <p>
-    <a href="privacy-policy.html" style="color: #ff6600;">Privacy Policy</a>
-  </p>
-  <img
-    src="https://habboera.com/imager?habbo=Matthew&size=m&gesture=std&action=std&direction=4&head_direction=4&headonly=0&gender=M"
-    alt="Matthew's Avatar"
-    style="width: 50px; height: auto; margin-top: 10px"
-  />
-</footer>
+    <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
+
+    <script>
+      // Function to dynamically load header and footer
+      function loadContent(selector, file) {
+        fetch(file)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector(selector).innerHTML = data;
+          })
+          .catch(error => console.error('Error loading content:', error));
+      }
+
+      // Load the header and footer
+      loadContent('#header-placeholder', 'header.html');
+      loadContent('#footer-placeholder', 'footer.html');
+    </script>
   </body>
 </html>
