@@ -392,11 +392,18 @@ footer a:hover {
 }
 
 /* Winners table styling */
+.winners-table-container {
+  display: flex;
+  justify-content: center; /* Center the table on the page */
+  padding: 20px; /* Add padding around the table */
+}
+
 .winners-table {
-  width: 80%;
+  width: 80%; /* Adjust the width to 80% of the page */
+  max-width: 1000px; /* Set a maximum width to prevent it from getting too large on wider screens */
   border-collapse: collapse;
-  margin: 20px 0;
-  background-color: #f9f9f9; /* Light background color */
+  background-color: #f9f9f9;
+  margin: 20px auto;
 }
 
 .winners-table th, .winners-table td {
