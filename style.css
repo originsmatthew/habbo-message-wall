@@ -159,17 +159,28 @@ nav a:hover {
   width: 100%;
 }
 
-/* Avatar styling */
+/* Styling for avatar images */
 .avatar img {
-  width: auto;
-  height: 150px; /* Adjust the height to make avatars taller */
-  max-width: 100%; /* Ensure it scales properly on smaller screens */
+  height: 150px;  /* Fixed height for avatars */
+  width: auto;    /* Maintain original aspect ratio */
 }
 
-/* On mobile, reduce the height for responsiveness */
+/* Styling for prize images */
+.prize-image img {
+  height: 100px;  /* Fixed height for prize images */
+  width: auto;    /* Maintain original aspect ratio */
+}
+
+/* Responsive adjustments for mobile */
 @media (max-width: 600px) {
   .avatar img {
-    height: 100px; /* Adjust for mobile to make avatars smaller */
+    height: 85px;  /* Smaller height for avatars on mobile */
+    width: auto;   /* Maintain original aspect ratio */
+  }
+
+  .prize-image img {
+    height: 70px;  /* Smaller height for prize images on mobile */
+    width: auto;   /* Maintain original aspect ratio */
   }
 }
 
