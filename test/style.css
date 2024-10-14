@@ -438,22 +438,34 @@ footer a:hover {
 .winners-table tbody tr:hover {
   background-color: #e0e0e0; /* Hover effect for rows */
 }
-/* Styling for avatar and prize images */
-.avatar img,
-.prize-image img {
-  height: 150px;  /* Fixed height */
+/* Styling for avatar images */
+.avatar img {
+  height: 150px;  /* Fixed height for avatars */
   width: auto;    /* Maintain original aspect ratio */
 }
 
+/* Styling for prize images */
+.prize-image img {
+  height: 100px;  /* Fixed height for prize images */
+  width: auto;    /* Maintain original aspect ratio */
+}
+
+/* Responsive adjustments for mobile */
 @media (max-width: 600px) {
-  .avatar img,
+  .avatar img {
+    height: 85px;  /* Smaller height for avatars on mobile */
+    width: auto;   /* Maintain original aspect ratio */
+  }
+
   .prize-image img {
-    height: 85px; /* Smaller height for mobile */
+    height: 70px;  /* Smaller height for prize images on mobile */
     width: auto;   /* Maintain original aspect ratio */
   }
 }
+
+/* Avatar column styling */
 table td.avatar {
-  width: 200px; /* Adjust width as needed */
+  width: 200px; /* Adjust width for the avatar column */
   padding: 10px;
   text-align: center;
 }
