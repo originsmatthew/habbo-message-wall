@@ -321,3 +321,8 @@ a {
 a:hover {
   text-decoration: underline; /* Add underline on hover */
 }
+
+/* Add space between pagination and footer */
+#pagination {
+  margin-bottom: 30px; /* Adjust the value to whatever spacing you prefer */
+}
