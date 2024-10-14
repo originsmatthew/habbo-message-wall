@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Dynamic header -->
     <div id="header-placeholder"></div>
 
+    <!-- Main Section -->
     <section class="intro-message-section">
       <div class="intro-message-container">
         <p class="intro-message">
@@ -24,19 +26,25 @@
       </div>
     </section>
 
+    <!-- Message Display Section -->
     <section>
       <h2>The Wall of Kindness</h2>
       <div id="messagesContainer">
         <p>Loading messages...</p>
       </div>
 
-      <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Habbo Origins Wall of Kindness</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div id="header-placeholder"></div>
+      <!-- Pagination -->
+      <div id="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <span id="pageIndicator">Page 1</span>
+        <button id="nextPage" disabled>Next</button>
+      </div>
+    </section>
+
+    <!-- Dynamic footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Link to the app.js script -->
+    <script src="app.js"></script>
+  </body>
+</html>
