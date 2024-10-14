@@ -7,13 +7,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="header-placeholder"></div> <!-- Placeholder for header -->
+    <div id="header-placeholder"></div> <!-- Dynamic header placeholder -->
 
-    <section>
-      <div class="intro-message">
-        <p><u>Hey Habbos!</u><br>
-          Matthew here. Let's spread some positivity! Simply <a href="add-message.html" style="color: #ff6600;">leave a message</a> telling us something nice about a fellow Habbo.
+    <section class="intro-message-section">
+      <div class="intro-message-container">
+        <p class="intro-message">
+          <u>Hey Habbos!</u><br>
+          Matthew here. Let's spread some positivity! Simply <a href="add-message.html" class="link">leave a message</a> telling us something nice about a fellow Habbo.
+          <br><br>
+          The wall will be open for one week. On <u>Monday, 21st October</u>, every Habbo who has sent or received a message will be entered into a prize draw to win <a href="f02b6d15-e922-44be-95b7-1096926f3105.png" target="_blank" class="link">one of the prizes at random from this room</a>.
         </p>
+        <p class="intro-details">
+          That means we'll have <u>22 winners</u>! Each Habbo can only be entered once, regardless of how many times their name is mentioned.
+        </p>
+        <p class="thank-you-message">Thanks so much for taking part in our week of kindness. ♡</p>
       </div>
     </section>
 
@@ -23,13 +30,15 @@
         <p>Loading messages...</p>
       </div>
 
-      <div id="pagination" style="text-align: center; margin: 20px 0;">
-        <button id="prevButton" disabled>Previous</button>
-        <button id="nextButton" disabled>Next</button>
+      <!-- Pagination -->
+      <div id="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <span id="pageIndicator">Page 1</span>
+        <button id="nextPage" disabled>Next</button>
       </div>
     </section>
 
-    <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
+    <div id="footer-placeholder"></div> <!-- Dynamic footer placeholder -->
 
     <script>
       function loadContent(selector, file) {
@@ -44,49 +53,78 @@
       loadContent('#header-placeholder', 'header.html');
       loadContent('#footer-placeholder', 'footer.html');
 
-      let offset = "";
+      let currentPage = 1;
       const messagesPerPage = 10;
-      const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
-      const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
 
-      async function fetchMessages(page) {
+      async function fetchMessages() {
+        const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
+        const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
+
         try {
-          let url = `${airtableBaseURL}?filterByFormula={Approved}=TRUE()&pageSize=${messagesPerPage}`;
-          if (offset) {
-            url += `&offset=${offset}`;
-          }
-          const response = await fetch(url, {
-            headers: {
-              Authorization: `Bearer ${airtableToken}`,
-              "Content-Type": "application/json",
+          const response = await fetch(
+            `${airtableBaseURL}?filterByFormula={Approved}=TRUE()`,
+            {
+              headers: {
+                Authorization: `Bearer ${airtableToken}`,
+                "Content-Type": "application/json",
+              },
             }
-          });
-
+          );
           const result = await response.json();
           const messages = result.records;
-          displayMessages(messages);
 
-          offset = result.offset || "";
+          messages.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
 
-          document.getElementById("prevButton").disabled = !offset;
-          document.getElementById("nextButton").disabled = !offset || messages.length < messagesPerPage;
+          const totalPages = Math.ceil(messages.length / messagesPerPage);
+          displayMessages(messages, currentPage, totalPages);
+
+          const prevButton = document.getElementById("prevPage");
+          const nextButton = document.getElementById("nextPage");
+          const pageIndicator = document.getElementById("pageIndicator");
+
+          prevButton.disabled = currentPage === 1;
+          nextButton.disabled = currentPage === totalPages;
+
+          prevButton.onclick = () => {
+            if (currentPage > 1) {
+              currentPage--;
+              displayMessages(messages, currentPage, totalPages);
+              pageIndicator.innerText = `Page ${currentPage} of ${totalPages}`;
+            }
+          };
+
+          nextButton.onclick = () => {
+            if (currentPage < totalPages) {
+              currentPage++;
+              displayMessages(messages, currentPage, totalPages);
+              pageIndicator.innerText = `Page ${currentPage} of ${totalPages}`;
+            }
+          };
         } catch (error) {
           console.error("Error fetching messages:", error);
           document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
         }
       }
 
-      function displayMessages(messages) {
+      function displayMessages(messages, page, totalPages) {
         const container = document.getElementById("messagesContainer");
         container.innerHTML = "";
 
-        messages.forEach(message => {
+        const start = (page - 1) * messagesPerPage;
+        const end = start + messagesPerPage;
+        const messagesToShow = messages.slice(start, end);
+
+        messagesToShow.forEach(message => {
           const yourHabbo = message.fields["Your Habbo Name"];
           const friendHabbo = message.fields["Friend Habbo Name"];
           const kindMessage = message.fields["Message"];
           const createdTime = new Date(message.createdTime);
           const submissionDate = createdTime.toLocaleDateString("en-GB");
-          const submissionTime = createdTime.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: true });
+          const submissionTime = createdTime.toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          });
 
           const messageBox = `
             <div class="message-box">
@@ -96,8 +134,12 @@
                   <p>${yourHabbo}</p>
                 </div>
                 <div class="message-content">
-                  <p>${kindMessage}</p>
-                  <p class="submission-time">Submitted on: ${submissionDate} @ ${submissionTime} UTC</p>
+                  <div class="pixel-message-container">
+                    <div class="pixel-message">
+                      <p>${kindMessage}</p>
+                    </div>
+                    <p class="submission-time">Submitted on: ${submissionDate} @ ${submissionTime} UTC</p>
+                  </div>
                 </div>
                 <div class="avatar recipient">
                   <img src="https://habboera.com/imager?habbo=${friendHabbo}&size=l&gesture=std&action=wav&direction=4&head_direction=4&headonly=0" alt="${friendHabbo}">
@@ -110,19 +152,7 @@
         });
       }
 
-      document.getElementById("prevButton").addEventListener("click", function () {
-        if (offset) {
-          fetchMessages(currentPage - 1);
-        }
-      });
-
-      document.getElementById("nextButton").addEventListener("click", function () {
-        if (offset) {
-          fetchMessages(currentPage + 1);
-        }
-      });
-
-      fetchMessages(1);
+      fetchMessages();
     </script>
   </body>
 </html>
