@@ -311,3 +311,13 @@ footer a:hover {
     padding: 10px 15px;
   }
 }
+
+/* Ensure all links are orange */
+a {
+  color: #ff6600; /* Orange color */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
