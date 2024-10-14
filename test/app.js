@@ -211,3 +211,30 @@ async function searchMessages() {
     messagesContainer.innerHTML = `<p>Failed to load messages. Error: ${error.message}</p>`;
   }
 }
+// Load avatars for winners
+function loadWinnerAvatars() {
+  const winners = document.querySelectorAll('.winner input');
+  
+  winners.forEach(winner => {
+    winner.addEventListener('input', function() {
+      const habboName = winner.value;
+      const winnerInfo = winner.nextElementSibling;
+      if (habboName) {
+        winnerInfo.innerHTML = `
+          <img src="https://habboera.com/imager?habbo=${habboName}&size=l&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="${habboName}'s avatar">
+          <p>${habboName}</p>
+        `;
+      } else {
+        winnerInfo.innerHTML = '';
+      }
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadWinnerAvatars();
+
+  // Loading header and footer dynamically
+  loadContent('#header-placeholder', 'header.html');
+  loadContent('#footer-placeholder', 'footer.html');
+});
