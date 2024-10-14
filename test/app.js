@@ -26,36 +26,50 @@ loadContent('#footer-placeholder', 'footer.html');
 // --- Initialize the Home Page (index.html) ---
 function initializeHomePage() {
   let currentPage = 1;
-  let offset = "";
+  let allMessages = [];
   const messagesPerPage = 10;
 
-  async function fetchMessages() {
+  async function fetchAllMessages() {
     const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
     const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
+    let offset = "";
+    let isFetching = true;
 
     try {
-      let url = `${airtableBaseURL}?filterByFormula={Approved}=TRUE()&pageSize=${messagesPerPage}`;
-      if (offset) {
-        url += `&offset=${offset}`;
+      while (isFetching) {
+        let url = `${airtableBaseURL}?filterByFormula={Approved}=TRUE()&pageSize=100`;
+        if (offset) {
+          url += `&offset=${offset}`;
+        }
+
+        const response = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${airtableToken}`,
+            "Content-Type": "application/json",
+          }
+        });
+
+        const result = await response.json();
+
+        // Add messages to allMessages array
+        allMessages = [...allMessages, ...result.records];
+
+        // Check if there's more to fetch
+        offset = result.offset || "";
+        isFetching = !!offset;
       }
 
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${airtableToken}`,
-          "Content-Type": "application/json",
-        }
-      });
+      // Sort all messages by submission date (newest first)
+      allMessages.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
 
-      const result = await response.json();
+      // Display the first page of messages
+      displayMessages(allMessages.slice(0, messagesPerPage));
 
-      // Sort messages by submission date (newest first)
-      result.records.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
-
-      displayMessages(result.records);
-
-      offset = result.offset || "";
-      document.getElementById("prevPage").disabled = currentPage === 1;
-      document.getElementById("nextPage").disabled = !offset || result.records.length < messagesPerPage;
+      // Enable or disable pagination buttons based on message count
+      const prevButton = document.getElementById("prevPage");
+      const nextButton = document.getElementById("nextPage");
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = allMessages.length <= messagesPerPage;
       document.getElementById("pageIndicator").innerText = `Page ${currentPage}`;
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -79,13 +93,14 @@ function initializeHomePage() {
         hour12: true,
       });
 
-      const avatarURL = `https://habboera.com/imager?habbo=${yourHabbo}&size=l&gesture=std&action=wav&direction=2&head_direction=2&headonly=0`;
+      const senderAvatarURL = `https://habboera.com/imager?habbo=${yourHabbo}&size=l&gesture=std&action=wav&direction=2&head_direction=2&headonly=0`;
+      const recipientAvatarURL = `https://habboera.com/imager?habbo=${friendHabbo}&size=l&gesture=std&action=wav&direction=4&head_direction=4&headonly=0`;
 
       const messageBox = `
         <div class="message-box">
           <div class="avatar-container">
             <div class="avatar sender">
-              <img src="${avatarURL}" alt="${yourHabbo}">
+              <img src="${senderAvatarURL}" alt="${yourHabbo}">
               <p>${yourHabbo}</p>
             </div>
             <div class="message-content">
@@ -97,7 +112,7 @@ function initializeHomePage() {
               </div>
             </div>
             <div class="avatar recipient">
-              <img src="https://habboera.com/imager?habbo=${friendHabbo}&size=l" alt="${friendHabbo}">
+              <img src="${recipientAvatarURL}" alt="${friendHabbo}">
               <p>${friendHabbo}</p>
             </div>
           </div>
@@ -110,134 +125,24 @@ function initializeHomePage() {
   document.getElementById("prevPage").addEventListener("click", function () {
     if (currentPage > 1) {
       currentPage--;
-      fetchMessages();
+      const startIndex = (currentPage - 1) * messagesPerPage;
+      displayMessages(allMessages.slice(startIndex, startIndex + messagesPerPage));
+      document.getElementById("pageIndicator").innerText = `Page ${currentPage}`;
+      document.getElementById("nextPage").disabled = false;
     }
+    document.getElementById("prevPage").disabled = currentPage === 1;
   });
 
   document.getElementById("nextPage").addEventListener("click", function () {
-    if (offset) {
+    const startIndex = currentPage * messagesPerPage;
+    if (startIndex < allMessages.length) {
       currentPage++;
-      fetchMessages();
+      displayMessages(allMessages.slice(startIndex, startIndex + messagesPerPage));
+      document.getElementById("pageIndicator").innerText = `Page ${currentPage}`;
+      document.getElementById("prevPage").disabled = false;
     }
+    document.getElementById("nextPage").disabled = currentPage * messagesPerPage >= allMessages.length;
   });
 
-  fetchMessages();
-}
-
-// --- Initialize the Search Page (search.html) ---
-function initializeSearchPage() {
-  const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
-  const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
-
-  document.getElementById('searchButton').addEventListener('click', function() {
-    const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
-    fetchMessages(searchQuery);
-  });
-
-  document.getElementById('searchInput').addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      const searchQuery = event.target.value.toLowerCase().trim();
-      fetchMessages(searchQuery);
-    }
-  });
-
-  async function fetchMessages(query) {
-    try {
-      const response = await fetch(`${airtableBaseURL}?filterByFormula=AND(OR(FIND('${query}', LOWER({Your Habbo Name})) > 0, FIND('${query}', LOWER({Friend Habbo Name})) > 0), {Approved}=TRUE())`, {
-        headers: {
-          Authorization: `Bearer ${airtableToken}`,
-          "Content-Type": "application/json",
-        }
-      });
-
-      const result = await response.json();
-      displayMessages(result.records);
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-      document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
-    }
-  }
-
-  function displayMessages(messages) {
-    const container = document.getElementById("messagesContainer");
-    container.innerHTML = "";
-
-    if (messages.length === 0) {
-      container.innerHTML = "<p>No messages found.</p>";
-      return;
-    }
-
-    messages.forEach(message => {
-      const yourHabbo = message.fields["Your Habbo Name"];
-      const friendHabbo = message.fields["Friend Habbo Name"];
-      const kindMessage = message.fields["Message"];
-      const createdTime = new Date(message.createdTime);
-      const submissionDate = createdTime.toLocaleDateString("en-GB");
-      const submissionTime = createdTime.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: true });
-
-      const messageBox = `
-        <div class="message-box">
-          <div class="avatar-container">
-            <div class="avatar sender">
-              <img src="https://habboera.com/imager?habbo=${yourHabbo}&size=l" alt="${yourHabbo}">
-              <p>${yourHabbo}</p>
-            </div>
-            <div class="message-content">
-              <p>${kindMessage}</p>
-              <p class="submission-time">Submitted on: ${submissionDate} @ ${submissionTime} UTC</p>
-            </div>
-            <div class="avatar recipient">
-              <img src="https://habboera.com/imager?habbo=${friendHabbo}&size=l" alt="${friendHabbo}">
-              <p>${friendHabbo}</p>
-            </div>
-          </div>
-        </div>
-      `;
-      container.innerHTML += messageBox;
-    });
-  }
-}
-
-// --- Initialize the Add Message Page (add-message.html) ---
-function initializeAddMessagePage() {
-  const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
-  const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
-
-  document.getElementById("submit-message").addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    const yourHabbo = document.getElementById("your-habbo").value;
-    const friendHabbo = document.getElementById("friend-habbo").value;
-    const message = document.getElementById("message").value;
-
-    const data = {
-      fields: {
-        "Your Habbo Name": yourHabbo,
-        "Friend Habbo Name": friendHabbo,
-        "Message": message,
-        "Approved": false
-      }
-    };
-
-    try {
-      const response = await fetch(`${airtableBaseURL}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${airtableToken}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) {
-        throw new Error("Error submitting message");
-      }
-
-      window.location.href = "thankyou.html";
-    } catch (error) {
-      console.error("Error submitting message:", error);
-      alert("There was an issue submitting your message. Please try again.");
-    }
-  });
+  fetchAllMessages();
 }
