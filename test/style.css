@@ -312,6 +312,7 @@ nav a {
 
 nav a:hover {
   background-color: #ff3300; /* Darker orange on hover */
+  color: white; /* Ensure the text remains white */
   text-decoration: none; /* No underline */
 }
 
