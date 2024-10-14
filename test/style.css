@@ -28,19 +28,32 @@ header {
   background-color: #ffcc66;
   padding: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Stack the logo and navigation */
+  align-items: flex-start; /* Left align everything */
 }
 
+/* Logo styling */
 header img {
-  max-width: 200px; /* Adjust this value based on the size you want for the logo */
+  max-width: 300px; /* Larger logo size */
   height: auto;
+}
+
+/* Welcome text styling */
+header .welcome-text {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 1.2em;
+  color: #333;
+  margin-top: 10px; /* Space between logo and text */
+  margin-bottom: 20px; /* Space below the text before nav */
+  text-align: left;
 }
 
 /* Navigation styling */
 nav {
   display: flex;
-  gap: 15px; /* Space between navigation links */
+  gap: 15px;
+  width: 100%; /* Full width on desktop */
+  justify-content: flex-start; /* Left align navigation */
 }
 
 nav a {
@@ -60,63 +73,28 @@ nav a:hover {
 /* Mobile-specific adjustments */
 @media (max-width: 600px) {
   header {
-    flex-direction: column; /* Stack items vertically */
-    align-items: center;
+    align-items: center; /* Center align for mobile */
   }
 
   header img {
-    max-width: 150px; /* Smaller logo on mobile */
-    margin-bottom: 10px; /* Add space below the logo */
+    max-width: 225px; /* Adjusted logo size for mobile */
   }
 
-  nav {
-    flex-direction: column; /* Stack navigation buttons vertically */
-    width: 100%; /* Full width on mobile */
-  }
-
-  nav a {
-    width: 100%; /* Make the buttons full width */
+  header .welcome-text {
     text-align: center;
-    padding: 15px; /* Larger touch area */
-    margin-bottom: 10px; /* Space between buttons */
+    margin-bottom: 15px; /* Adjust spacing for mobile */
   }
-}
 
-/* Navigation buttons */
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-nav a {
-  background-color: #ff6600;
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-family: "Volter Goldfish Bold";
-  font-size: 1.2em;
-  display: inline-block;
-}
-
-nav a:hover {
-  background-color: #ff3300;
-}
-
-/* Mobile-specific adjustments for header */
-@media (max-width: 600px) {
   nav {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Stack navigation vertically on mobile */
+    width: 100%;
   }
 
   nav a {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
     margin-bottom: 10px;
-    width: 100%; /* Full-width buttons for better stacking */
-    text-align: center;
-    padding: 15px; /* Increased padding for larger tap area */
   }
 }
 
