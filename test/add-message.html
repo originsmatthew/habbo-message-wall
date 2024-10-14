@@ -28,9 +28,19 @@
     <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
 
     <script>
-      // Load header and footer
-      document.getElementById('header-placeholder').innerHTML = '<object type="text/html" data="header.html"></object>';
-      document.getElementById('footer-placeholder').innerHTML = '<object type="text/html" data="footer.html"></object>';
+      // Function to dynamically load header and footer
+      function loadContent(selector, file) {
+        fetch(file)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector(selector).innerHTML = data;
+          })
+          .catch(error => console.error('Error loading content:', error));
+      }
+
+      // Load the header and footer
+      loadContent('#header-placeholder', 'header.html');
+      loadContent('#footer-placeholder', 'footer.html');
 
       const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
       const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
