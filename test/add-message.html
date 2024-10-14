@@ -28,7 +28,7 @@
     <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
 
     <script>
-      // Function to dynamically load header and footer
+      // Load header and footer dynamically
       function loadContent(selector, file) {
         fetch(file)
           .then(response => response.text())
@@ -38,7 +38,6 @@
           .catch(error => console.error('Error loading content:', error));
       }
 
-      // Load the header and footer
       loadContent('#header-placeholder', 'header.html');
       loadContent('#footer-placeholder', 'footer.html');
 
