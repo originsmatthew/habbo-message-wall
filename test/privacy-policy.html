@@ -7,47 +7,53 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="header-placeholder"></div> <!-- Placeholder for header -->
+    <!-- Dynamic header -->
+    <div id="header-placeholder"></div>
 
     <section style="padding: 20px;">
       <h1>Privacy Policy</h1>
-      <p>At <strong>Habbo Origins Wall of Kindness</strong>, we respect your privacy and are committed to protecting your personal data.</p>
+      <p>
+        At <strong>Habbo Origins Wall of Kindness</strong>, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we handle any data collected on this website.
+      </p>
+      
+      <h2>What Data We Collect</h2>
+      <p>
+        We do not collect or store any personal data unless voluntarily provided by you through form submissions. All data provided is used solely to display messages on the Wall of Kindness.
+      </p>
 
-      <h2>What Information Do We Collect?</h2>
-      <p>We collect the following types of information:</p>
+      <h2>Use of Cookies</h2>
+      <p>We use strictly necessary cookies to ensure the security and functionality of the site, including:</p>
       <ul>
-        <li><strong>Habbo Names:</strong> We collect the name of the Habbo who submits the message and the Habbo name of the recipient.</li>
-        <li><strong>Messages:</strong> The kind message you submit is stored for approval and display on the Wall of Kindness.</li>
+        <li><strong>XSRF-TOKEN</strong>: This cookie helps protect against Cross-Site Request Forgery (CSRF) attacks.</li>
+        <li><strong>laravel_session</strong>: This cookie manages session data to maintain user interactions with the website.</li>
+        <li><strong>remember_web_</strong>: This cookie stores login credentials for those who select the "remember me" option.</li>
       </ul>
+      <p>These cookies are necessary for the website’s operation and do not require user consent.</p>
 
-      <h2>How Do We Use Your Information?</h2>
-      <p>We use the information you provide solely for the purpose of displaying kind messages on the Wall of Kindness. The information is not shared with third parties and is used in accordance with the terms outlined here.</p>
+      <h2>Third-Party Services</h2>
+      <p>
+        We do not use any tracking or analytics cookies. Should any changes be made that involve non-essential cookies, we will obtain your consent before implementing them.
+      </p>
 
-      <h2>Your Rights</h2>
-      <p>If you wish to have your message removed or wish to correct any details, you may contact us through the form provided on the website, and we will handle your request in a timely manner.</p>
+      <h2>Your Rights & Data Removal</h2>
+      <p>
+        If you wish to request the removal of a message mentioning you, please submit a request via the message form. Insert your name as "Your Habbo Name," "DELETE" as the "Friend's Habbo Name," and "Delete my data" as the message. We will action your request as soon as possible.
+      </p>
 
-      <h2>Changes to this Policy</h2>
-      <p>We may update this policy from time to time. When we make changes, we will update the "Last Updated" date at the top of this page.</p>
+      <h2>Prize Draw</h2>
+      <p>
+        All names entered on the Wall of Kindness will automatically be entered into a random prize draw to win one of 22 prizes. The winners will be chosen at random from the pool of names submitted during the event.
+      </p>
 
-      <p>If you have any questions about this Privacy Policy, please <a href="contact.html" style="color: #ff6600;">contact us</a>.</p>
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions or concerns regarding this policy, feel free to contact <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a> on Habbo Origins or via social media.
+      </p>
     </section>
 
-    <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
+    <!-- Dynamic footer -->
+    <div id="footer-placeholder"></div>
 
-    <script>
-      // Function to dynamically load header and footer
-      function loadContent(selector, file) {
-        fetch(file)
-          .then(response => response.text())
-          .then(data => {
-            document.querySelector(selector).innerHTML = data;
-          })
-          .catch(error => console.error('Error loading content:', error));
-      }
-
-      // Load the header and footer
-      loadContent('#header-placeholder', 'header.html');
-      loadContent('#footer-placeholder', 'footer.html');
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
