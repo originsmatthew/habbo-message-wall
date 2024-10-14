@@ -566,3 +566,23 @@ footer a:hover {
   height: 50px;
   border-radius: 50%;
 }
+
+/* Styling for avatars to match original layout */
+.avatar img {
+  width: 80px; /* Original size from the attached file */
+  height: 80px; /* Ensure the aspect ratio is maintained */
+  border-radius: 50%;
+}
+
+.submission-time {
+  font-size: 0.85em;
+  color: #666; /* Subtle color */
+  text-align: center;
+  margin-top: 20px; /* Increased space between bubble and time */
+}
+
+.pixel-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
