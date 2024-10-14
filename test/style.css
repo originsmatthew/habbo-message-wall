@@ -23,18 +23,63 @@ body {
   box-sizing: border-box;
 }
 
-/* Header styling */
+/* General header styling */
 header {
   background-color: #ffcc66;
   padding: 20px;
-  color: #333;
-  border-bottom: 4px solid #ff6600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header img {
-  max-width: 400px;
+  max-width: 200px; /* Adjust this value based on the size you want for the logo */
   height: auto;
-  width: 100%;
+}
+
+/* Navigation styling */
+nav {
+  display: flex;
+  gap: 15px; /* Space between navigation links */
+}
+
+nav a {
+  background-color: #ff6600;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+}
+
+nav a:hover {
+  background-color: #ff3300;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+  }
+
+  header img {
+    max-width: 150px; /* Smaller logo on mobile */
+    margin-bottom: 10px; /* Add space below the logo */
+  }
+
+  nav {
+    flex-direction: column; /* Stack navigation buttons vertically */
+    width: 100%; /* Full width on mobile */
+  }
+
+  nav a {
+    width: 100%; /* Make the buttons full width */
+    text-align: center;
+    padding: 15px; /* Larger touch area */
+    margin-bottom: 10px; /* Space between buttons */
+  }
 }
 
 /* Navigation buttons */
