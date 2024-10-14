@@ -53,28 +53,15 @@ nav a {
   border-radius: 5px;
   font-family: "Volter Goldfish Bold";
   font-size: 1.2em;
+  display: inline-block;
 }
 
 nav a:hover {
   background-color: #ff3300;
 }
 
-/* Ensure URLs remain orange */
-a {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 /* Mobile-specific adjustments for header */
 @media (max-width: 600px) {
-  header img {
-    max-width: 180px;
-  }
-
   nav {
     flex-direction: column;
     align-items: center;
@@ -82,8 +69,9 @@ a:hover {
 
   nav a {
     margin-bottom: 10px;
-    width: 90%; /* Full width button */
+    width: 100%; /* Full-width buttons for better stacking */
     text-align: center;
+    padding: 15px; /* Increased padding for larger tap area */
   }
 }
 
@@ -159,6 +147,7 @@ a:hover {
   text-align: left;
 }
 
+/* Pixel-styled speech bubble */
 .pixel-message {
   background-color: #f9d71c;
   padding: 15px 25px;
@@ -171,7 +160,16 @@ a:hover {
   position: relative;
   margin: 0 20px;
   max-width: 100%;
-  word-wrap: break-word;
+  word-wrap: break-word; /* Ensure text wraps within the bubble */
+  overflow-wrap: break-word; /* Ensure longer words break and fit within the box */
+}
+
+/* Mobile-specific text fix */
+@media (max-width: 600px) {
+  .pixel-message {
+    font-size: 0.9em; /* Smaller font for better fit on mobile */
+    padding: 10px 15px;
+  }
 }
 
 /* Adding a triangle for the speech bubble effect */
