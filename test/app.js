@@ -15,10 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
         searchMessages();
       }
     });
+  } else {
+    // Fetch messages for the homepage (with pagination)
+    fetchMessages();
   }
 });
 
-// Search functionality for search.html
+// --- Search functionality for search.html ---
 async function searchMessages() {
   const searchInput = document.getElementById("searchInput").value.toLowerCase();
   const messagesContainer = document.getElementById("messagesContainer");
@@ -45,7 +48,6 @@ async function searchMessages() {
     }
 
     const result = await response.json();
-    console.log("Airtable Response:", result); // Add this to inspect the returned data
     const messages = result.records;
 
     // Filter messages by "Your Habbo Name" or "Friend Habbo Name"
@@ -61,11 +63,60 @@ async function searchMessages() {
       messagesContainer.innerHTML = "<p>No messages found for that name.</p>";
     }
   } catch (error) {
-    console.error("Error fetching messages:", error); // Log the exact error for debugging
+    console.error("Error fetching messages:", error);
     messagesContainer.innerHTML = `<p>Failed to load messages. Error: ${error.message}</p>`;
   }
 }
 
+// --- Fetch messages with pagination (for index.html) ---
+let currentPage = 1;
+let offset = "";
+const messagesPerPage = 10;
+
+async function fetchMessages() {
+  const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
+  const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
+
+  try {
+    // Construct the URL to fetch the messages, applying pagination
+    let url = `${airtableBaseURL}?filterByFormula={Approved}=TRUE()&pageSize=${messagesPerPage}`;
+    if (offset) {
+      url += `&offset=${offset}`;
+    }
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${airtableToken}`,
+        "Content-Type": "application/json",
+      }
+    });
+
+    const result = await response.json();
+    const messages = result.records;
+
+    // Sort messages by submission date in descending order
+    messages.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
+
+    // Display the sorted messages
+    displayMessages(messages);
+
+    // Manage pagination buttons and offsets
+    offset = result.offset || "";
+    const prevButton = document.getElementById("prevPage");
+    const nextButton = document.getElementById("nextPage");
+    const pageIndicator = document.getElementById("pageIndicator");
+
+    // Disable or enable buttons based on pagination logic
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = !offset || messages.length < messagesPerPage;
+    pageIndicator.innerText = `Page ${currentPage}`;
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
+  }
+}
+
+// --- Display the messages ---
 function displayMessages(messages) {
   const container = document.getElementById("messagesContainer");
   container.innerHTML = ""; // Clear existing messages
@@ -107,3 +158,18 @@ function displayMessages(messages) {
     container.innerHTML += messageBox;
   });
 }
+
+// --- Pagination event listeners ---
+document.getElementById("prevPage").addEventListener("click", function () {
+  if (currentPage > 1) {
+    currentPage--;
+    fetchMessages();
+  }
+});
+
+document.getElementById("nextPage").addEventListener("click", function () {
+  if (offset) {
+    currentPage++;
+    fetchMessages();
+  }
+});
