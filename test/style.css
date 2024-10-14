@@ -393,14 +393,14 @@ footer a:hover {
 
 /* Winners table styling */
 .winners-table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   margin: 20px 0;
   background-color: #f9f9f9; /* Light background color */
 }
 
 .winners-table th, .winners-table td {
-  padding: 10px;
+  padding: 20px;
   text-align: center;
 }
 
