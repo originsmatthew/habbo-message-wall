@@ -20,45 +20,81 @@ body {
   background-color: #f0f0f0;
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Ensure consistent padding and border behavior */
+  box-sizing: border-box;
 }
 
 /* Header styling */
 header {
-  background-color: #ffcc66; /* Softer yellow */
+  background-color: #ffcc66;
   padding: 20px;
-  color: #333; /* Darker text color for better contrast */
-  border-bottom: 4px solid #ff6600; /* Add a contrasting bottom border */
+  color: #333;
+  border-bottom: 4px solid #ff6600;
 }
 
 header img {
-  max-width: 400px; /* Adjust this value for a larger logo on bigger screens */
+  max-width: 400px;
   height: auto;
-  width: 100%; /* Ensures the logo scales down on smaller screens */
+  width: 100%;
 }
+
 /* Mobile-specific adjustments */
 @media (max-width: 600px) {
   header img {
-    max-width: 180px; /* Smaller logo on mobile */
+    max-width: 180px;
   }
 }
+
+/* Headings */
 h1,
 h2 {
   font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 2em;
-  line-height: 1.2;
-  color: #ff6600; /* Orange to match the Habbo theme */
+  color: #ff6600;
 }
 
-h1,
-h2 {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+h1 {
   font-size: 2em;
-  line-height: 1.2; /* Better readability on mobile */
 }
 
 h2 {
   font-size: 1.5em;
+}
+
+/* Hyperlinks */
+a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Intro message styling */
+.intro-message-section {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+.intro-message-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.intro-message, .intro-details, .thank-you-message {
+  color: #333;
+  font-size: 0.95em;
+  line-height: 1.3;
+}
+
+.thank-you-message {
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Main container for messages */
@@ -69,20 +105,18 @@ h2 {
   padding: 20px;
 }
 
-/* Styling for each message box */
+/* Message box styling */
 .message-box {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 80%;
-  max-width: 100%; /* Ensure it doesn't overflow on mobile */
   margin: 20px 0;
   padding: 10px;
   background-color: #fff;
   border: 3px solid #ddd;
   border-radius: 10px;
-  box-sizing: border-box;
 }
 
 /* Avatar container */
@@ -99,19 +133,18 @@ h2 {
   flex-direction: column;
   align-items: center;
   width: 150px;
-  max-width: 100px; /* Responsive on smaller screens */
 }
 
 .avatar img {
-  width: 100px;
-  height: auto;
-  max-width: 80px; /* Further adjust for very small screens */
+  width: auto;
+  height: 80px; /* Adjusted size to match the original */
+  border-radius: 50%;
 }
 
 /* Names under avatars */
 .avatar p {
   margin-top: 10px;
-  font-family: "Volter Goldfish Bold", Arial, sans-serif; /* Make avatar names bold */
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
   font-size: 1em;
 }
 
@@ -122,16 +155,15 @@ h2 {
   align-items: center;
   margin: 0 20px;
   flex-grow: 1;
-  text-align: left; /* Better alignment on mobile */
+  text-align: left;
 }
 
-/* Pixel-styled speech bubble */
 .pixel-message {
   background-color: #f9d71c;
   padding: 15px 25px;
   border: 3px solid #000;
   font-family: "Volter Goldfish", Arial, sans-serif;
-  font-size: 1em; /* Slightly smaller font for message */
+  font-size: 1em;
   color: #000;
   text-align: center;
   border-radius: 10px;
@@ -146,21 +178,43 @@ h2 {
   content: "";
   position: absolute;
   top: 50%;
-  left: -20px; /* Adjust for sender */
+  left: -20px;
   border-width: 10px;
   border-style: solid;
   border-color: transparent #f9d71c transparent transparent;
-  border-right-color: #000; /* Black border on the right side of the triangle */
+  border-right-color: #000;
 }
 
-/* Sender avatar facing right */
-.avatar.sender img {
-  transform: scaleX(1); /* Default orientation */
+/* Submit time under the message */
+.submission-time {
+  font-size: 0.85em;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
 }
 
-/* Recipient avatar - removing the flip */
-.avatar.recipient img {
-  transform: none; /* No flip */
+/* Pagination styling */
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#pagination button {
+  margin: 0 10px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#pagination button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
 /* Form container for add message */
@@ -222,251 +276,6 @@ button:hover {
 
 /* Footer styling */
 footer {
-  margin-top: 30px;
-}
-
-.add-message-link {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #ff6600;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-family: "Volter Goldfish Bold";
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-.add-message-link:hover {
-  background-color: #ff3300;
-}
-
-/* Responsive styling for mobile */
-@media (max-width: 600px) {
-  .form-container {
-    width: 90%;
-  }
-
-  h1,
-  h2 {
-    font-size: 2em;
-  }
-
-  .message-box {
-    flex-direction: column; /* Stack messages on smaller screens */
-    width: 100%; /* Full width */
-  }
-
-  .message-content {
-    margin: 10px 0;
-  }
-
-  .pixel-message {
-    font-size: 1em; /* Smaller font for mobile */
-    padding: 10px 15px;
-  }
-
-  .avatar {
-    max-width: 80px; /* Smaller avatars for mobile */
-  }
-
-  button {
-    font-size: 1em;
-    padding: 10px;
-  }
-
-  .add-message-link {
-    font-size: 1em;
-    padding: 10px 15px;
-  }
-}
-#prevPage,
-#nextPage {
-  font-size: 0.9em; /* Slightly smaller font size */
-  padding: 5px 15px; /* Adjust padding */
-  background-color: #ff6600; /* Default color */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#prevPage:disabled,
-#nextPage:disabled {
-  background-color: #ccc; /* Grey color when disabled */
-  color: #666; /* Slightly darker text color */
-  cursor: not-allowed; /* Change cursor when disabled */
-}
-
-.subheading {
-  font-size: 0.9em; /* Adjust the size to your preference */
-  color: #333; /* Optional: You can change the color for better contrast */
-  margin-top: 5px; /* Optional: Add margin to adjust the spacing */
-}
-.submission-time {
-  font-size: 0.85em; /* Make font slightly smaller */
-  color: #666; /* Subtle color */
-  text-align: center;
-  margin-top: 20px; /* Space between message box and time */
-}
-.add-message-link {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #ff6600;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-family: "Volter Goldfish Bold";
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-.add-message-link:hover {
-  background-color: #ff3300;
-}
-
-/* Section styling */
-section {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  max-width: 90%;
-  box-sizing: border-box;
-}
-
-/* Introductory message styling */
-.intro-message {
-  color: #333;
-  font-size: 0.95em;
-  line-height: 1.3;
-  margin: 0;
-}
-
-.intro-message p {
-  margin-top: 20px;
-}
-
-.intro-message.center-text {
-  text-align: center;
-}
-
-/* Pagination styling */
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-#pagination button {
-  margin: 0 10px;
-}
-
-/* Message box styling */
-.message-box {
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-}
-
-.avatar-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.avatar img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.submission-time {
-  font-size: 0.85em;
-  color: #777;
-  margin-top: 10px;
-}
-
-.message-content {
-  flex: 1;
-  padding: 0 20px;
-}
-
-/* Styling for thank you section */
-.thank-you-section {
-  text-align: center;
-  padding: 20px;
-}
-
-.thank-you-section h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.thank-you-section p {
-  font-size: 1.2em;
-  margin-bottom: 15px;
-}
-
-.thank-you-section a {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-/* Styling for the form container */
-.form-container {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  max-width: 600px;
-  box-sizing: border-box;
-}
-
-.form-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-container label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 1.1em;
-}
-
-.form-container input,
-.form-container textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-.form-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #ff6600;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-.form-container button:hover {
-  background-color: #ff4500;
-}
-
-footer {
   text-align: center;
   padding: 10px;
   background-color: #f4f4f4;
@@ -486,103 +295,24 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Intro message styling */
-.intro-message-section {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  max-width: 90%;
-  box-sizing: border-box;
-}
+/* Responsive styling */
+@media (max-width: 600px) {
+  .form-container {
+    width: 90%;
+  }
 
-.intro-message-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  position: relative;
-}
+  .message-box {
+    flex-direction: column;
+    width: 100%;
+  }
 
-.intro-message, .intro-details, .thank-you-message {
-  color: #333;
-  font-size: 0.95em;
-  line-height: 1.3;
-}
+  .avatar img {
+    width: auto;
+    height: 60px;
+  }
 
-.thank-you-message {
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* Pagination styling */
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-#pagination button {
-  margin: 0 10px;
-}
-
-/* Message box styling */
-.message-box {
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-}
-
-.avatar-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.avatar img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.submission-time {
-  font-size: 0.85em;
-  color: #666;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.message-content {
-  flex: 1;
-  padding: 0 20px;
-}
-
-/* Avatar fix for aspect ratio */
-.avatar img {
-  width: auto;
-  height: 50px;
-  border-radius: 50%;
-}
-
-/* Styling for avatars to match original layout */
-.avatar img {
-  width: 80px; /* Original size from the attached file */
-  height: 80px; /* Ensure the aspect ratio is maintained */
-  border-radius: 50%;
-}
-
-.submission-time {
-  font-size: 0.85em;
-  color: #666; /* Subtle color */
-  text-align: center;
-  margin-top: 20px; /* Increased space between bubble and time */
-}
-
-.pixel-message-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  button {
+    font-size: 1em;
+    padding: 10px;
+  }
 }
