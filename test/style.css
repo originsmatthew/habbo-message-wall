@@ -446,3 +446,8 @@ footer a:hover {
     width: auto;   /* Maintain original aspect ratio */
   }
 }
+table td.avatar {
+  width: 200px; /* Adjust width as needed */
+  padding: 10px;
+  text-align: center;
+}
