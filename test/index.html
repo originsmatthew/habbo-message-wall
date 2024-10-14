@@ -13,11 +13,7 @@
       <div class="intro-message">
         <p><u>Hey Habbos!</u><br>
           Matthew here. Let's spread some positivity! Simply <a href="add-message.html" style="color: #ff6600;">leave a message</a> telling us something nice about a fellow Habbo.
-          <br><br>
-          The wall will be open for one week. On <u>Monday, 21st October</u>, every Habbo who has sent or received a message will be entered into a prize draw to win <a href="f02b6d15-e922-44be-95b7-1096926f3105.png" target="_blank" style="color: #ff6600;">one of the prizes at random from this room</a>.
         </p>
-        <p>That means we'll have <u>22 winners</u>! Each Habbo can only be entered once, regardless of how many times their name is mentioned.</p>
-        <p class="center-text">Thanks so much for taking part in our week of kindness. ♡</p>
       </div>
     </section>
 
@@ -27,11 +23,9 @@
         <p>Loading messages...</p>
       </div>
 
-      <!-- Pagination -->
-      <div id="pagination">
-        <button id="prevPage" disabled>Previous</button>
-        <span id="pageIndicator">Page 1</span>
-        <button id="nextPage" disabled>Next</button>
+      <div id="pagination" style="text-align: center; margin: 20px 0;">
+        <button id="prevButton" disabled>Previous</button>
+        <button id="nextButton" disabled>Next</button>
       </div>
     </section>
 
@@ -51,14 +45,14 @@
       loadContent('#footer-placeholder', 'footer.html');
 
       let currentPage = 1;
-      const messagesPerPage = 5;
+      const messagesPerPage = 10;
       const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
       const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
 
       async function fetchMessages(page) {
         try {
           const offset = (page - 1) * messagesPerPage;
-          const response = await fetch(`${airtableBaseURL}?filterByFormula={Approved}=TRUE()&maxRecords=${messagesPerPage}&offset=${offset}`, {
+          const response = await fetch(`${airtableBaseURL}?filterByFormula={Approved}=TRUE()&pageSize=${messagesPerPage}&offset=${offset}`, {
             headers: {
               Authorization: `Bearer ${airtableToken}`,
               "Content-Type": "application/json",
@@ -66,11 +60,11 @@
           });
 
           const result = await response.json();
-          displayMessages(result.records);
+          const messages = result.records;
+          displayMessages(messages);
 
-          document.getElementById('pageIndicator').textContent = `Page ${page}`;
-          document.getElementById('prevPage').disabled = page === 1;
-          document.getElementById('nextPage').disabled = result.records.length < messagesPerPage;
+          document.getElementById("prevButton").disabled = page === 1;
+          document.getElementById("nextButton").disabled = messages.length < messagesPerPage;
         } catch (error) {
           console.error("Error fetching messages:", error);
           document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
@@ -111,14 +105,14 @@
         });
       }
 
-      document.getElementById('prevPage').addEventListener('click', () => {
+      document.getElementById("prevButton").addEventListener("click", function () {
         if (currentPage > 1) {
           currentPage--;
           fetchMessages(currentPage);
         }
       });
 
-      document.getElementById('nextPage').addEventListener('click', () => {
+      document.getElementById("nextButton").addEventListener("click", function () {
         currentPage++;
         fetchMessages(currentPage);
       });
