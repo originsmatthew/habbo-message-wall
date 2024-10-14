@@ -169,8 +169,8 @@ nav a:hover {
 }
 
 .avatar img {
-  width: 100px;
-  height: auto;
+  width: auto;
+  height: 150px;
   max-width: 80px; /* Further adjust for very small screens */
 }
 
