@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const submissionsOpen = false; // Change to true to open submissions
+  const submissionsOpen = true; // Change to true to open submissions
   const currentPath = window.location.pathname;
 
   if (currentPath.includes("search.html")) {
