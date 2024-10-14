@@ -162,7 +162,7 @@ nav a:hover {
 /* Avatar styling */
 .avatar img {
   width: auto;
-  height: 250px; /* Adjust the height to make avatars taller */
+  height: 150px; /* Adjust the height to make avatars taller */
   max-width: 100%; /* Ensure it scales properly on smaller screens */
 }
 
@@ -441,7 +441,7 @@ footer a:hover {
 /* Styling for avatar and prize images */
 .avatar img,
 .prize-image img {
-  height: 75px;  /* Fixed height */
+  height: 150px;  /* Fixed height */
   width: auto;    /* Maintain original aspect ratio */
 }
 
