@@ -23,47 +23,47 @@ body {
   box-sizing: border-box;
 }
 
-/* General header styling */
+/* Header styling */
 header {
-  background-color: #ffcc66;
+  background-color: #ffcc66; /* Softer yellow */
   padding: 20px;
   display: flex;
-  flex-direction: column; /* Stack the logo and navigation */
-  align-items: flex-start; /* Left align everything */
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 4px solid #ff6600; /* Darker orange line */
 }
 
-/* Logo styling */
 header img {
-  max-width: 300px; /* Larger logo size */
+  max-width: 300px; /* Larger logo */
   height: auto;
 }
 
 /* Welcome text styling */
 header .welcome-text {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 1.2em;
+  font-family: "Volter Goldfish", Arial, sans-serif; /* Non-bold version */
+  font-size: 1em; /* Smaller text */
   color: #333;
-  margin-top: 10px; /* Space between logo and text */
-  margin-bottom: 20px; /* Space below the text before nav */
+  margin-top: 5px; /* Slight space between logo and text */
+  margin-bottom: 15px; /* Space below the text */
   text-align: left;
 }
 
 /* Navigation styling */
 nav {
   display: flex;
-  gap: 15px;
-  width: 100%; /* Full width on desktop */
-  justify-content: flex-start; /* Left align navigation */
+  gap: 10px; /* Reduced space between navigation buttons */
+  justify-content: flex-start;
+  width: 100%;
 }
 
 nav a {
   background-color: #ff6600;
   color: white;
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 8px 16px; /* Smaller navigation boxes */
   border-radius: 5px;
   font-family: "Volter Goldfish Bold";
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 nav a:hover {
@@ -82,31 +82,20 @@ nav a:hover {
 
   header .welcome-text {
     text-align: center;
-    margin-bottom: 15px; /* Adjust spacing for mobile */
+    margin-bottom: 15px;
   }
 
   nav {
-    flex-direction: column; /* Stack navigation vertically on mobile */
+    flex-direction: column;
     width: 100%;
   }
 
   nav a {
-    width: 100%;
+    width: 100%; /* Full width on mobile */
     text-align: center;
-    padding: 15px;
+    padding: 12px;
     margin-bottom: 10px;
   }
-}
-
-/* Intro message styling */
-.intro-message-section {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  max-width: 90%;
-  box-sizing: border-box;
 }
 
 /* Main container for messages */
@@ -117,18 +106,20 @@ nav a:hover {
   padding: 20px;
 }
 
-/* Message box styling */
+/* Styling for each message box */
 .message-box {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 80%;
+  max-width: 100%; /* Ensure it doesn't overflow on mobile */
   margin: 20px 0;
   padding: 10px;
   background-color: #fff;
   border: 3px solid #ddd;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 /* Avatar container */
@@ -145,12 +136,13 @@ nav a:hover {
   flex-direction: column;
   align-items: center;
   width: 150px;
+  max-width: 100px; /* Responsive on smaller screens */
 }
 
 .avatar img {
-  width: auto;
-  height: 150px; /* Adjusted size to 150px for desktop */
-  border-radius: 50%;
+  width: 100px;
+  height: auto;
+  max-width: 80px; /* Further adjust for very small screens */
 }
 
 /* Names under avatars */
@@ -183,16 +175,7 @@ nav a:hover {
   position: relative;
   margin: 0 20px;
   max-width: 100%;
-  word-wrap: break-word; /* Ensure text wraps within the bubble */
-  overflow-wrap: break-word; /* Ensure longer words break and fit within the box */
-}
-
-/* Mobile-specific text fix */
-@media (max-width: 600px) {
-  .pixel-message {
-    font-size: 0.9em; /* Smaller font for better fit on mobile */
-    padding: 10px 15px;
-  }
+  word-wrap: break-word;
 }
 
 /* Adding a triangle for the speech bubble effect */
@@ -200,44 +183,29 @@ nav a:hover {
   content: "";
   position: absolute;
   top: 50%;
-  left: -20px;
+  left: -20px; /* Adjust for sender */
   border-width: 10px;
   border-style: solid;
   border-color: transparent #f9d71c transparent transparent;
   border-right-color: #000;
 }
 
-/* Submit time under the message */
+/* Sender avatar facing right */
+.avatar.sender img {
+  transform: scaleX(1); /* Default orientation */
+}
+
+/* Recipient avatar - removing the flip */
+.avatar.recipient img {
+  transform: none;
+}
+
+/* Submission time styling */
 .submission-time {
-  font-size: 0.85em;
-  color: #666;
+  font-size: 0.85em; /* Make font slightly smaller */
+  color: #666; /* Subtle color */
   text-align: center;
-  margin-top: 20px;
-}
-
-/* Pagination styling */
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-#pagination button {
-  margin: 0 10px;
-  background-color: #ff6600;
-  color: white;
-  border: none;
-  padding: 5px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: "Volter Goldfish Bold"; /* Ensure the correct font is applied */
-}
-
-#pagination button:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
+  margin-top: 20px; /* Space between message box and time */
 }
 
 /* Form container for add message */
@@ -299,53 +267,88 @@ button:hover {
 
 /* Footer styling */
 footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #f4f4f4;
-  border-top: 1px solid #ddd;
+  margin-top: 30px;
 }
 
-footer p {
-  margin: 5px 0;
-}
-
-footer a {
-  color: #ff6600;
+.add-message-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
   text-decoration: none;
+  border-radius: 5px;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
-footer a:hover {
-  text-decoration: underline;
+.add-message-link:hover {
+  background-color: #ff3300;
 }
 
-/* Mobile-specific adjustments for message boxes */
+/* Responsive styling for mobile */
 @media (max-width: 600px) {
-  .message-box {
-    flex-direction: column;
-    width: 100%;
+  .form-container {
+    width: 90%;
   }
 
-  .avatar img {
-    height: 80px; /* Slightly smaller avatars for mobile */
+  h1,
+  h2 {
+    font-size: 2em;
+  }
+
+  .message-box {
+    flex-direction: column; /* Stack messages on smaller screens */
+    width: 100%; /* Full width */
+  }
+
+  .message-content {
+    margin: 10px 0;
   }
 
   .pixel-message {
-    font-size: 0.9em;
+    font-size: 1em; /* Smaller font for mobile */
+    padding: 10px 15px;
+  }
+
+  .avatar {
+    max-width: 80px; /* Smaller avatars for mobile */
+  }
+
+  button {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  .add-message-link {
+    font-size: 1em;
     padding: 10px 15px;
   }
 }
 
-/* Ensure all links are orange */
-a {
-  color: #ff6600; /* Orange color */
-  text-decoration: none;
+/* Pagination */
+#prevPage,
+#nextPage {
+  font-size: 0.9em; /* Slightly smaller font size */
+  padding: 5px 15px; /* Adjust padding */
+  background-color: #ff6600; /* Default color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-a:hover {
-  text-decoration: underline; /* Add underline on hover */
+#prevPage:disabled,
+#nextPage:disabled {
+  background-color: #ccc; /* Grey color when disabled */
+  color: #666; /* Slightly darker text color */
+  cursor: not-allowed; /* Change cursor when disabled */
 }
 
-/* Add space between pagination and footer */
-#pagination {
-  margin-bottom: 30px; /* Adjust the value to whatever spacing you prefer */
+/* Subheading */
+.subheading {
+  font-size: 0.9em; /* Adjust the size to your preference */
+  color: #333; /* Optional: You can change the color for better contrast */
+  margin-top: 5px; /* Optional: Add margin to adjust the spacing */
 }
