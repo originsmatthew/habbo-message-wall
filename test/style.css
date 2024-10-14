@@ -1,448 +1,140 @@
-/* Font-face declarations */
-@font-face {
-  font-family: "Volter Goldfish";
-  src: url("fonts/Volter (Goldfish).ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wall of Kindness Winners</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div id="header-placeholder"></div>
+  </header>
 
-@font-face {
-  font-family: "Volter Goldfish Bold";
-  src: url("fonts/Volter-Bold (Goldfish).ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
+  <main>
+    <h1>Wall of Kindness Winners</h1>
+    <p>Congratulations to the following Habbos! Your prize will be delivered to your donation room soon.</p>
+    <table class="winners-table">
+      <thead>
+        <tr>
+          <th>Habbo</th>
+          <th>Prize</th>
+          <th>Prize Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner1&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner1"><br>Winner1</td>
+          <td>Yellow Amber Lamp</td>
+          <td class="prize-image"><img src="yellowamber.png" alt="Yellow Amber Lamp"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner2&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner2"><br>Winner2</td>
+          <td>Yellow Amber Lamp</td>
+          <td class="prize-image"><img src="yellowamber.png" alt="Yellow Amber Lamp"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner3&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner3"><br>Winner3</td>
+          <td>Dragon Egg</td>
+          <td class="prize-image"><img src="dragonegg.png" alt="Dragon Egg"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner4&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner4"><br>Winner4</td>
+          <td>Tropical Beach Rug</td>
+          <td class="prize-image"><img src="sandrug.png" alt="Tropical Beach Rug"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner5&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner5"><br>Winner5</td>
+          <td>FF Cola</td>
+          <td class="prize-image"><img src="ffcola.png" alt="FF Cola"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner6&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner6"><br>Winner6</td>
+          <td>Ice Cream</td>
+          <td class="prize-image"><img src="yellowice.png" alt="Ice Cream"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner7&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner7"><br>Winner7</td>
+          <td>Aloe Vera</td>
+          <td class="prize-image"><img src="aloe.png" alt="Aloe Vera"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner8&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner8"><br>Winner8</td>
+          <td>Aloe Vera</td>
+          <td class="prize-image"><img src="aloe.png" alt="Aloe Vera"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner9&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner9"><br>Winner9</td>
+          <td>Bonsai Set</td>
+          <td class="prize-image"><img src="bonsai.png" alt="Bonsai Set"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner10&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner10"><br>Winner10</td>
+          <td>Bonsai Set</td>
+          <td class="prize-image"><img src="bonsai.png" alt="Bonsai Set"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner11&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner11"><br>Winner11</td>
+          <td>Birdbath</td>
+          <td class="prize-image"><img src="birdbath.png" alt="Birdbath"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner12&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner12"><br>Winner12</td>
+          <td>Laser Gate</td>
+          <td class="prize-image"><img src="laser.png" alt="Laser Gate"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner13&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner13"><br>Winner13</td>
+          <td>FF Bunny</td>
+          <td class="prize-image"><img src="ffbunny.png" alt="FF Bunny"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner14&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner14"><br>Winner14</td>
+          <td>Bunny</td>
+          <td class="prize-image"><img src="bunny.png" alt="Bunny"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner15&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner15"><br>Winner15</td>
+          <td>Bunny</td>
+          <td class="prize-image"><img src="bunny.png" alt="Bunny"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner16&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner16"><br>Winner16</td>
+          <td>Bunny</td>
+          <td class="prize-image"><img src="bunny.png" alt="Bunny"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner17&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner17"><br>Winner17</td>
+          <td>Bunny</td>
+          <td class="prize-image"><img src="bunny.png" alt="Bunny"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner18&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner18"><br>Winner18</td>
+          <td>Bunny</td>
+          <td class="prize-image"><img src="bunny.png" alt="Bunny"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner19&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner19"><br>Winner19</td>
+          <td>Sunflower</td>
+          <td class="prize-image"><img src="sunflowers.png" alt="Sunflower"></td>
+        </tr>
+        <tr>
+          <td class="avatar"><img src="https://habboera.com/imager?habbo=Winner20&size=m&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="Winner20"><br>Winner20</td>
+          <td>Sunflower</td>
+          <td class="prize-image"><img src="sunflowers.png" alt="Sunflower"></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
 
-/* General body styling */
-body {
-  font-family: "Volter Goldfish", Arial, sans-serif;
-  text-align: center;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <footer>
+    <div id="footer-placeholder"></div>
+  </footer>
 
-/* Header styling */
-header {
-  background-color: #ffcc66; /* Softer yellow */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-bottom: 4px solid #ff6600; /* Darker orange line */
-}
-
-header img {
-  max-width: 300px; /* Larger logo */
-  height: auto;
-}
-
-/* Welcome text styling */
-header .welcome-text {
-  font-family: "Volter Goldfish", Arial, sans-serif; /* Non-bold version */
-  font-size: 1em; /* Smaller text */
-  color: #333;
-  margin-top: 5px; /* Slight space between logo and text */
-  margin-bottom: 15px; /* Space below the text */
-  text-align: left;
-}
-
-/* Navigation styling */
-nav {
-  display: flex;
-  gap: 10px; /* Reduced space between navigation buttons */
-  justify-content: flex-start;
-  width: 100%;
-}
-
-nav a {
-  background-color: #ff6600;
-  color: white;
-  text-decoration: none;
-  padding: 8px 16px; /* Smaller navigation boxes */
-  border-radius: 5px;
-  font-family: "Volter Goldfish Bold";
-  font-size: 1em;
-}
-
-nav a:hover {
-  background-color: #ff3300;
-}
-
-/* Mobile-specific adjustments */
-@media (max-width: 600px) {
-  header {
-    align-items: center; /* Center align for mobile */
-  }
-
-  header img {
-    max-width: 225px; /* Adjusted logo size for mobile */
-  }
-
-  header .welcome-text {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  nav {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  nav a {
-    width: 100%; /* Full width on mobile */
-    text-align: center;
-    padding: 12px;
-    margin-bottom: 10px;
-  }
-}
-
-/* Main container for messages */
-#messagesContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-/* Welcome message container styling */
-.intro-message-section {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  max-width: 90%;
-  box-sizing: border-box;
-}
-
-.intro-message-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  position: relative;
-}
-
-.intro-message, .intro-details, .thank-you-message {
-  color: #333;
-  font-size: 0.95em;
-  line-height: 1.3;
-}
-
-.thank-you-message {
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* Styling for each message box */
-.message-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  max-width: 100%; /* Ensure it doesn't overflow on mobile */
-  margin: 20px 0;
-  padding: 10px;
-  background-color: #fff;
-  border: 3px solid #ddd;
-  border-radius: 10px;
-  box-sizing: border-box;
-}
-
-/* Avatar container */
-.avatar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-/* Avatar styling */
-.avatar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 150px;
-  max-width: 100px; /* Responsive on smaller screens */
-}
-
-.avatar img {
-  width: 100px;
-  height: auto;
-  max-width: 80px; /* Further adjust for very small screens */
-}
-
-/* Names under avatars */
-.avatar p {
-  margin-top: 10px;
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 1em;
-}
-
-/* Message content styling */
-.message-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 20px;
-  flex-grow: 1;
-  text-align: left;
-}
-
-/* Pixel-styled speech bubble */
-.pixel-message {
-  background-color: #f9d71c;
-  padding: 15px 25px;
-  border: 3px solid #000;
-  font-family: "Volter Goldfish", Arial, sans-serif;
-  font-size: 1em;
-  color: #000;
-  text-align: center;
-  border-radius: 10px;
-  position: relative;
-  margin: 0 20px;
-  max-width: 100%;
-  word-wrap: break-word;
-}
-
-/* Adding a triangle for the speech bubble effect */
-.pixel-message::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -20px; /* Adjust for sender */
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent #f9d71c transparent transparent;
-  border-right-color: #000;
-}
-
-/* Submission time styling */
-.submission-time {
-  font-size: 0.85em;
-  color: #666;
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* Footer styling */
-footer {
-  margin-top: 30px;
-}
-
-footer p {
-  margin: 5px 0;
-}
-
-footer a {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-/* Pagination buttons styling */
-#prevPage,
-#nextPage {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 0.9em; /* Slightly smaller font size */
-  padding: 5px 15px; /* Adjust padding */
-  background-color: #ff6600; /* Default color */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 10px;
-}
-
-#prevPage:disabled,
-#nextPage:disabled {
-  background-color: #ccc; /* Grey color when disabled */
-  color: #666; /* Slightly darker text color */
-  cursor: not-allowed; /* Change cursor when disabled */
-}
-
-/* Pagination container styling */
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-#pagination button {
-  margin: 0 10px;
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  padding: 5px 15px;
-}
-
-#pagination .page-number {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 1em;
-  color: #333;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-
-/* Hyperlink styling */
-a {
-  color: #ff6600; /* Orange link color */
-  text-decoration: none;
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-}
-
-a:hover {
-  color: #ff3300; /* Darker orange on hover */
-  text-decoration: underline;
-}
-
-/* Navigation buttons */
-nav a {
-  background-color: #ff6600;
-  color: white;
-  text-decoration: none;
-  padding: 8px 16px; /* Smaller navigation boxes */
-  border-radius: 5px;
-  font-family: "Volter Goldfish Bold";
-  font-size: 1em;
-}
-
-nav a:hover {
-  background-color: #ff3300; /* Darker orange on hover */
-  color: white; /* Ensure the text remains white */
-  text-decoration: none; /* No underline */
-}
-
-/* Form container for add message */
-.form-container {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Form styling */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-input[type="text"],
-textarea {
-  padding: 10px;
-  font-family: "Volter Goldfish", Arial, sans-serif;
-  font-size: 1em;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-textarea {
-  resize: vertical;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #ff6600;
-  color: white;
-  font-family: "Volter Goldfish Bold";
-  font-size: 1.2em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #ff3300;
-}
-
-/* Footer styling */
-footer {
-  margin-top: 30px;
-}
-
-footer p {
-  margin: 5px 0;
-}
-
-footer a {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Winners table styling */
-.winners-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  background-color: #f9f9f9; /* Light background color */
-}
-
-.winners-table th, .winners-table td {
-  padding: 10px;
-  text-align: center;
-}
-
-.winners-table th {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif; /* Bold font */
-  background-color: #f4f4f4; /* Light grey background for header */
-  border-bottom: 2px solid #ddd;
-}
-
-.winners-table td {
-  border: 1px solid #ddd;
-  vertical-align: middle; /* Aligns content vertically in the middle */
-}
-
-.avatar-small, .prize-image {
-  width: 50px; /* Avatar and prize image same height */
-  height: 50px;
-  border-radius: 50%;
-}
-
-.winners-table tbody tr:nth-child(odd) {
-  background-color: #fafafa; /* Alternating row color */
-}
-
-.winners-table tbody tr:nth-child(even) {
-  background-color: #f0f0f0; /* Slightly darker alternate row */
-}
-
-.winners-table tbody tr:hover {
-  background-color: #e0e0e0; /* Hover effect for rows */
-}
-/* Styling for avatar and prize images */
-.avatar img,
-.prize-image img {
-  height: 150px;  /* Fixed height */
-  width: auto;    /* Maintain original aspect ratio */
-}
-
-@media (max-width: 600px) {
-  .avatar img,
-  .prize-image img {
-    height: 100px; /* Smaller height for mobile */
-    width: auto;   /* Maintain original aspect ratio */
-  }
-}
+  <script>
+    // Script to dynamically load the header and footer
+    document.getElementById("header-placeholder").innerHTML = '<!-- Include header content -->';
+    document.getElementById("footer-placeholder").innerHTML = '<!-- Include footer content -->';
+  </script>
+</body>
+</html>
