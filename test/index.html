@@ -44,15 +44,18 @@
       loadContent('#header-placeholder', 'header.html');
       loadContent('#footer-placeholder', 'footer.html');
 
-      let currentPage = 1;
+      let offset = "";
       const messagesPerPage = 10;
       const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
       const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
 
       async function fetchMessages(page) {
         try {
-          const offset = (page - 1) * messagesPerPage;
-          const response = await fetch(`${airtableBaseURL}?filterByFormula={Approved}=TRUE()&pageSize=${messagesPerPage}&offset=${offset}`, {
+          let url = `${airtableBaseURL}?filterByFormula={Approved}=TRUE()&pageSize=${messagesPerPage}`;
+          if (offset) {
+            url += `&offset=${offset}`;
+          }
+          const response = await fetch(url, {
             headers: {
               Authorization: `Bearer ${airtableToken}`,
               "Content-Type": "application/json",
@@ -63,8 +66,10 @@
           const messages = result.records;
           displayMessages(messages);
 
-          document.getElementById("prevButton").disabled = page === 1;
-          document.getElementById("nextButton").disabled = messages.length < messagesPerPage;
+          offset = result.offset || "";
+
+          document.getElementById("prevButton").disabled = !offset;
+          document.getElementById("nextButton").disabled = !offset || messages.length < messagesPerPage;
         } catch (error) {
           console.error("Error fetching messages:", error);
           document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
@@ -106,18 +111,18 @@
       }
 
       document.getElementById("prevButton").addEventListener("click", function () {
-        if (currentPage > 1) {
-          currentPage--;
-          fetchMessages(currentPage);
+        if (offset) {
+          fetchMessages(currentPage - 1);
         }
       });
 
       document.getElementById("nextButton").addEventListener("click", function () {
-        currentPage++;
-        fetchMessages(currentPage);
+        if (offset) {
+          fetchMessages(currentPage + 1);
+        }
       });
 
-      fetchMessages(currentPage);
+      fetchMessages(1);
     </script>
   </body>
 </html>
