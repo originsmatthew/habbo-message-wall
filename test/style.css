@@ -298,3 +298,94 @@ a:hover {
   color: #ff3300; /* Darker orange on hover */
   text-decoration: underline;
 }
+
+/* Navigation buttons */
+nav a {
+  background-color: #ff6600;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px; /* Smaller navigation boxes */
+  border-radius: 5px;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1em;
+}
+
+nav a:hover {
+  background-color: #ff3300; /* Darker orange on hover */
+  text-decoration: none; /* No underline */
+}
+
+/* Form container for add message */
+.form-container {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px;
+  font-family: "Volter Goldfish", Arial, sans-serif;
+  font-size: 1em;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff3300;
+}
+
+/* Footer styling */
+footer {
+  margin-top: 30px;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+footer a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
