@@ -390,3 +390,26 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+/* Winners table styling */
+.winners-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.winners-table th, .winners-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.avatar-small {
+  width: 50px; /* 50% of the original size */
+  height: auto;
+  border-radius: 50%;
+}
+
+.prize-image {
+  width: 50px;
+  height: auto;
+}
