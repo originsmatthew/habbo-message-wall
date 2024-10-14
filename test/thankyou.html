@@ -9,16 +9,16 @@
   <body>
     <div id="header-placeholder"></div> <!-- Placeholder for header -->
 
-    <section style="text-align: center; padding: 20px;">
+    <section class="thank-you-section">
       <h1>Thank You for Your Submission!</h1>
       <p>Your message will be reviewed and added to the Wall of Kindness once approved.</p>
-      <p>Return to the <a href="index.html" style="color: #ff6600; text-decoration: none;">homepage</a> or <a href="search.html" style="color: #ff6600; text-decoration: none;">search for messages</a>.</p>
+      <p>Return to the <a href="index.html">homepage</a> or <a href="search.html">search for messages</a>.</p>
     </section>
 
     <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
 
     <script>
-      // Function to dynamically load header and footer
+      // Load header and footer dynamically
       function loadContent(selector, file) {
         fetch(file)
           .then(response => response.text())
@@ -28,7 +28,6 @@
           .catch(error => console.error('Error loading content:', error));
       }
 
-      // Load the header and footer
       loadContent('#header-placeholder', 'header.html');
       loadContent('#footer-placeholder', 'footer.html');
     </script>
