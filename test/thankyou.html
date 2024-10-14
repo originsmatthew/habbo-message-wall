@@ -24,6 +24,20 @@
     <div id="footer-placeholder"></div>
 
     <script>
+      // Function to load header and footer dynamically
+      function loadContent(selector, file) {
+        fetch(file)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector(selector).innerHTML = data;
+          })
+          .catch(error => console.error('Error loading content:', error));
+      }
+
+      // Load header and footer
+      loadContent('#header-placeholder', 'header.html');
+      loadContent('#footer-placeholder', 'footer.html');
+
       // Function to get URL parameters
       function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -33,18 +47,18 @@
       }
 
       // Get the Habbo names from the URL
-      const yourHabbo = getUrlParameter('yourHabboName');
-      const friendHabbo = getUrlParameter('friendHabboName');
+      const yourHabbo = getUrlParameter('sender');
+      const friendHabbo = getUrlParameter('recipient');
 
       // Display the avatars dynamically with the correct URL and directions
       const avatarsContainer = document.getElementById('avatarsContainer');
       const avatarHTML = `
         <div>
-          <img src="https://habboera.com/imager?habbo=${yourHabbo}&size=l&gesture=std&action=wav&direction=8&head_direction=8&headonly=0&gender=M" alt="${yourHabbo}" />
+          <img src="https://habboera.com/imager?habbo=${yourHabbo}&size=l&gesture=std&action=wav&direction=8&head_direction=8&headonly=0" alt="${yourHabbo}" />
         </div>
         <div style="font-family: 'Volter Goldfish'; font-size: 2em; margin: 0 10px;">|</div>
         <div>
-          <img src="https://habboera.com/imager?habbo=${friendHabbo}&size=l&gesture=std&action=wav&direction=4&head_direction=4&headonly=0&gender=M" alt="${friendHabbo}" />
+          <img src="https://habboera.com/imager?habbo=${friendHabbo}&size=l&gesture=std&action=wav&direction=4&head_direction=4&headonly=0" alt="${friendHabbo}" />
         </div>
       `;
       avatarsContainer.innerHTML = avatarHTML;
