@@ -93,7 +93,7 @@ function initializeHomePage(submissionsOpen) {
         <div class="message-box">
           <div class="avatar-container">
             <div class="avatar sender">
-              <img src="https://habboera.com/imager?habbo=${yourHabbo}&size=l&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="${yourHabbo}">
+              <img src="https://habboden.com/habbo-imaging/${yourHabbo}?size=b&action=wav&frame=2" alt="${yourHabbo}">
               <p>${yourHabbo}</p>
             </div>
             <div class="message-content">
@@ -105,7 +105,7 @@ function initializeHomePage(submissionsOpen) {
               </div>
             </div>
             <div class="avatar recipient">
-              <img src="https://habboera.com/imager?habbo=${friendHabbo}&size=l&gesture=std&action=wav&direction=4&head_direction=4&headonly=0" alt="${friendHabbo}">
+              <img src="https://habboden.com/habbo-imaging/${friendHabbo}?size=b&action=wav&direction=4&head_direction=4" alt="${friendHabbo}">
               <p>${friendHabbo}</p>
             </div>
           </div>
