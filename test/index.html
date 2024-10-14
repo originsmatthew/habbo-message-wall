@@ -3,18 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search Messages - Habbo Wall of Kindness</title>
+    <title>Habbo Origins Wall of Kindness</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="header-placeholder"></div> <!-- Placeholder for header -->
 
     <section>
-      <h2>Search Messages</h2>
-      <input type="text" id="searchInput" placeholder="Enter a Habbo name" class="search-input">
-      <button id="searchButton" class="search-button">Search</button>
+      <div class="intro-message">
+        <p><u>Hey Habbos!</u><br>
+          Matthew here. Let's spread some positivity! Simply <a href="add-message.html" style="color: #ff6600;">leave a message</a> telling us something nice about a fellow Habbo.
+          <br><br>
+          The wall will be open for one week. On <u>Monday, 21st October</u>, every Habbo who has sent or received a message will be entered into a prize draw to win <a href="f02b6d15-e922-44be-95b7-1096926f3105.png" target="_blank" style="color: #ff6600;">one of the prizes at random from this room</a>.
+        </p>
+        <p>That means we'll have <u>22 winners</u>! Each Habbo can only be entered once, regardless of how many times their name is mentioned.</p>
+        <p class="center-text">Thanks so much for taking part in our week of kindness. ♡</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>The Wall of Kindness</h2>
       <div id="messagesContainer">
-        <p>Enter a name and press "Search" to find messages...</p>
+        <p>Loading messages...</p>
+      </div>
+
+      <!-- Pagination -->
+      <div id="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <span id="pageIndicator">Page 1</span>
+        <button id="nextPage" disabled>Next</button>
       </div>
     </section>
 
@@ -33,31 +50,27 @@
       loadContent('#header-placeholder', 'header.html');
       loadContent('#footer-placeholder', 'footer.html');
 
+      let currentPage = 1;
+      const messagesPerPage = 5;
       const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
       const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
 
-      document.getElementById('searchButton').addEventListener('click', function() {
-        const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
-        fetchMessages(searchQuery);
-      });
-
-      document.getElementById('searchInput').addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-          const searchQuery = event.target.value.toLowerCase().trim();
-          fetchMessages(searchQuery);
-        }
-      });
-
-      async function fetchMessages(query) {
+      async function fetchMessages(page) {
         try {
-          const response = await fetch(`${airtableBaseURL}?filterByFormula=AND(OR(FIND('${query}', LOWER({Your Habbo Name})) > 0, FIND('${query}', LOWER({Friend Habbo Name})) > 0), {Approved}=TRUE())`, {
+          const offset = (page - 1) * messagesPerPage;
+          const response = await fetch(`${airtableBaseURL}?filterByFormula={Approved}=TRUE()&maxRecords=${messagesPerPage}&offset=${offset}`, {
             headers: {
               Authorization: `Bearer ${airtableToken}`,
               "Content-Type": "application/json",
             }
           });
+
           const result = await response.json();
           displayMessages(result.records);
+
+          document.getElementById('pageIndicator').textContent = `Page ${page}`;
+          document.getElementById('prevPage').disabled = page === 1;
+          document.getElementById('nextPage').disabled = result.records.length < messagesPerPage;
         } catch (error) {
           console.error("Error fetching messages:", error);
           document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
@@ -67,11 +80,6 @@
       function displayMessages(messages) {
         const container = document.getElementById("messagesContainer");
         container.innerHTML = "";
-
-        if (messages.length === 0) {
-          container.innerHTML = "<p>No messages found.</p>";
-          return;
-        }
 
         messages.forEach(message => {
           const yourHabbo = message.fields["Your Habbo Name"];
@@ -102,6 +110,20 @@
           container.innerHTML += messageBox;
         });
       }
+
+      document.getElementById('prevPage').addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          fetchMessages(currentPage);
+        }
+      });
+
+      document.getElementById('nextPage').addEventListener('click', () => {
+        currentPage++;
+        fetchMessages(currentPage);
+      });
+
+      fetchMessages(currentPage);
     </script>
   </body>
 </html>
