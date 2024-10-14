@@ -37,36 +37,44 @@ header img {
   width: 100%;
 }
 
-/* Mobile-specific adjustments */
+/* Navigation buttons */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+nav a {
+  background-color: #ff6600;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+}
+
+nav a:hover {
+  background-color: #ff3300;
+}
+
+/* Mobile-specific adjustments for header */
 @media (max-width: 600px) {
   header img {
     max-width: 180px;
   }
-}
 
-/* Headings */
-h1,
-h2 {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  color: #ff6600;
-}
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
 
-h1 {
-  font-size: 2em;
-}
-
-h2 {
-  font-size: 1.5em;
-}
-
-/* Hyperlinks */
-a {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+  nav a {
+    margin-bottom: 10px;
+    width: 90%; /* Full width button */
+    text-align: center;
+  }
 }
 
 /* Intro message styling */
@@ -78,23 +86,6 @@ a:hover {
   border-radius: 10px;
   max-width: 90%;
   box-sizing: border-box;
-}
-
-.intro-message-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-}
-
-.intro-message, .intro-details, .thank-you-message {
-  color: #333;
-  font-size: 0.95em;
-  line-height: 1.3;
-}
-
-.thank-you-message {
-  text-align: center;
-  margin-top: 20px;
 }
 
 /* Main container for messages */
@@ -137,7 +128,7 @@ a:hover {
 
 .avatar img {
   width: auto;
-  height: 80px; /* Adjusted size to match the original */
+  height: 150px; /* Adjusted size to match the original */
   border-radius: 50%;
 }
 
@@ -193,6 +184,27 @@ a:hover {
   margin-top: 20px;
 }
 
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-top: 1px solid #ddd;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+footer a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
 /* Pagination styling */
 #pagination {
   display: flex;
@@ -217,102 +229,19 @@ a:hover {
   cursor: not-allowed;
 }
 
-/* Form container for add message */
-.form-container {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Form styling */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-input[type="text"],
-textarea {
-  padding: 10px;
-  font-family: "Volter Goldfish", Arial, sans-serif;
-  font-size: 1em;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-textarea {
-  resize: vertical;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #ff6600;
-  color: white;
-  font-family: "Volter Goldfish Bold";
-  font-size: 1.2em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #ff3300;
-}
-
-/* Footer styling */
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #f4f4f4;
-  border-top: 1px solid #ddd;
-}
-
-footer p {
-  margin: 5px 0;
-}
-
-footer a {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive styling */
+/* Mobile-specific adjustments for message boxes */
 @media (max-width: 600px) {
-  .form-container {
-    width: 90%;
-  }
-
   .message-box {
     flex-direction: column;
     width: 100%;
   }
 
   .avatar img {
-    width: auto;
     height: 60px;
   }
 
-  button {
-    font-size: 1em;
-    padding: 10px;
+  .pixel-message {
+    font-size: 0.9em;
+    padding: 10px 15px;
   }
 }
