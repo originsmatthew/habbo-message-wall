@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Dynamic header -->
+    <!-- Header included dynamically -->
     <div id="header-placeholder"></div>
 
  <main>
@@ -138,6 +138,11 @@
   window.addEventListener('load', function() {
     window.scrollTo(0, 0);
   });
+     // Load header and footer
+      loadContent('#header-placeholder', 'header.html');
+      loadContent('#footer-placeholder', 'footer.html');
+
 </script>
+  
   </body>
 </html>
