@@ -241,6 +241,47 @@ footer a {
   text-decoration: none;
 }
 
+/* Pagination buttons styling */
+#prevPage,
+#nextPage {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 0.9em; /* Slightly smaller font size */
+  padding: 5px 15px; /* Adjust padding */
+  background-color: #ff6600; /* Default color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+#prevPage:disabled,
+#nextPage:disabled {
+  background-color: #ccc; /* Grey color when disabled */
+  color: #666; /* Slightly darker text color */
+  cursor: not-allowed; /* Change cursor when disabled */
+}
+
+/* Pagination container styling */
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#pagination button {
+  margin: 0 10px;
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  padding: 5px 15px;
+}
+
+#pagination .page-number {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 1em;
+  color: #333;
+}
+
 footer a:hover {
   text-decoration: underline;
 }
