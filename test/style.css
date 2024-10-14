@@ -397,3 +397,24 @@ section {
   flex: 1;
   padding: 0 20px;
 }
+
+/* Styling for thank you section */
+.thank-you-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.thank-you-section h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.thank-you-section p {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.thank-you-section a {
+  color: #ff6600;
+  text-decoration: none;
+}
