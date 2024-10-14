@@ -285,3 +285,16 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+
+/* Hyperlink styling */
+a {
+  color: #ff6600; /* Orange link color */
+  text-decoration: none;
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+}
+
+a:hover {
+  color: #ff3300; /* Darker orange on hover */
+  text-decoration: underline;
+}
