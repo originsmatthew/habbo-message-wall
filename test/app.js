@@ -105,7 +105,7 @@ function initializeHomePage(submissionsOpen) {
               </div>
             </div>
             <div class="avatar recipient">
-              <img src="https://habboden.com/habbo-imaging/${yourHabbo}?size=b&action=wav&frame=2" alt="${friendHabbo}">
+              <img src="https://habboden.com/habbo-imaging/${yourHabbo}?size=b&action=wav&direction=4&head_direction=4" alt="${friendHabbo}">
               <p>${friendHabbo}</p>
             </div>
           </div>
