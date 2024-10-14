@@ -9,20 +9,15 @@
   <body>
     <div id="header-placeholder"></div> <!-- Placeholder for header -->
 
-    <section style="margin: 20px auto; padding: 20px; background-color: #fff; border: 2px solid #ddd; border-radius: 10px; max-width: 90%; box-sizing: border-box;">
-      <div style="padding: 20px; background-color: #f9f9f9; border-radius: 10px; position: relative;">
-        <p style="color: #333; font-size: 0.95em; line-height: 1.3; margin: 0;">
-          <u>Hey Habbos!</u><br>
-          Matthew here. Let's spread some positivity! Simply <a href="add-message.html" style="color: #ff6600; text-decoration: none;">leave a message</a> telling us something nice about a fellow Habbo.
+    <section>
+      <div class="intro-message">
+        <p><u>Hey Habbos!</u><br>
+          Matthew here. Let's spread some positivity! Simply <a href="add-message.html" style="color: #ff6600;">leave a message</a> telling us something nice about a fellow Habbo.
           <br><br>
           The wall will be open for one week. On <u>Monday, 21st October</u>, every Habbo who has sent or received a message will be entered into a prize draw to win <a href="f02b6d15-e922-44be-95b7-1096926f3105.png" target="_blank" style="color: #ff6600;">one of the prizes at random from this room</a>.
         </p>
-        <p style="color: #333; font-size: 0.95em; line-height: 1.3; margin-top: 20px;">
-          That means we'll have <u>22 winners</u>! Each Habbo can only be entered once, regardless of how many times their name is mentioned.
-        </p>
-        <p style="color: #333; font-size: 0.95em; text-align: center; margin-top: 20px;">
-          Thanks so much for taking part in our week of kindness. ♡
-        </p>
+        <p>That means we'll have <u>22 winners</u>! Each Habbo can only be entered once, regardless of how many times their name is mentioned.</p>
+        <p class="center-text">Thanks so much for taking part in our week of kindness. ♡</p>
       </div>
     </section>
 
@@ -32,18 +27,17 @@
         <p>Loading messages...</p>
       </div>
 
-      <!-- Pagination Buttons -->
-      <div id="pagination" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-        <button id="prevPage" style="margin-right: 10px" disabled>Previous</button>
+      <!-- Pagination -->
+      <div id="pagination">
+        <button id="prevPage" disabled>Previous</button>
         <span id="pageIndicator">Page 1</span>
-        <button id="nextPage" style="margin-left: 10px" disabled>Next</button>
+        <button id="nextPage" disabled>Next</button>
       </div>
     </section>
 
     <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
 
     <script>
-      // Load header and footer
       function loadContent(selector, file) {
         fetch(file)
           .then(response => response.text())
@@ -56,9 +50,8 @@
       loadContent('#header-placeholder', 'header.html');
       loadContent('#footer-placeholder', 'footer.html');
 
-      // Pagination and message loading functionality
       let currentPage = 1;
-      const messagesPerPage = 5; // Adjust the number of messages per page
+      const messagesPerPage = 5;
       const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
       const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
 
@@ -73,14 +66,11 @@
           });
 
           const result = await response.json();
-          const messages = result.records;
+          displayMessages(result.records);
 
-          displayMessages(messages);
-
-          // Handle pagination
           document.getElementById('pageIndicator').textContent = `Page ${page}`;
           document.getElementById('prevPage').disabled = page === 1;
-          document.getElementById('nextPage').disabled = messages.length < messagesPerPage;
+          document.getElementById('nextPage').disabled = result.records.length < messagesPerPage;
         } catch (error) {
           console.error("Error fetching messages:", error);
           document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
@@ -133,7 +123,7 @@
         fetchMessages(currentPage);
       });
 
-      fetchMessages(currentPage); // Load the first page of messages
+      fetchMessages(currentPage);
     </script>
   </body>
 </html>
