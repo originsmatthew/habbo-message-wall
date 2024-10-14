@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Messages - Habbo Wall of Kindness</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="header-placeholder"></div> <!-- Placeholder for header -->
+
+    <section style="text-align: center; padding: 20px;">
+      <h2>Search Messages</h2>
+      <input type="text" id="searchInput" placeholder="Enter a Habbo name" style="width: 80%; max-width: 400px; padding: 10px;">
+      <button id="searchButton" style="padding: 10px 20px; margin-top: 10px;">Search</button>
+      <div id="messagesContainer">
+        <p>Enter a name and press "Search" to find messages...</p>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div> <!-- Placeholder for footer -->
+
+    <script>
+      // Function to dynamically load header and footer
+      function loadContent(selector, file) {
+        fetch(file)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector(selector).innerHTML = data;
+          })
+          .catch(error => console.error('Error loading content:', error));
+      }
+
+      // Load the header and footer
+      loadContent('#header-placeholder', 'header.html');
+      loadContent('#footer-placeholder', 'footer.html');
+
+      const airtableToken = "patJ1ygzZwHGdrzeE.086c49e787b3e28cf270914e240eade8279592e7f0aaa2206d7bc0fd41a29c11";
+      const airtableBaseURL = "https://api.airtable.com/v0/app2r945tWexLP44Z/Messages";
+
+      document.getElementById('searchButton').addEventListener('click', function() {
+        const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+        fetchMessages(searchQuery);
+      });
+
+      document.getElementById('searchInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          const searchQuery = event.target.value.toLowerCase().trim();
+          fetchMessages(searchQuery);
+        }
+      });
+
+      async function fetchMessages(query) {
+        try {
+          const response = await fetch(`${airtableBaseURL}?filterByFormula=AND(OR(FIND('${query}', LOWER({Your Habbo Name})) > 0, FIND('${query}', LOWER({Friend Habbo Name})) > 0), {Approved}=TRUE())`, {
+            headers: {
+              Authorization: `Bearer ${airtableToken}`,
+              "Content-Type": "application/json",
+            }
+          });
+          const result = await response.json();
+          displayMessages(result.records);
+        } catch (error) {
+          console.error("Error fetching messages:", error);
+          document.getElementById("messagesContainer").innerHTML = "<p>Failed to load messages.</p>";
+        }
+      }
+
+      function displayMessages(messages) {
+        const container = document.getElementById("messagesContainer");
+        container.innerHTML = "";
+
+        if (messages.length === 0) {
+          container.innerHTML = "<p>No messages found.</p>";
+          return;
+        }
+
+        messages.forEach(message => {
+          const yourHabbo = message.fields["Your Habbo Name"];
+          const friendHabbo = message.fields["Friend Habbo Name"];
+          const kindMessage = message.fields["Message"];
+          const createdTime = new Date(message.createdTime);
+          const submissionDate = createdTime.toLocaleDateString("en-GB");
+          const submissionTime = createdTime.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: true });
+
+          // Apply same styling as index.html
+          const messageBox = `
+            <div class="message-box">
+              <div class="avatar-container">
+                <div class="avatar sender">
+                  <img src="https://habboera.com/imager?habbo=${yourHabbo}&size=l&gesture=std&action=wav&direction=2&head_direction=2&headonly=0" alt="${yourHabbo}">
+                  <p>${yourHabbo}</p>
+                </div>
+                <div class="message-content">
+                  <div class="pixel-message-container">
+                    <div class="pixel-message">
+                      <p>${kindMessage}</p>
+                    </div>
+                    <p class="submission-time">Submitted on: ${submissionDate} @ ${submissionTime} UTC</p>
+                  </div>
+                </div>
+                <div class="avatar recipient">
+                  <img src="https://habboera.com/imager?habbo=${friendHabbo}&size=l&gesture=std&action=wav&direction=4&head_direction=4&headonly=0" alt="${friendHabbo}">
+                  <p>${friendHabbo}</p>
+                </div>
+              </div>
+            </div>
+          `;
+          container.innerHTML += messageBox;
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy - Habbo Origins Wall of Kindness</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header included dynamically -->
+    <div id="header-placeholder"></div>
+
+    <section style="padding: 20px; text-align: left;">
+      <h1>Privacy Policy</h1>
+      <p>
+        At <strong>Habbo Origins Wall of Kindness</strong>, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we handle any data collected on this website.
+      </p>
+      
+      <h2>What Data We Collect</h2>
+      <p>
+        We do not collect or store any personal data unless voluntarily provided by you through form submissions. All data provided is used solely to display messages on the Wall of Kindness.
+      </p>
+
+      <h2>Use of Cookies</h2>
+      <p>We use strictly necessary cookies to ensure the security and functionality of the site, including:</p>
+      <ul>
+        <li><strong>XSRF-TOKEN</strong>: This cookie helps protect against Cross-Site Request Forgery (CSRF) attacks.</li>
+        <li><strong>laravel_session</strong>: This cookie manages session data to maintain user interactions with the website.</li>
+        <li><strong>remember_web_</strong>: This cookie stores login credentials for those who select the "remember me" option.</li>
+      </ul>
+      <p>These cookies are necessary for the website’s operation and do not require user consent.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>
+        We do not use any tracking or analytics cookies. Should any changes be made that involve non-essential cookies, we will obtain your consent before implementing them.
+      </p>
+
+      <h2>Your Rights & Data Removal</h2>
+      <p>
+        If you wish to request the removal of a message mentioning you, please submit a request via the message form. Insert your name as "Your Habbo Name," "DELETE" as the "Friend's Habbo Name," and "Delete my data" as the message. We will action your request as soon as possible.
+      </p>
+
+      <h2>Prize Draw</h2>
+      <p>
+        All names entered on the Wall of Kindness will automatically be entered into a random prize draw to win one of 22 prizes. The winners will be chosen at random from the pool of names submitted during the event.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions or concerns regarding this policy, feel free to contact <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a> on Habbo Origins or via social media.
+      </p>
+    </section>
+
+    <!-- Dynamic footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="app.js"></script>
+    <script>
+      // Function to load header and footer dynamically
+      function loadContent(selector, file) {
+        fetch(file)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector(selector).innerHTML = data;
+          })
+          .catch(error => console.error('Error loading content:', error));
+      }
+
+      // Load header and footer
+      loadContent('#header-placeholder', 'header.html');
+      loadContent('#footer-placeholder', 'footer.html');
+    </script>
+  </body>
+</html>
