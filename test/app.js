@@ -47,6 +47,10 @@ function initializeHomePage() {
       });
 
       const result = await response.json();
+
+      // Sort messages by submission date (newest first)
+      result.records.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
+
       displayMessages(result.records);
 
       offset = result.offset || "";
@@ -75,11 +79,13 @@ function initializeHomePage() {
         hour12: true,
       });
 
+      const avatarURL = `https://habboera.com/imager?habbo=${yourHabbo}&size=l&gesture=std&action=wav&direction=2&head_direction=2&headonly=0`;
+
       const messageBox = `
         <div class="message-box">
           <div class="avatar-container">
             <div class="avatar sender">
-              <img src="https://habboera.com/imager?habbo=${yourHabbo}&size=l" alt="${yourHabbo}">
+              <img src="${avatarURL}" alt="${yourHabbo}">
               <p>${yourHabbo}</p>
             </div>
             <div class="message-content">
