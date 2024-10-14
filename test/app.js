@@ -17,22 +17,21 @@ document.addEventListener("DOMContentLoaded", function () {
     addMessageLink.style.display = "none";
   }
 
- // Function to load the header and footer dynamically
-window.onload = function() {
-  // Load the header
-  fetch('header.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('header-placeholder').innerHTML = data;
-    });
+  // Load header and footer
+  loadContent('#header-placeholder', 'header.html');
+  loadContent('#footer-placeholder', 'footer.html');
+});
 
-  // Load the footer
-  fetch('footer.html')
+// --- Load Header and Footer ---
+function loadContent(selector, file) {
+  fetch(file)
     .then(response => response.text())
     .then(data => {
-      document.getElementById('footer-placeholder').innerHTML = data;
-    });
-};
+      document.querySelector(selector).innerHTML = data;
+    })
+    .catch(error => console.error('Error loading content:', error));
+}
+
 // --- Initialize Home Page ---
 function initializeHomePage(submissionsOpen) {
   let currentPage = 1;
