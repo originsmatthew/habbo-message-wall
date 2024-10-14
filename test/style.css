@@ -432,3 +432,10 @@ footer a:hover {
 .winners-table tbody tr:hover {
   background-color: #e0e0e0; /* Hover effect for rows */
 }
+.avatar img, 
+.prize-image {
+  max-width: 50px; /* Ensure uniform width */
+  height: auto;    /* Maintain aspect ratio */
+  display: block;
+  margin: 0 auto;  /* Center the image horizontally */
+}
