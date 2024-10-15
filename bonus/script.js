@@ -12,7 +12,7 @@ function generateImage() {
     // Position the images correctly behind the holiday romance
     habboImage1.style.left = '15px'; // Adjusted for better alignment
     habboImage1.style.bottom = '-100px'; // Lowered for better fit
-    habboImage2.style.left = '45px'; // Adjust based on your design
+    habboImage2.style.left = '48px'; // Adjust based on your design
     habboImage2.style.bottom = '-80px'; // Lowered for better fit
 
     // Show the Habbo images
