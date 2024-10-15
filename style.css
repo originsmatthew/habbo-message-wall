@@ -111,8 +111,8 @@ nav a:hover {
 .message-box {
   display: flex;
   flex-direction: row; /* Keep avatars and messages in a row */
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start; /* Align items to the start */
+  align-items: flex-start; /* Align items to the top */
   width: 80%;
   max-width: 100%; /* Ensure it doesn't overflow on mobile */
   margin: 20px 0;
@@ -128,7 +128,7 @@ nav a:hover {
   display: flex; /* Use flex to keep avatars inline */
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: auto; /* Allow width to adapt */
 }
 
 /* Styling for avatar images */
@@ -162,13 +162,26 @@ nav a:hover {
     width: auto;   /* Maintain original aspect ratio */
   }
 
-  /* Adjust logo size for mobile */
+  /* Header adjustments for mobile */
   header img {
     max-width: 225px; /* Adjusted logo size for mobile */
   }
 
   header .welcome-text {
     text-align: center; /* Center text on mobile */
+  }
+
+  /* Adjusting navigation for mobile */
+  nav {
+    flex-direction: column; /* Stack navigation vertically */
+    width: 100%;
+  }
+
+  nav a {
+    width: 100%; /* Full width on mobile */
+    text-align: center; /* Center align text */
+    padding: 12px; /* Increased padding for mobile */
+    margin-bottom: 10px; /* Space between buttons */
   }
 }
 
