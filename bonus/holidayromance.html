@@ -44,20 +44,22 @@
         }
 
         /* Styling for the holiday romance image */
-        #holidayRomance {
-            position: absolute; /* Ensures this image is the base */
-            top: 0; /* Adjust as needed */
-            left: 0; /* Adjust as needed */
-        }
+    #holidayRomance {
+        position: absolute; /* Ensures this image is the base */
+        top: 0; /* Adjust as needed */
+        left: 0; /* Adjust as needed */
+        z-index: 1; /* Ensure this is in front */
+    }
 
-        /* Habbo image styling */
-        .habbo-image {
-            position: absolute; /* Position absolutely to overlap */
-            width: 50px; /* Adjust as needed */
-            height: auto;
-            bottom: 5px; /* Align to the bottom of the holiday romance image */
-            display: none; /* Initially hidden */
-        }
+    /* Habbo image styling */
+    .habbo-image {
+        position: absolute; /* Position absolutely to overlap */
+        width: 50px; /* Adjust as needed */
+        height: auto;
+        bottom: 5px; /* Align to the bottom of the holiday romance image */
+        display: none; /* Initially hidden */
+        z-index: 0; /* Ensure this is behind the holiday romance */
+    }
 
         /* Input container styling */
         #inputContainer {
