@@ -4,9 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holiday Romance</title>
-    <link rel="stylesheet" href="bonus.css"> <!-- Link to your new CSS file -->
     <style>
-        /* Inline styles can remain here or be moved to the CSS file */
+        /* Font-face declarations */
+        @font-face {
+            font-family: "Volter Goldfish";
+            src: url("/font/Volter (Goldfish).ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Volter Goldfish Bold";
+            src: url("/font/Volter-Bold (Goldfish).ttf") format("truetype");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* General body styling */
+        body {
+            font-family: "Volter Goldfish", Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main container */
+        #container {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Image display styling */
+        #imageDisplay {
+            position: relative;
+            margin: 20px;
+        }
+
+        /* Styling for the holiday romance image */
+        #holidayRomance {
+            position: absolute; /* Ensures this image is the base */
+            top: 0; /* Adjust as needed */
+            left: 0; /* Adjust as needed */
+        }
+
+        /* Habbo image styling */
+        .habbo-image {
+            position: absolute; /* Position absolutely to overlap */
+            width: 50px; /* Adjust as needed */
+            height: auto;
+            bottom: 20px; /* Align to the bottom of the holiday romance image */
+        }
+
+        /* Input container styling */
+        #inputContainer {
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px; /* Adjust width as necessary */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff3300;
+        }
     </style>
 </head>
 <body>
@@ -17,7 +93,7 @@
         <button onclick="generateImage()">Generate</button>
     </div>
     <div id="imageDisplay">
-        <img id="holidayRomance" src="https://habbokindness.com/bonus/holiday_romance.png" alt="Holiday Romance" />
+        <img id="holidayRomance" src="path/to/holiday_romance.png" alt="Holiday Romance" />
         <img id="habboImage1" class="habbo-image" src="" alt="Habbo 1" />
         <img id="habboImage2" class="habbo-image" src="" alt="Habbo 2" />
     </div>
