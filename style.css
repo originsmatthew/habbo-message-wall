@@ -70,6 +70,34 @@ nav a:hover {
   background-color: #ff3300;
 }
 
+/* Mobile-specific adjustments */
+@media (max-width: 600px) {
+  header {
+    align-items: center; /* Center align for mobile */
+  }
+
+  header img {
+    max-width: 225px; /* Adjusted logo size for mobile */
+  }
+
+  header .welcome-text {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  nav {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav a {
+    width: 100%; /* Full width on mobile */
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+}
+
 /* Main container for messages */
 #messagesContainer {
   display: flex;
@@ -110,9 +138,9 @@ nav a:hover {
 /* Styling for each message box */
 .message-box {
   display: flex;
-  flex-direction: row; /* Keep avatars and messages in a row */
-  justify-content: flex-start; /* Align items to the start */
-  align-items: flex-start; /* Align items to the top */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 80%;
   max-width: 100%; /* Ensure it doesn't overflow on mobile */
   margin: 20px 0;
@@ -125,10 +153,10 @@ nav a:hover {
 
 /* Avatar container */
 .avatar-container {
-  display: flex; /* Use flex to keep avatars inline */
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  width: auto; /* Allow width to adapt */
+  width: 100%;
 }
 
 /* Styling for avatar images */
@@ -145,13 +173,6 @@ nav a:hover {
 
 /* Responsive adjustments for mobile */
 @media (max-width: 600px) {
-  .message-box {
-    flex-direction: column; /* Stack avatar and message vertically on mobile */
-    align-items: center; /* Center align items */
-    width: 95%; /* Use a percentage for responsive design */
-    max-width: 100%; /* Prevent overflow */
-  }
-
   .avatar img {
     height: 85px;  /* Smaller height for avatars on mobile */
     width: auto;   /* Maintain original aspect ratio */
@@ -160,28 +181,6 @@ nav a:hover {
   .prize-image img {
     height: 70px;  /* Smaller height for prize images on mobile */
     width: auto;   /* Maintain original aspect ratio */
-  }
-
-  /* Header adjustments for mobile */
-  header img {
-    max-width: 225px; /* Adjusted logo size for mobile */
-  }
-
-  header .welcome-text {
-    text-align: center; /* Center text on mobile */
-  }
-
-  /* Adjusting navigation for mobile */
-  nav {
-    flex-direction: column; /* Stack navigation vertically */
-    width: 100%;
-  }
-
-  nav a {
-    width: 100%; /* Full width on mobile */
-    text-align: center; /* Center align text */
-    padding: 12px; /* Increased padding for mobile */
-    margin-bottom: 10px; /* Space between buttons */
   }
 }
 
@@ -227,7 +226,7 @@ nav a:hover {
   border-width: 10px;
   border-style: solid;
   border-color: transparent #f9d71c transparent transparent;
-  border-right-color: #000; /* Black border on the right side of the triangle */
+  border-right-color: #000;
 }
 
 /* Submission time styling */
@@ -250,10 +249,6 @@ footer p {
 footer a {
   color: #ff6600;
   text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
 }
 
 /* Pagination buttons styling */
@@ -283,6 +278,127 @@ footer a:hover {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+}
+
+#pagination button {
+  margin: 0 10px;
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  padding: 5px 15px;
+}
+
+#pagination .page-number {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 1em;
+  color: #333;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* Hyperlink styling */
+a {
+  color: #ff6600; /* Orange link color */
+  text-decoration: none;
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+}
+
+a:hover {
+  color: #ff3300; /* Darker orange on hover */
+  text-decoration: underline;
+}
+
+/* Navigation buttons */
+nav a {
+  background-color: #ff6600;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px; /* Smaller navigation boxes */
+  border-radius: 5px;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1em;
+}
+
+nav a:hover {
+  background-color: #ff3300; /* Darker orange on hover */
+  color: white; /* Ensure the text remains white */
+  text-decoration: none; /* No underline */
+}
+
+/* Form container for add message */
+.form-container {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px;
+  font-family: "Volter Goldfish", Arial, sans-serif;
+  font-size: 1em;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  font-family: "Volter Goldfish Bold";
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff3300;
+}
+
+/* Footer styling */
+footer {
+  margin-top: 30px;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+footer a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* Winners table styling */
@@ -333,7 +449,6 @@ footer a:hover {
 .winners-table tbody tr:hover {
   background-color: #e0e0e0; /* Hover effect for rows */
 }
-
 /* Avatar styling */
 .avatar img {
   height: 150px; /* Adjust the height to make avatars taller */
@@ -343,20 +458,31 @@ footer a:hover {
 /* On mobile, reduce the height for responsiveness */
 @media (max-width: 600px) {
   .avatar img {
-    height: 85px; /* Smaller height for avatars on mobile */
+    height: 100px; /* Smaller height for mobile */
+    width: auto;   /* Maintain original aspect ratio */
+}
+/* Styling for prize images */
+.prize-image img {
+  height: 100px;  /* Fixed height for prize images */
+  width: auto;    /* Maintain original aspect ratio */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+  .avatar img {
+    height: 85px;  /* Smaller height for avatars on mobile */
     width: auto;   /* Maintain original aspect ratio */
   }
 
-  /* Responsive adjustments for prize images */
   .prize-image img {
     height: 70px;  /* Smaller height for prize images on mobile */
     width: auto;   /* Maintain original aspect ratio */
   }
+}
 
-  /* Avatar column styling */
-  table td.avatar {
-    width: 200px; /* Adjust width for the avatar column */
-    padding: 10px;
-    text-align: center;
-  }
+/* Avatar column styling */
+table td.avatar {
+  width: 200px; /* Adjust width for the avatar column */
+  padding: 10px;
+  text-align: center;
 }
