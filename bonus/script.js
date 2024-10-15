@@ -10,10 +10,10 @@ function generateImage() {
     habboImage2.src = `https://habboden.com/habbo-imaging/${habbo2}?size=b&action=wav&frame=2`;
 
     // Position the images correctly behind the holiday romance
-    habboImage1.style.left = '40px'; // Adjust based on your design
-    habboImage1.style.bottom = '20px'; // Adjust to fit behind the holiday romance
+    habboImage1.style.left = '30px'; // Adjusted for better alignment
+    habboImage1.style.bottom = '5px'; // Lowered for better fit
     habboImage2.style.left = '100px'; // Adjust based on your design
-    habboImage2.style.bottom = '20px'; // Adjust to fit behind the holiday romance
+    habboImage2.style.bottom = '5px'; // Lowered for better fit
 
     // Show the Habbo images
     habboImage1.style.display = 'block'; // Show Habbo 1
