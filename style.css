@@ -20,7 +20,7 @@ body {
   background-color: #f0f0f0;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Ensure consistent padding and border behavior */
 }
 
 /* Header styling */
@@ -70,43 +70,6 @@ nav a:hover {
   background-color: #ff3300;
 }
 
-@media (max-width: 600px) {
-  body {
-    font-size: 14px; /* Adjust base font size */
-  }
-
-  header {
-    padding: 10px; /* Reduce padding for smaller screens */
-  }
-
-  .message-box {
-    flex-direction: column; /* Stack elements on smaller screens */
-    width: 95%; /* Full width for mobile */
-    margin: 10px auto; /* Center alignment */
-  }
-
-  .avatar {
-    width: 100%; /* Full width for avatar images */
-  }
-
-  .pixel-message {
-    font-size: 1em; /* Slightly smaller font size */
-    padding: 10px; /* Adjust padding */
-  }
-
-  /* Ensure images are responsive */
-  img {
-    max-width: 100%;
-    height: auto; /* Maintain aspect ratio */
-  }
-
-  /* Adjust button sizes */
-  button {
-    padding: 8px 15px; /* Smaller button size */
-    font-size: 1em; /* Responsive font size */
-  }
-}
-
 /* Main container for messages */
 #messagesContainer {
   display: flex;
@@ -147,12 +110,12 @@ nav a:hover {
 /* Styling for each message box */
 .message-box {
   display: flex;
-  flex-direction: row;
+  flex-direction: column; /* Stack avatar and message vertically */
   justify-content: center;
   align-items: center;
-  width: 80%;
-  max-width: 100%; /* Ensure it doesn't overflow on mobile */
-  margin: 20px 0;
+  width: 95%; /* Use a percentage for responsive design */
+  max-width: 100%; /* Prevent overflow */
+  margin: 10px auto; /* Center alignment */
   padding: 10px;
   background-color: #fff;
   border: 3px solid #ddd;
@@ -162,16 +125,17 @@ nav a:hover {
 
 /* Avatar container */
 .avatar-container {
+  width: 100%; /* Full width */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center align items */
 }
 
 /* Styling for avatar images */
 .avatar img {
-  height: 150px;  /* Fixed height for avatars */
-  width: auto;    /* Maintain original aspect ratio */
+  height: 85px; /* Adjusted height for mobile */
+  width: auto; /* Maintain original aspect ratio */
+  max-width: 100%; /* Ensure image does not overflow */
 }
 
 /* Styling for prize images */
@@ -182,14 +146,52 @@ nav a:hover {
 
 /* Responsive adjustments for mobile */
 @media (max-width: 600px) {
-  .avatar img {
-    height: 85px;  /* Smaller height for avatars on mobile */
-    width: auto;   /* Maintain original aspect ratio */
+  body {
+    font-size: 14px; /* Adjust base font size */
   }
 
-  .prize-image img {
-    height: 70px;  /* Smaller height for prize images on mobile */
-    width: auto;   /* Maintain original aspect ratio */
+  header {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .pixel-message {
+    font-size: 0.9em; /* Slightly smaller text on mobile */
+    padding: 10px; /* Adjust padding */
+    max-width: 95%; /* Limit width */
+  }
+
+  /* Ensure images are responsive */
+  img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  /* Avatar styling */
+  .avatar img {
+    height: 85px; /* Smaller height for avatars on mobile */
+    width: auto; /* Maintain original aspect ratio */
+  }
+
+  /* Adjust button sizes */
+  button {
+    padding: 8px 15px; /* Smaller button size */
+    font-size: 1em; /* Responsive font size */
+  }
+
+  /* Winners table styling */
+  .winners-table {
+    width: 90%; /* Adjust to 90% for better mobile responsiveness */
+    max-width: 1000px; /* Prevent it from getting too wide */
+    border-collapse: collapse; /* Ensure no double borders */
+    margin: 0 auto; /* Center table */
+  }
+
+  .winners-table th, .winners-table td {
+    padding: 10px; /* Reduced padding for smaller devices */
+    text-align: center;
+    overflow: hidden; /* Prevent overflow of content */
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
   }
 }
 
@@ -235,7 +237,7 @@ nav a:hover {
   border-width: 10px;
   border-style: solid;
   border-color: transparent #f9d71c transparent transparent;
-  border-right-color: #000;
+  border-right-color: #000; /* Black border on the right side of the triangle */
 }
 
 /* Submission time styling */
@@ -258,6 +260,10 @@ footer p {
 footer a {
   color: #ff6600;
   text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* Pagination buttons styling */
@@ -289,22 +295,54 @@ footer a {
   margin-top: 20px;
 }
 
-#pagination button {
-  margin: 0 10px;
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  padding: 5px 15px;
+/* Winners table styling */
+.winners-table-container {
+  display: flex;
+  justify-content: center; /* Center the table on the page */
+  padding: 20px; /* Add padding around the table */
 }
 
-#pagination .page-number {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif;
-  font-size: 1em;
-  color: #333;
+.winners-table {
+  width: 80%; /* Adjust the width to 80% of the page */
+  max-width: 1000px; /* Set a maximum width to prevent it from getting too large on wider screens */
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  margin: 20px auto;
 }
 
-footer a:hover {
-  text-decoration: underline;
+.winners-table th, .winners-table td {
+  padding: 20px;
+  text-align: center;
 }
 
+.winners-table th {
+  font-family: "Volter Goldfish Bold", Arial, sans-serif; /* Bold font */
+  background-color: #f4f4f4; /* Light grey background for header */
+  border-bottom: 2px solid #ddd;
+}
+
+.winners-table td {
+  border: 1px solid #ddd;
+  vertical-align: middle; /* Aligns content vertically in the middle */
+}
+
+.avatar-small, .prize-image {
+  width: 50px; /* Avatar and prize image same height */
+  height: 50px;
+  border-radius: 0%;
+}
+
+.winners-table tbody tr:nth-child(odd) {
+  background-color: #fafafa; /* Alternating row color */
+}
+
+.winners-table tbody tr:nth-child(even) {
+  background-color: #f0f0f0; /* Slightly darker alternate row */
+}
+
+.winners-table tbody tr:hover {
+  background-color: #e0e0e0; /* Hover effect for rows */
+}
 
 /* Hyperlink styling */
 a {
@@ -408,90 +446,4 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
-}
-
-/* Winners table styling */
-.winners-table-container {
-  display: flex;
-  justify-content: center; /* Center the table on the page */
-  padding: 20px; /* Add padding around the table */
-}
-
-.winners-table {
-  width: 80%; /* Adjust the width to 80% of the page */
-  max-width: 1000px; /* Set a maximum width to prevent it from getting too large on wider screens */
-  border-collapse: collapse;
-  background-color: #f9f9f9;
-  margin: 20px auto;
-}
-
-.winners-table th, .winners-table td {
-  padding: 20px;
-  text-align: center;
-}
-
-.winners-table th {
-  font-family: "Volter Goldfish Bold", Arial, sans-serif; /* Bold font */
-  background-color: #f4f4f4; /* Light grey background for header */
-  border-bottom: 2px solid #ddd;
-}
-
-.winners-table td {
-  border: 1px solid #ddd;
-  vertical-align: middle; /* Aligns content vertically in the middle */
-}
-
-.avatar-small, .prize-image {
-  width: 50px; /* Avatar and prize image same height */
-  height: 50px;
-  border-radius: 0%;
-}
-
-.winners-table tbody tr:nth-child(odd) {
-  background-color: #fafafa; /* Alternating row color */
-}
-
-.winners-table tbody tr:nth-child(even) {
-  background-color: #f0f0f0; /* Slightly darker alternate row */
-}
-
-.winners-table tbody tr:hover {
-  background-color: #e0e0e0; /* Hover effect for rows */
-}
-/* Avatar styling */
-.avatar img {
-  height: 150px; /* Adjust the height to make avatars taller */
-  width: auto;   /* Maintain original aspect ratio */
-}
-
-/* On mobile, reduce the height for responsiveness */
-@media (max-width: 600px) {
-  .avatar img {
-    height: 100px; /* Smaller height for mobile */
-    width: auto;   /* Maintain original aspect ratio */
-}
-/* Styling for prize images */
-.prize-image img {
-  height: 100px;  /* Fixed height for prize images */
-  width: auto;    /* Maintain original aspect ratio */
-}
-
-/* Responsive adjustments for mobile */
-@media (max-width: 600px) {
-  .avatar img {
-    height: 85px;  /* Smaller height for avatars on mobile */
-    width: auto;   /* Maintain original aspect ratio */
-  }
-
-  .prize-image img {
-    height: 70px;  /* Smaller height for prize images on mobile */
-    width: auto;   /* Maintain original aspect ratio */
-  }
-}
-
-/* Avatar column styling */
-table td.avatar {
-  width: 200px; /* Adjust width for the avatar column */
-  padding: 10px;
-  text-align: center;
 }
