@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Romance</title>
+    <style>
+        body {
+            font-family: "Volter Goldfish", Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        #container {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #imageDisplay {
+            position: relative;
+            margin: 20px;
+        }
+        #holidayRomance {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .habbo-image {
+            position: absolute;
+            width: 50px; /* Adjust as needed */
+            height: auto;
+        }
+        #inputContainer {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Holiday Romance Photo Generator</h1>
+    <div id="inputContainer">
+        <input type="text" id="habbo1" placeholder="Enter first Habbo name" />
+        <input type="text" id="habbo2" placeholder="Enter second Habbo name" />
+        <button onclick="generateImage()">Generate</button>
+    </div>
+    <div id="imageDisplay">
+        <img id="holidayRomance" src="path/to/holiday_romance.png" alt="Holiday Romance" />
+        <img id="habboImage1" class="habbo-image" src="" alt="Habbo 1" />
+        <img id="habboImage2" class="habbo-image" src="" alt="Habbo 2" />
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
