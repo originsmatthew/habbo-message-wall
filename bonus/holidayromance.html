@@ -3,65 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Romance</title>
+    <title>Holiday Romance Generator</title>
     <style>
         /* Font-face declarations */
         @font-face {
             font-family: "Volter Goldfish";
-            src: url("/fonts/Volter (Goldfish).ttf") format("truetype");
+            src: url("fonts/Volter (Goldfish).ttf") format("truetype");
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
             font-family: "Volter Goldfish Bold";
-            src: url("/fonts/Volter-Bold (Goldfish).ttf") format("truetype");
+            src: url("fonts/Volter-Bold (Goldfish).ttf") format("truetype");
             font-weight: bold;
             font-style: normal;
         }
 
-        /* General body styling */
         body {
             font-family: "Volter Goldfish", Arial, sans-serif;
             text-align: center;
             background-color: #f0f0f0;
             margin: 0;
-            padding: 0;
+            padding: 20px;
         }
 
-        /* Main container */
-        #container {
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
-        /* Image display styling */
+        .description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
         #imageDisplay {
             position: relative;
-            margin: 20px;
+            width: 400px; /* Set to original width */
+            height: 400px; /* Set to original height */
+            margin: 20px auto; /* Centering the container */
+            background-color: #fff; /* Background color for visibility */
+            border: 5px solid black; /* Black border */
+            border-radius: 15px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow content */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
         }
 
-        /* Styling for the holiday romance image */
-    #holidayRomance {
-        position: absolute; /* Ensures this image is the base */
-        top: 0; /* Adjust as needed */
-        left: 0; /* Adjust as needed */
-        z-index: 1; /* Ensure this is in front */
-    }
-
-    /* Habbo image styling */
-.habbo-image {
-    position: absolute; /* Position absolutely to overlap */
-    width: 70px; /* Increase the size here */
-    height: auto;
-    bottom: 5px; /* Align to the bottom of the holiday romance image */
-    display: none; /* Initially hidden */
-    z-index: 0; /* Ensure this is behind the holiday romance */
+        #holidayRomance {
+            max-width: 50%; /* Scale down to 50% of the container width */
+            height: 50%; /* Maintain aspect ratio */
+            margin: 0; /* Center the image horizontally */
+z-index: 2; /* Higher z-index to appear in front of Habbo images */
 }
 
-        /* Input container styling */
+        .habbo-image {
+            position: absolute;
+            width: 25%; /* Original width for Habbo images */
+            height: auto; /* Maintain aspect ratio */
+            display: none; /* Initially hidden */
+            z-index: 1; /* Lower z-index */
+        }
+
+        #habboImage1 {
+            bottom: 80px; /* Position above the holiday romance */
+            left: 20%; /* Adjust for horizontal positioning */
+        }
+
+        #habboImage2 {
+            bottom: 80px; /* Position above the holiday romance */
+            right: 20%; /* Adjust for horizontal positioning */
+        }
+
         #inputContainer {
             margin: 20px 0;
         }
@@ -71,7 +86,8 @@
             margin: 5px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            width: 200px; /* Adjust width as necessary */
+            width: 200px;
+            font-family: "Volter Goldfish"; /* Use Volter font */
         }
 
         button {
@@ -81,24 +97,79 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin: 5px;
+            font-family: "Volter Goldfish Bold"; /* Apply font */
         }
 
         button:hover {
             background-color: #ff3300;
         }
+
+        #captionDisplay {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+font-family: "Volter Goldfish Bold"; /* Apply font */
+        }
+
+        #backgroundSelector {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #backgroundSelector p {
+            margin-right: 10px; /* Add space to the right of the text */
+        }
+
+        #backgroundSelector label {
+            margin: 0 5px; /* Space between options */
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #backgroundSelector img {
+            width: 50px; /* Thumbnail width */
+            height: 50px; /* Thumbnail height */
+            border: 2px solid black; /* Add a black border */
+            border-radius: 5px; /* Rounded corners */
+        }
     </style>
 </head>
 <body>
-    <h1>Holiday Romance Photo Generator</h1>
-    <div id="inputContainer">
-        <input type="text" id="habbo1" placeholder="Enter first Habbo name" />
-        <input type="text" id="habbo2" placeholder="Enter second Habbo name" />
-        <button onclick="generateImage()">Generate</button>
-    </div>
-    <div id="imageDisplay">
-        <img id="holidayRomance" src="/bonus/holiday_romance.png" alt="Holiday Romance" />
-        <img id="habboImage1" class="habbo-image" src="" alt="Habbo 1" />
-        <img id="habboImage2" class="habbo-image" src="" alt="Habbo 2" />
+    <div>
+        <h1>Holiday Romance Generator</h1>
+        <p class="description">No holiday romance? No problem. Type your Habbo names in below. Snap a screenshot to save the image.</p>
+        <div id="inputContainer">
+            <input type="text" id="habbo1" placeholder="Enter first Habbo name" />
+            <input type="text" id="habbo2" placeholder="Enter second Habbo name" />
+            <button onclick="generateImage()">Generate</button>
+            <button onclick="resetFields()">Reset</button>
+        </div>
+        <div id="backgroundSelector">
+            <p>Select a Background:</p>
+            <label onclick="changeBackground('none')">
+                <img src="none-thumbnail.png" alt="No Background">
+            </label>
+            <label onclick="changeBackground('bg1')">
+                <img src="thumbnail1.png" alt="Background 1">
+            </label>
+            <label onclick="changeBackground('bg2')">
+                <img src="thumbnail2.png" alt="Background 2">
+            </label>
+            <label onclick="changeBackground('bg3')">
+                <img src="thumbnail3.png" alt="Background 3">
+            </label>
+        </div>
+        <div id="imageDisplay">
+            <img id="holidayRomance" src="holiday_romance.png" alt="Holiday Romance" />
+            <img id="habboImage1" class="habbo-image" src="" alt="Habbo 1" />
+            <img id="habboImage2" class="habbo-image" src="" alt="Habbo 2" />
+        </div>
+        <p id="captionDisplay"></p> <!-- Caption display -->
     </div>
     <script src="script.js"></script>
 </body>
