@@ -10,7 +10,7 @@ function generateImage() {
     habboImage.style.display = 'block'; 
 
     // Position the image correctly above the speakers corner
-    habboImage.style.left = '40%'; // Adjust for horizontal positioning
+    habboImage.style.left = '39%'; // Adjust for horizontal positioning
     habboImage.style.bottom = '195px'; // Position above speakers corner
 
     // Display the caption
