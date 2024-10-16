@@ -1,79 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Mini-Projects</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy - Habbo Origins Wall of Kindness</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-        body {
-            font-family: "Volter Goldfish", Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .link-container {
-            margin-top: 20px;
-        }
-
-        .project-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ff6600;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 20px;
-            transition: background-color 0.3s;
-        }
-
-        .project-link:hover {
-            background-color: #ff3300;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Dynamic header -->
+  </head>
+  <body>
+    <!-- Header included dynamically -->
     <div id="header-placeholder"></div>
 
     <h1>Discover Fun Mini-Projects!</h1>
     <p>Explore my collection of mini-projects designed to spread joy and creativity!</p>
 
-    <div class="link-container">
-        <a href="/bonus/holidayromance.html" class="project-link">Habbo Romance Generator</a>
-        <!-- Future links can be added here -->
+<br>
+        <a href="/bonus/holidayromance.html">Habbo Romance Generator</a>
+
     </div>
 
     <!-- Dynamic footer -->
     <div id="footer-placeholder"></div>
 
+    <script src="app.js"></script>
     <script>
-        // Function to load header and footer dynamically
-        function loadContent(selector, file) {
-            fetch(file)
-                .then(response => response.text())
-                .then(data => {
-                    document.querySelector(selector).innerHTML = data;
-                })
-                .catch(error => console.error('Error loading content:', error));
-        }
+      // Function to load header and footer dynamically
+      function loadContent(selector, file) {
+        fetch(file)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector(selector).innerHTML = data;
+          })
+          .catch(error => console.error('Error loading content:', error));
+      }
 
-        // Load header and footer
-        loadContent('#header-placeholder', 'header.html');
-        loadContent('#footer-placeholder', 'footer.html');
+      // Load header and footer
+      loadContent('#header-placeholder', 'header.html');
+      loadContent('#footer-placeholder', 'footer.html');
     </script>
-</body>
+  </body>
 </html>
