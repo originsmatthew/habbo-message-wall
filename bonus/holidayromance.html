@@ -56,8 +56,8 @@
             max-width: 50%; /* Scale down to 50% of the container width */
             height: 50%; /* Maintain aspect ratio */
             margin: 0; /* Center the image horizontally */
-z-index: 2; /* Higher z-index to appear in front of Habbo images */
-}
+            z-index: 2; /* Higher z-index to appear in front of Habbo images */
+        }
 
         .habbo-image {
             position: absolute;
@@ -109,7 +109,7 @@ z-index: 2; /* Higher z-index to appear in front of Habbo images */
             font-size: 14px;
             font-weight: bold;
             margin-top: 10px;
-font-family: "Volter Goldfish Bold"; /* Apply font */
+            font-family: "Volter Goldfish Bold"; /* Apply font */
         }
 
         #backgroundSelector {
@@ -140,6 +140,9 @@ font-family: "Volter Goldfish Bold"; /* Apply font */
     </style>
 </head>
 <body>
+    <!-- Dynamic header -->
+    <div id="header-placeholder"></div>
+
     <div>
         <h1>Holiday Romance Generator</h1>
         <p class="description">No holiday romance? No problem. Type your Habbo names in below. Snap a screenshot to save the image.</p>
@@ -171,6 +174,10 @@ font-family: "Volter Goldfish Bold"; /* Apply font */
         </div>
         <p id="captionDisplay"></p> <!-- Caption display -->
     </div>
+
+    <!-- Dynamic footer -->
+    <div id="footer-placeholder"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
