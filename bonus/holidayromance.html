@@ -178,7 +178,28 @@
     <!-- Dynamic footer -->
     <div id="footer-placeholder"></div>
 
-    <!-- Load both JavaScript files -->
-    <script src="../app.js" defer></script> <!-- Load header/footer script -->
-    <script src="script.js" defer></script> <!-- Load bonus page script -->
+    <!-- Script to load header and footer -->
+    <script>
+        // Load Header and Footer
+        function loadContent(selector, file) {
+            fetch(file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.querySelector(selector).innerHTML = data;
+                })
+                .catch(error => console.error('Error loading content:', error));
+        }
+
+        // Load header and footer
+        loadContent('#header-placeholder', '../header.html');
+        loadContent('#footer-placeholder', '../footer.html');
+    </script>
+
+    <script src="script.js"></script> <!-- Load your specific script -->
 </body>
+</html>
