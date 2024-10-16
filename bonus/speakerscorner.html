@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakers Corner Generator</title>
+    <style>
+        /* Font-face declarations */
+        @font-face {
+            font-family: "Volter Goldfish";
+            src: url("../fonts/Volter (Goldfish).ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Volter Goldfish Bold";
+            src: url("../fonts/Volter-Bold (Goldfish).ttf") format("truetype");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "Volter Goldfish", Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #imageDisplay {
+            position: relative;
+            width: 400px; /* Set to original width */
+            height: 400px; /* Set to original height */
+            margin: 20px auto; /* Centering the container */
+            background-color: #fff; /* Background color for visibility */
+            border: 5px solid black; /* Black border */
+            border-radius: 15px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow content */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        #speakersCorner {
+            max-width: 50%; /* Scale down to 50% of the container width */
+            height: 50%; /* Maintain aspect ratio */
+            margin: 0; /* Center the image horizontally */
+            z-index: 2; /* Higher z-index to appear in front of Habbo images */
+        }
+
+        .habbo-image {
+            position: absolute;
+            width: 25%; /* Original width for Habbo images */
+            height: auto; /* Maintain aspect ratio */
+            display: none; /* Initially hidden */
+            z-index: 1; /* Lower z-index */
+        }
+
+        #habboImage {
+            bottom: 80px; /* Position above the speakers corner */
+            left: 20%; /* Adjust for horizontal positioning */
+        }
+
+        #inputContainer {
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            font-family: "Volter Goldfish"; /* Use Volter font */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-family: "Volter Goldfish Bold"; /* Apply font */
+        }
+
+        button:hover {
+            background-color: #ff3300;
+        }
+
+        #captionDisplay {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            font-family: "Volter Goldfish Bold"; /* Apply font */
+        }
+
+        #backgroundSelector {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #backgroundSelector p {
+            margin-right: 10px; /* Add space to the right of the text */
+        }
+
+        #backgroundSelector label {
+            margin: 0 5px; /* Space between options */
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #backgroundSelector img {
+            width: 50px; /* Thumbnail width */
+            height: 50px; /* Thumbnail height */
+            border: 2px solid black; /* Add a black border */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 600px) {
+            #imageDisplay {
+                margin: 05px 05px; /* Add horizontal margin to create space on the sides */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+  <h1>Speakers Corner</h1>
+        <p class="description">Step into the Speakers Corner and speak your truth. Snap a screenshot to save the image.<br>Share your image on X using #HabboOrigins.</p>
+        <div id="inputContainer">
+            <input type="text" id="habbo" placeholder="Enter first Habbo name" />
+            <button onclick="generateImage()">Generate</button>
+            <button onclick="resetFields()">Reset</button>
+        </div>
+        <div id="backgroundSelector">
+            <p>Select a Background:</p>
+            <label onclick="changeBackground('none')">
+                <img src="none-thumbnail.png" alt="No Background">
+            </label>
+            <label onclick="changeBackground('bg1')">
+                <img src="thumbnail4.png" alt="Background 1">
+            </label>
+            <label onclick="changeBackground('bg2')">
+                <img src="thumbnail2.png" alt="Background 2">
+            </label>
+            <label onclick="changeBackground('bg3')">
+                <img src="thumbnail6.png" alt="Background 3">
+            </label>
+        </div>
+        <div id="imageDisplay">
+    <img id="speakersCorner" src="speakers_corner.png" alt="Speakers Corner" />
+    <img id="habboImage" class="habbo-image" src="" alt="Habbo" />
+</div>
+<p id="captionDisplay"></p>
+
+<footer style="font-size: 0.8em; color: #999; padding: 0 20px">
+  <p>
+    <br>We are not affiliated with, endorsed, sponsored, or specifically approved by Sulake Oy or its Affiliates. <br> We may use the trademarks and other intellectual property of Habbo, which is permitted under the Habbo Fan Site Policy. <br>The use of this Habbo Imager kindly provided by <a href="https://habboden.com" target="_blank">HabboDen</a>.
+  </p>
+  <p>
+    Page created and maintained by <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a>. Dedicated to user bo.
+  </p>
+  <p>
+     <a href="../index.html">HabboKindness.com</a> | <a href="privacy-policy.html">Privacy Policy</a>
+  </p>
+  <img
+    src="https://habboden.com/habbo-imaging/Matthew?size=b&action=wav&gesture=sml"
+    alt="Matthew's Avatar"
+    style="width: 50px; height: auto; margin-top: 10px"
+  />
+</footer>
+
+    <script src="speakerscorner.js"></script>
+</body>
+</html>
