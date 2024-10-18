@@ -8,7 +8,7 @@ const loadingPhrases = [
     "... reading the signs ...",
     "... unlocking your future ...",
     "... finding your cosmic path ..."
-        "... oh bobba ..."
+    "... oh bobba ..."
     "... consulting the enigmas ..."
     "... detecting energy ..."
 ];
