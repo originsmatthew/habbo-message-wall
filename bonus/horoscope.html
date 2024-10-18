@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habbo Horoscope Generator</title>
+    <style>
+        /* Font-face declarations */
+        @font-face {
+            font-family: "Volter Goldfish";
+            src: url("../fonts/Volter (Goldfish).ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Volter Goldfish Bold";
+            src: url("../fonts/Volter-Bold (Goldfish).ttf") format("truetype");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "Volter Goldfish", Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #inputContainer {
+            margin: 20px 0;
+        }
+
+        input[type="text"], select {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            font-family: "Volter Goldfish"; /* Use Volter font */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-family: "Volter Goldfish Bold"; /* Apply font */
+        }
+
+        button:hover {
+            background-color: #ff3300;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-image: url('horoscopebg.png');
+            background-size: cover;
+            color: white;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto; /* Center the container */
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            position: relative; /* For absolute positioning of magic symbols */
+        }
+
+        #horoscopeHeader {
+            font-family: "Volter Goldfish Bold";
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        #resultContent {
+            display: flex;
+            align-items: center; /* Vertically align the avatar and star sign */
+            justify-content: space-between; /* Space them out horizontally */
+            gap: 20px; /* Add space between the avatar and star sign */
+            width: 100%;
+            padding: 10px;
+        }
+
+        #avatar img, #starSign {
+            width: 200px; /* Fixed size for avatar and star sign */
+            height: 150px;
+            object-fit: contain; /* Ensure proper scaling */
+        }
+
+        #avatar {
+            flex: 1; /* Allow the avatar to take equal space */
+            text-align: center;
+        }
+
+        #starSign {
+            flex: 1; /* Allow the star sign to take equal space */
+            text-align: center;
+        }
+
+        /* Adjustments for smaller screens */
+        @media (max-width: 600px) {
+            #resultContent {
+                flex-direction: column; /* Stack avatar and star sign vertically on small screens */
+                gap: 10px;
+            }
+
+            #avatar img, #starSign {
+                width: 80px; /* Slightly smaller images for small screens */
+                height: 80px;
+            }
+        }
+
+        /* Magical Loading Animation */
+        #loadingMessage {
+            font-size: 18px;
+            color: #ff6600;
+            font-family: "Volter Goldfish";
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Magical Symbols (Heart, Lightning, Hypnotic Symbol) */
+        .magical-symbol {
+            font-size: 24px;
+            position: absolute;
+            color: #ffd700; /* Gold color to match stars */
+            animation: fadeInOut 3s infinite;
+            opacity: 0;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Habbo Horoscope Generator</h1>
+    <div class="description">Enter your name, select your horoscope sign, and find out what the stars have in store for you today!</div>
+    
+    <div id="inputContainer">
+        <input type="text" id="habboName" placeholder="Enter your Habbo name" />
+        <select id="horoscopeSign">
+            <option value="Aries">Aries</option>
+            <option value="Taurus">Taurus</option>
+            <option value="Gemini">Gemini</option>
+            <option value="Cancer">Cancer</option>
+            <option value="Leo">Leo</option>
+            <option value="Virgo">Virgo</option>
+            <option value="Libra">Libra</option>
+            <option value="Scorpio">Scorpio</option>
+            <option value="Sagittarius">Sagittarius</option>
+            <option value="Capricorn">Capricorn</option>
+            <option value="Aquarius">Aquarius</option>
+            <option value="Pisces">Pisces</option>
+        </select>
+        <button id="getHoroscope">Get My Horoscope</button>
+    </div>
+
+    <!-- Horoscope result will appear here -->
+    <div id="result">
+        <!-- Loading Message inside result -->
+        <div id="loadingMessage" style="display: none;"></div>
+        
+        <!-- Horoscope content -->
+        <div id="horoscopeHeader"></div>
+        <div id="resultContent">
+            <div id="avatar"></div> <!-- Avatar will be injected here by JavaScript -->
+            <img id="starSign" alt="Horoscope Sign" style="display: none;" /> <!-- Hidden initially -->
+        </div>
+        <p id="horoscopeText"></p>
+
+        <!-- Magical Symbols inside result container -->
+        <span class="magical-symbol" id="symbol1" style="top: 20px; left: 30px;">|</span> <!-- Heart -->
+        <span class="magical-symbol" id="symbol2" style="top: 100px; right: 40px;">º</span> <!-- Lightning -->
+        <span class="magical-symbol" id="symbol3" style="bottom: 50px; left: 50px;">ì</span> <!-- Hypnotic Symbol -->
+    </div>
+
+    <script src="horoscope.js"></script>
+</body>
+
+<footer style="font-size: 0.8em; color: #999; padding: 0 20px">
+  <p>
+    <br>We are not affiliated with, endorsed, sponsored, or specifically approved by Sulake Oy or its Affiliates. <br> We may use the trademarks and other intellectual property of Habbo, which is permitted under the Habbo Fan Site Policy. <br>The use of this Habbo Imager kindly provided by <a href="https://habboden.com" target="_blank">HabboDen</a>.
+  </p>
+  <p>
+    Page created and maintained by <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a>. Dedicated to user BobBarker.
+  </p>
+  <p>
+     <a href="../index.html">HabboKindness.com</a> | <a href="privacy-policy.html">Privacy Policy</a>
+  </p>
+  <img
+    src="https://habboden.com/habbo-imaging/Matthew?size=b&action=wav&gesture=sml"
+    alt="Matthew's Avatar"
+    style="width: 50px; height: auto; margin-top: 10px"
+  />
+</footer>
+</body>
+</html>
+</html>
