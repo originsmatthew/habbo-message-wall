@@ -2,12 +2,15 @@ document.getElementById('getHoroscope').addEventListener('click', generateHorosc
 
 // Magical loading phrases
 const loadingPhrases = [
-    "... getting your horoscope ...",
+    "... getting your habboscope ...",
     "... aligning with the stars ...",
     "... consulting the universe ...",
     "... reading the signs ...",
     "... unlocking your future ...",
     "... finding your cosmic path ..."
+        "... oh bobba ..."
+    "... consulting the enigmas ..."
+    "... detecting energy ..."
 ];
 
 // Expressions associated with different avatar gestures
