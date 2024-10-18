@@ -7,8 +7,8 @@ const loadingPhrases = [
     "... consulting the universe ...",
     "... reading the signs ...",
     "... unlocking your future ...",
-    "... finding your cosmic path ..."
-    "... consulting the enigmas ..."
+    "... finding your cosmic path ...", // Add a comma here
+    "... consulting the enigmas ...",
     "... detecting energy ..."
 ];
 
