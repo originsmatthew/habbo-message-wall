@@ -1,6 +1,6 @@
 // --- Initialize ---
 document.addEventListener("DOMContentLoaded", function () {
-  const submissionsOpen = true; // Set to false to close submissions
+  const submissionsOpen = false; // Set to false to close submissions
   const currentPath = window.location.pathname;
 
   if (currentPath.includes("search.html")) {
