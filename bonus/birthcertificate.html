@@ -197,9 +197,12 @@ function drawCertificate(username, motto, memberSince, avatarUrl) {
         ctx.font = `${fontSize}px Volter Goldfish`;
         ctx.fillStyle = 'black';  // Text color
 
-        // Position Username, Motto, and Born On dynamically based on canvas size
-        ctx.fillText(`Username: ${username}`, canvas.width * 0.2, canvas.height * 0.35);  // Adjust positions
-        ctx.fillText(`Motto: ${motto}`, canvas.width * 0.2, canvas.height * 0.45);
+        // Position Username and Born On dynamically based on canvas size
+        ctx.fillText(`Username: ${username}`, canvas.width * 0.2, canvas.height * 0.35);
+
+        // Wrapping text for motto
+        wrapText(ctx, `Motto: ${motto}`, canvas.width * 0.2, canvas.height * 0.45, canvas.width * 0.6, fontSize);
+
         ctx.fillText(`Born On: ${memberSince}`, canvas.width * 0.2, canvas.height * 0.55);
 
         // Load and draw avatar, maintaining height and aspect ratio
@@ -218,6 +221,27 @@ function drawCertificate(username, motto, memberSince, avatarUrl) {
             link.style.display = 'block';
         };
     };
+}
+
+// Helper function to wrap text
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+
+    for (let i = 0; i < words.length; i++) {
+        let testLine = line + words[i] + ' ';
+        let metrics = context.measureText(testLine);
+        let testWidth = metrics.width;
+
+        if (testWidth > maxWidth && i > 0) {
+            context.fillText(line, x, y);
+            line = words[i] + ' ';
+            y += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+    context.fillText(line, x, y);
 }
 </script>
 
