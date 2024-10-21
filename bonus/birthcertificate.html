@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habbo Origins Birth Certificate</title>
+    <style>
+        /* Font-face declarations from your previous files */
+        @font-face {
+            font-family: "Volter Goldfish";
+            src: url("../fonts/Volter (Goldfish).ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Volter Goldfish Bold";
+            src: url("../fonts/Volter-Bold (Goldfish).ttf") format("truetype");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "Volter Goldfish", Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Subtext below the header */
+        .subtext {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #333;
+            font-family: "Volter Goldfish";
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #certificateCanvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            background-color: white;
+            width: 37.5%; /* Reduced to 75% of the 50% */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: "Volter Goldfish Bold"; /* Apply Volter font to the button */
+        }
+
+        button:hover {
+            background-color: #ff3300;
+        }
+
+        a#downloadLink {
+            display: none;
+            margin-top: 20px;
+            font-family: "Volter Goldfish Bold";
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            font-family: "Volter Goldfish"; /* Use Volter font */
+        }
+
+        /* Make the canvas fully responsive */
+        @media (max-width: 768px) {
+            #certificateCanvas {
+                width: 80%; /* Canvas width adjusts for mobile */
+            }
+
+            button {
+                width: 80%; /* Button also resizes on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Habbo Birth Certificate</h1>
+    <div class="subtext">
+        When did you join Origins? Type your username below and press enter to find out. Deep in the depths of the hotel, all birth certificates were stored away and have been retrieved for you!
+    </div>
+
+    <!-- Input container for username -->
+    <div id="inputContainer">
+        <input type="text" id="usernameInput" placeholder="Enter Habbo username" />
+        <button onclick="generateCertificate()">Retrieve Birth Certificate</button>
+    </div>
+    
+    <canvas id="certificateCanvas"></canvas>
+    
+    <a id="downloadLink" download="HabboBirthCertificate.png">Download Your Birth Certificate</a>
+
+<script>
+document.getElementById('usernameInput').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        generateCertificate();
+    }
+});
+
+function generateCertificate() {
+    const username = document.getElementById('usernameInput').value;
+    
+    if (!username) {
+        alert('Please enter a username');
+        return;
+    }
+
+    // Fetch user data from the API
+    fetch(`https://origins.habbo.com/api/public/users?name=${username}`)
+        .then(response => response.json())
+        .then(data => {
+            // Check if the response contains an error
+            if (data.error === "not-found") {
+                // Load and display fallback image (notfound.png)
+                displayNotFound();
+            } else {
+                // Proceed with generating certificate using user data
+                const memberSince = formatMemberSinceDate(data.memberSince);
+                const motto = data.motto;
+                const avatarUrl = `https://habboden.com/habbo-imaging/${username}?size=b&action=wav&gesture=sml`;
+                drawCertificate(username, motto, memberSince, avatarUrl);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user data:', error);
+            alert('Failed to fetch user data. Please try again.');
+        });
+}
+
+// Function to display the notfound.png image
+function displayNotFound() {
+    const canvas = document.getElementById('certificateCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Load the fallback image (notfound.png)
+    const notFoundImage = new Image();
+    notFoundImage.src = 'notfound.png';  // Your fallback image path
+    notFoundImage.onload = function () {
+        // Set canvas dimensions to match the fallback image size
+        canvas.width = notFoundImage.width;
+        canvas.height = notFoundImage.height;
+        ctx.drawImage(notFoundImage, 0, 0, canvas.width, canvas.height);
+    };
+}
+
+// Function to format the date from API
+function formatMemberSinceDate(memberSince) {
+    const dateObj = new Date(memberSince);
+    const formattedDate = dateObj.toLocaleDateString('en-GB'); // Format to dd/mm/yyyy
+    const formattedTime = dateObj.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); // Format to hh:mm
+    return `${formattedDate} @ ${formattedTime}`;
+}
+
+// Function to draw the certificate with username, motto, registration date, and avatar
+function drawCertificate(username, motto, memberSince, avatarUrl) {
+    const canvas = document.getElementById('certificateCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Load the background template image
+    const background = new Image();
+    background.src = 'certificatebackground.png';  // Your certificate background
+    background.onload = function () {
+        // Set canvas dimensions to match background image size
+        canvas.width = background.width * 0.75;  // Scale down canvas width to 75%
+        canvas.height = background.height * 0.75;  // Scale down canvas height to 75%
+        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+        // Responsive font size based on canvas width
+        const fontSize = canvas.width * 0.035;
+
+        // Set Volter font for text
+        ctx.font = `${fontSize}px Volter Goldfish`;
+        ctx.fillStyle = 'black';  // Text color
+
+        // Position Username, Motto, and Born On dynamically based on canvas size
+        ctx.fillText(`Username: ${username}`, canvas.width * 0.2, canvas.height * 0.35);  // Adjust positions
+        ctx.fillText(`Motto: ${motto}`, canvas.width * 0.2, canvas.height * 0.45);
+        ctx.fillText(`Born On: ${memberSince}`, canvas.width * 0.2, canvas.height * 0.55);
+
+        // Load and draw avatar, maintaining height and aspect ratio
+        const avatar = new Image();
+        avatar.src = avatarUrl;
+        avatar.onload = function () {
+            const avatarHeight = 300;  // Fixed avatar height of 300px
+            const avatarWidth = avatar.width * (avatarHeight / avatar.height);  // Maintain aspect ratio
+            const avatarX = (canvas.width - avatarWidth) / 2;  // Center the avatar horizontally
+            const avatarY = canvas.height * 0.65;  // Position below the "Born On" text
+            ctx.drawImage(avatar, avatarX, avatarY, avatarWidth, avatarHeight);
+
+            // Enable the download link
+            const link = document.getElementById('downloadLink');
+            link.href = canvas.toDataURL('image/png');
+            link.style.display = 'block';
+        };
+    };
+}
+</script>
+
+</body>
+<footer style="font-size: 0.8em; color: #999; padding: 0 20px">
+  <p>
+    <br>We are not affiliated with, endorsed, sponsored, or specifically approved by Sulake Oy or its Affiliates. <br> We may use the trademarks and other intellectual property of Habbo, which is permitted under the Habbo Fan Site Policy. <br>The use of this Habbo Imager kindly provided by <a href="https://habboden.com" target="_blank">HabboDen</a>.
+  </p>
+  <p>
+    Page created and maintained by <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a>.
+  </p>
+  <p>
+     <a href="../index.html">HabboKindness.com</a> | <a href="privacy-policy.html">Privacy Policy</a>
+  </p>
+  <img
+    src="https://habboden.com/habbo-imaging/Matthew?size=b&action=wav&gesture=sml"
+    alt="Matthew's Avatar"
+    style="width: 50px; height: auto; margin-top: 10px"
+  />
+</footer>
+</html>
