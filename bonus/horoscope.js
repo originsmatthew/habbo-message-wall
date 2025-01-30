@@ -347,38 +347,56 @@ init() {
 
     shareToX() {
         const resultDiv = document.getElementById('result');
-        
-        // Hide share button temporarily for the screenshot
         const shareButton = document.getElementById('shareToX');
+        
+        // Temporarily hide the share button for the screenshot
         shareButton.style.display = 'none';
         
-        html2canvas(resultDiv).then(canvas => {
-            // Show share button again
+        // Set background to ensure it's captured
+        const originalBackground = resultDiv.style.backgroundImage;
+        resultDiv.style.backgroundImage = `url('horoscopebg.png')`;
+        
+        // Use html2canvas with proper settings
+        html2canvas(resultDiv, {
+            backgroundColor: null,
+            scale: 2, // Higher quality
+            logging: false,
+            useCORS: true, // Allow cross-origin images
+            allowTaint: true,
+            onclone: function(clonedDoc) {
+                // Ensure magical symbols are visible in the clone
+                clonedDoc.querySelectorAll('.magical-symbol').forEach(symbol => {
+                    symbol.style.opacity = '1';
+                });
+            }
+        }).then(canvas => {
+            // Restore the share button and background
             shareButton.style.display = 'flex';
+            resultDiv.style.backgroundImage = originalBackground;
             
-            // Save the canvas as an image file
-            canvas.toBlob(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'habboscope.png';
-                a.click();
-                URL.revokeObjectURL(url);
-                
-                // Get the horoscope text
-                const horoscopeText = document.getElementById('horoscopeText').innerText;
-                const tweetText = `My Habboscope: ${horoscopeText.substring(0, 180)}${horoscopeText.length > 180 ? '...' : ''} via @OriginsMatthew #Habbo`;
-
-                // Open X's composer in a new window
-                window.open(
-                    `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`,
-                    '_blank',
-                    'width=600,height=400,location=yes,left=200,top=200'
-                );
-            });
+            // Convert canvas to base64 and open tweet dialog
+            const imageData = canvas.toDataURL('image/png');
+            const horoscopeText = document.getElementById('horoscopeText').innerText;
+            
+            // Create tweet text
+            const tweetText = `My Habboscope: ${horoscopeText.substring(0, 180)}${horoscopeText.length > 180 ? '...' : ''} via @OriginsMatthew #Habbo`;
+            
+            // Open X's composer
+            window.open(
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`,
+                '_blank',
+                'width=600,height=400,location=yes,left=200,top=200'
+            );
+            
+            // Also provide a download link for the image
+            const downloadLink = document.createElement('a');
+            downloadLink.href = imageData;
+            downloadLink.download = 'habboscope.png';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         });
     }
-}
 
 // Initialize the generator when the page loads
 document.addEventListener('DOMContentLoaded', () => {
