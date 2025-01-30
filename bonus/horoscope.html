@@ -72,59 +72,47 @@
         }
 
         #result {
-            margin-top: 20px;
-            padding: 15px;
-            border: 2px solid black;
-            border-radius: 10px;
-            background-image: url('horoscopebg.png');
-            background-size: cover;
-            color: white;
-            width: 80%;
-            max-width: 600px;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            position: relative;
-            transition: all 0.3s ease-in-out;
-            opacity: 0;
-        }
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-image: url('horoscopebg.png');
+    background-size: cover;
+    color: white;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
 
-        #result.show {
-            opacity: 1;
-        }
+#resultContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+}
 
-        #horoscopeHeader {
-            font-family: "Volter Goldfish Bold";
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
+#avatar img, #starSign {
+    width: 200px;
+    height: 150px;
+    object-fit: contain;
+}
 
-        #resultContent {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            width: 100%;
-            padding: 10px;
-        }
+#avatar {
+    flex: 1;
+    text-align: center;
+}
 
-        #avatar img, #starSign {
-            width: 200px;
-            height: 150px;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-
-        #avatar {
-            flex: 1;
-            text-align: center;
-        }
-
-        #starSign {
-            flex: 1;
-            text-align: center;
-        }
+#starSign {
+    flex: 1;
+    text-align: center;
+}
 
         /* Loading animation */
         #loadingMessage {
