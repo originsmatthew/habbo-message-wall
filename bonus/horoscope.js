@@ -1,187 +1,242 @@
-document.getElementById('getHoroscope').addEventListener('click', generateHoroscope);
+// Enhanced Habboscope Generator
+class HabboscopeGenerator {
+    constructor() {
+        // Original loading phrases
+        this.loadingPhrases = [
+            "... getting your habboscope ...",
+            "... aligning with the stars ...",
+            "... consulting the universe ...",
+            "... reading the signs ...",
+            "... unlocking your future ...",
+            "... consulting the enigmas ...",
+            "... detecting energy ...",
+            "... channeling cosmic forces ...",
+            "... connecting to the habboverse ..."
+        ];
 
-// Magical loading phrases
-const loadingPhrases = [
-    "... getting your habboscope ...",
-    "... aligning with the stars ...",
-    "... consulting the universe ...",
-    "... reading the signs ...",
-    "... unlocking your future ...",
-    "... finding your cosmic path ...", // Add a comma here
-    "... consulting the enigmas ...",
-    "... detecting energy ..."
-];
+        // Original expressions from your code
+        this.expressions = {
+            sad: ["sad", "under the weather", "deflated", "uninspired", "sad"],
+            spk: ["chatty", "like you're an open book", "you're full of words", "you're eager to talk", "you're ready to share", "expressive"],
+            eyb: ["sleepy", "tired", "drained", "exhausted", "in need of rest", "a little foggy-headed"],
+            agr: ["angry", "annoyed", "frustrated", "on edge", "irritable", "fuming"],
+            srp: ["shocked", "surprised", "taken aback", "astonished", "wide-eyed", "in disbelief"]
+        };
 
-// Expressions associated with different avatar gestures
-const expressions = {
-    sad: ["sad", "under the weather", "deflated", "uninspired", "sad"],
-    spk: ["chatty", "like you're an open book", "you're full of words", "you're eager to talk", "you're ready to share", "expressive"],
-    eyb: ["sleepy", "tired", "drained", "exhausted", "in need of rest", "a little foggy-headed"],
-    agr: ["angry", "annoyed", "frustrated", "on edge", "irritable", "fuming"],
-    srp: ["shocked", "surprised", "taken aback", "astonished", "wide-eyed", "in disbelief"]
-};
+        // Original arrays
+        this.colors = ['Red', 'Blue', 'Green', 'Purple', 'Yellow', 'Orange', 'Pink', 'Black', 'White', 'Gold', 'Silver', 'Turquoise', 'Violet', 'Brown', 'Magenta'];
+        this.numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        this.letterPhrases = [
+            "bring good news",
+            "are good for trading",
+            "will bring fun to games",
+            "will guide the way",
+            "bring unexpected surprises",
+            "are likely to help you today",
+            "will share helpful advice",
+            "will bring joy to your day"
+        ];
 
-// Colors and numbers for random generation
-const colors = ['Red', 'Blue', 'Green', 'Purple', 'Yellow', 'Orange', 'Pink', 'Black', 'White', 'Gold', 'Silver', 'Turquoise', 'Violet', 'Brown', 'Magenta'];
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        // Original hand items
+        this.handItems = [
+            { crr: 0, text: '' },
+            { crr: 1, text: 'Enjoy a refreshing drink today. You\'re safe.' },
+            { crr: 2, text: 'You\'ve drawn a carrot. Lucky this isn\'t a game of fridge. You would be out!' },
+            { crr: 3, text: 'You\'ve drawn an ice-cream. P2K?' },
+            { crr: 6, text: 'You\'ve drawn a coffee. Make sure to get your energy fix today!' }
+        ];
 
-// Phrases for names beginning with specific letters
-const letterPhrases = [
-    "bring good news",
-    "are good for trading",
-    "will bring fun to games",
-    "will guide the way",
-    "bring unexpected surprises",
-    "are likely to help you today",
-    "will share helpful advice",
-    "will bring joy to your day"
-];
+        // Enhanced color meanings
+        this.colorMeanings = {
+            Red: ["passion", "energy", "courage"],
+            Blue: ["peace", "wisdom", "trust"],
+            Green: ["growth", "harmony", "success"],
+            Purple: ["mystery", "creativity", "luxury"],
+            Yellow: ["happiness", "optimism", "clarity"],
+            Orange: ["enthusiasm", "adventure", "confidence"],
+            Pink: ["love", "compassion", "nurturing"],
+            Gold: ["prosperity", "abundance", "wisdom"],
+            Silver: ["intuition", "reflection", "mystery"]
+        };
 
-// Random advice array
-const advice = [
-    "Consider taking a break to recharge your energy.",
-    "Embrace the day and stay positive!",
-    "Remember, it's okay to ask for help if you need it.",
-    "Take a moment to reflect on what you want today.",
-    "Keep your head up and stay determined!",
-    "Don't hesitate to step outside for some fresh air.",
-    "Listen to your favorite music to lift your spirits.",
-    "Trust your instincts, they will guide you through today.",
-    "A small act of kindness could brighten someone’s day.",
-    "Take some time today to reflect on your goals.",
-    "Stay open to new opportunities, they may come unexpectedly.",
-    "Today is a great day to focus on self-care.",
-    "You might find comfort in familiar routines today.",
-    "A change in scenery might help clear your thoughts.",
-    "Laughter will be your best medicine today.",
-    "Reconnect with an old friend; it might bring unexpected joy.",
-    "Take things one step at a time, and don't rush.",
-    "Today is a great day to start a new hobby or interest.",
-    "Your energy is contagious, so spread positivity!",
-    "Pay attention to the little details, they might hold the key.",
-    "Let go of any unnecessary stress today.",
-    "Don’t forget to celebrate your small victories.",
-    "A problem you’ve been facing might have a simple solution.",
-    "It’s okay to take a break; rest will help you recharge.",
-    "Let your creativity shine today!",
-    "A walk outdoors might bring fresh perspectives.",
-    "Stay flexible; sometimes, plans change for the better.",
-    "Take a deep breath and focus on what truly matters.",
-    "Find time to enjoy the small pleasures in life today.",
-    "Stay organized today—it’ll make everything easier.",
-    "Be patient; sometimes things fall into place at their own pace.",
-    "Share a smile with someone; it could brighten their day.",
-    "Treat yourself to something special today—you deserve it!",
-    "Reach out to someone you haven’t spoken to in a while.",
-    "Step away from distractions and focus on what’s important.",
-    "Try something new today, even if it feels out of your comfort zone.",
-    "Focus on solutions, not problems, for a positive outcome.",
-    "Today might be the perfect day to clear your mind with a good book.",
-    "Take things slow and enjoy the process of what you’re working on.",
-    "Stay mindful of your surroundings; they might inspire new ideas.",
-    "Don’t be afraid to speak your mind and share your thoughts.",
-    "You’re stronger than you realize; face today with confidence.",
-    "Plan ahead, but don’t stress about what you can’t control.",
-    "Sometimes letting go brings the greatest peace.",
-    "Be kind to yourself today—self-compassion is powerful.",
-    "Make time for something that brings you joy today.",
-    "Believe in yourself and others will too.",
-    "Appreciate the beauty in everyday moments.",
-    "Today is a great day to reflect on your achievements.",
-    "A balanced mind will bring you success today.",
-    "Push through any challenges with a positive attitude.",
-    "Enjoy the journey, not just the destination."
-];
+        this.init();
+    }
 
-// Message structures for horoscope variation
-const messageStructures = [
-    `[color] is a powerful force for you today. Keep it close as it brings clarity and focus.`,
-    `The number [number] will play a significant role today. Pay attention!`,
-    `You might be feeling a bit [expression] today. Great things lie ahead!`,
-    `Feeling [expression] today? Let [color] help center you.`,
-    `Today, Habbos whose names begin with the letter [alphabet] [letterPhrase].`,
-    `If you're feeling [expression], wear something [color] to lift your spirits.`,
-    `Keep an eye out for the number [number]; it holds the key to success.`,
-    `Habbos whose names begin with the letter [alphabet] [letterPhrase]. Pay attention to them today!`,
-    `The number [number] is on your side. Good things are coming.`,
-    `Feeling a bit [expression]? Today, [color] will bring you peace and the number [number] will bring luck.`
-];
+    init() {
+        // Set up event listeners
+        const horoscopeButton = document.getElementById('getHoroscope');
+        if (horoscopeButton) {
+            horoscopeButton.addEventListener('click', () => this.generateHoroscope());
+        }
 
-// Hand items array and corresponding texts
-const handItems = [
-    { crr: 0, text: '' }, // No item, no text
-    { crr: 1, text: 'Enjoy a refreshing drink today. You\'re safe.' }, // Soda
-    { crr: 2, text: 'You\'ve drawn a carrot. Lucky this isn\'t a game of fridge. You would be out!' }, // Carrot
-    { crr: 3, text: 'You\'ve drawn an ice-cream. P2K?' }, // Ice-Cream
-    { crr: 6, text: 'You\'ve drawn a coffee. Make sure to get your energy fix today!' } // Coffee
-];
-
-function generateHoroscope() {
-    const habboName = document.getElementById('habboName').value;
-    const horoscopeSign = document.getElementById('horoscopeSign').value;
-
-    // Ensure the starsign and avatar are hidden initially
-    document.getElementById('starSign').style.display = "none"; 
-    document.getElementById('avatar').innerHTML = ''; // Clear the avatar
-    document.getElementById('horoscopeText').innerText = ''; // Clear horoscope text
-
-    // Show loading message
-    const randomLoadingPhrase = loadingPhrases[Math.floor(Math.random() * loadingPhrases.length)];
-    document.getElementById('loadingMessage').innerText = randomLoadingPhrase;
-    document.getElementById('loadingMessage').style.display = "block"; // Show the loading message
-
-    // Hide the horoscope result while loading
-    document.getElementById('resultContent').style.display = "none";
-
-    // Delay the horoscope generation to simulate "magical" loading
-    setTimeout(() => {
-        // Randomly select an expression and retrieve a corresponding phrase
-        const randomExpressionKey = Object.keys(expressions)[Math.floor(Math.random() * Object.keys(expressions).length)];
-        const randomExpressionPhrase = expressions[randomExpressionKey][Math.floor(Math.random() * expressions[randomExpressionKey].length)];
-
-        // Randomly select color, number, alphabet, and letter phrase
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
-        const randomLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")[Math.floor(Math.random() * 26)];
-        const randomLetterPhrase = letterPhrases[Math.floor(Math.random() * letterPhrases.length)];
-
-        // Randomly select advice
-        const randomAdvice = advice[Math.floor(Math.random() * advice.length)];
-
-        // Select a random message structure and replace placeholders
-        let randomMessage = messageStructures[Math.floor(Math.random() * messageStructures.length)];
-        randomMessage = randomMessage.replace('[expression]', randomExpressionPhrase)
-                                     .replace('[color]', randomColor)
-                                     .replace('[number]', randomNumber)
-                                     .replace('[alphabet]', randomLetter)
-                                     .replace('[letterPhrase]', randomLetterPhrase);
+        // Check time of day and apply appropriate class
+        this.setTimeBasedClass();
         
-        // Append random advice to the message
-        let finalMessage = `${randomMessage} ${randomAdvice}`;
+        // Initialize any floating elements
+        this.initializeFloatingElements();
+    }
 
-        // Randomly select a hand item and append its text to the horoscope
-        const randomHandItem = handItems[Math.floor(Math.random() * handItems.length)];
-        if (randomHandItem.text) {
-            finalMessage += ` ${randomHandItem.text}`; // Append the text if available
+    setTimeBasedClass() {
+        const hour = new Date().getHours();
+        const body = document.body;
+        
+        if (hour >= 22 || hour < 6) {
+            body.className = 'time-night';
+        } else if (hour >= 6 && hour < 12) {
+            body.className = 'time-morning';
+        } else if (hour >= 12 && hour < 18) {
+            body.className = 'time-afternoon';
+        } else {
+            body.className = 'time-evening';
+        }
+    }
+
+    initializeFloatingElements() {
+        const result = document.getElementById('result');
+        if (result) {
+            // Add some subtle floating stars
+            for (let i = 0; i < 3; i++) {
+                const star = document.createElement('div');
+                star.className = 'magical-symbol floating-element';
+                star.textContent = '✦';
+                star.style.left = `${Math.random() * 80 + 10}%`;
+                star.style.top = `${Math.random() * 80 + 10}%`;
+                result.appendChild(star);
+            }
+        }
+    }
+
+    async generateHoroscope() {
+        const habboName = document.getElementById('habboName').value;
+        const horoscopeSign = document.getElementById('horoscopeSign').value;
+
+        if (!habboName) {
+            alert("Please enter your Habbo name!");
+            return;
         }
 
-        // Display the avatar with the hand item
-        const avatarHtml = `<img src="https://habboden.com/habbo-imaging/${habboName}?size=b&action=std&direction=2&head_direction=2&gesture=${randomExpressionKey}&crr=${randomHandItem.crr}" alt="${habboName}" />`;
-        document.getElementById('avatar').innerHTML = avatarHtml;
+        // Hide current content and show loading
+        this.showLoading();
 
-        // Display the star sign image after generation
-        if (horoscopeSign) {
-            const starSignUrl = `horoscopeimages/${horoscopeSign}.png`;
-            document.getElementById('starSign').src = starSignUrl;
-            document.getElementById('starSign').style.display = "block"; // Show the starsign after generation
+        // Simulate loading time for effect
+        setTimeout(() => {
+            this.generateAndDisplayHoroscope(habboName, horoscopeSign);
+        }, 2000);
+    }
+
+    showLoading() {
+        const loadingMessage = document.getElementById('loadingMessage');
+        const resultContent = document.getElementById('resultContent');
+        const starSign = document.getElementById('starSign');
+        const avatar = document.getElementById('avatar');
+        const horoscopeText = document.getElementById('horoscopeText');
+
+        // Show loading message
+        if (loadingMessage) {
+            loadingMessage.innerText = this.loadingPhrases[Math.floor(Math.random() * this.loadingPhrases.length)];
+            loadingMessage.style.display = "block";
         }
 
-        // Display the horoscope text
-        document.getElementById('horoscopeText').innerText = finalMessage;
+        // Hide content while loading
+        if (resultContent) resultContent.style.display = "none";
+        if (starSign) starSign.style.display = "none";
+        if (avatar) avatar.innerHTML = '';
+        if (horoscopeText) horoscopeText.innerText = '';
+    }
 
-        // Hide the loading message and show the result
-        document.getElementById('loadingMessage').style.display = "none";
-        document.getElementById('resultContent').style.display = "flex";
+    generateAndDisplayHoroscope(habboName, horoscopeSign) {
+        // Generate random elements
+        const randomExpressionKey = Object.keys(this.expressions)[Math.floor(Math.random() * Object.keys(this.expressions).length)];
+        const randomExpressionPhrase = this.expressions[randomExpressionKey][Math.floor(Math.random() * this.expressions[randomExpressionKey].length)];
+        const randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
+        const randomNumber = this.numbers[Math.floor(Math.random() * this.numbers.length)];
+        const randomLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random() * 26)];
+        const randomLetterPhrase = this.letterPhrases[Math.floor(Math.random() * this.letterPhrases.length)];
+        const randomHandItem = this.handItems[Math.floor(Math.random() * this.handItems.length)];
 
-    }, 2000); // 2 seconds delay to simulate magic
+        // Generate horoscope message
+        let horoscopeMessage = this.constructHoroscopeMessage(
+            randomExpressionPhrase,
+            randomColor,
+            randomNumber,
+            randomLetter,
+            randomLetterPhrase,
+            randomHandItem
+        );
+
+        // Add time-based modifier
+        horoscopeMessage += ' ' + this.getTimeBasedModifier();
+
+        // Update UI
+        this.updateUI(habboName, horoscopeSign, horoscopeMessage, randomExpressionKey, randomHandItem.crr);
+    }
+
+    constructHoroscopeMessage(expression, color, number, letter, letterPhrase, handItem) {
+        const colorMeaning = this.colorMeanings[color] ? 
+            this.colorMeanings[color][Math.floor(Math.random() * this.colorMeanings[color].length)] : 
+            '';
+
+        const messages = [
+            `${color} brings ${colorMeaning} to your day. You're feeling ${expression}.`,
+            `The number ${number} will guide you today. Those whose names begin with ${letter} ${letterPhrase}.`,
+            `You're feeling ${expression}. Let the energy of ${color} guide you.`,
+            `The stars align with the number ${number} today. You might be feeling ${expression}.`
+        ];
+
+        let message = messages[Math.floor(Math.random() * messages.length)];
+        
+        if (handItem.text) {
+            message += ' ' + handItem.text;
+        }
+
+        return message;
+    }
+
+    getTimeBasedModifier() {
+        const hour = new Date().getHours();
+        
+        if (hour >= 22 || hour < 6) {
+            return "The night stars amplify your energy...";
+        } else if (hour >= 6 && hour < 12) {
+            return "The morning sun brings fresh opportunities...";
+        } else if (hour >= 12 && hour < 18) {
+            return "The afternoon rays strengthen your resolve...";
+        } else {
+            return "The evening stars guide your path...";
+        }
+    }
+
+    updateUI(habboName, horoscopeSign, horoscopeMessage, expressionKey, handItemCrr) {
+        // Update avatar
+        const avatar = document.getElementById('avatar');
+        if (avatar) {
+            avatar.innerHTML = `<img src="https://habboden.com/habbo-imaging/${habboName}?size=b&action=std&direction=2&head_direction=2&gesture=${expressionKey}&crr=${handItemCrr}" alt="${habboName}" class="interactive-element" />`;
+        }
+
+        // Update star sign
+        const starSign = document.getElementById('starSign');
+        if (starSign) {
+            starSign.src = `horoscopeimages/${horoscopeSign}.png`;
+            starSign.style.display = "block";
+            starSign.className = "interactive-element";
+        }
+
+        // Update horoscope text
+        const horoscopeText = document.getElementById('horoscopeText');
+        if (horoscopeText) {
+            horoscopeText.innerText = horoscopeMessage;
+        }
+
+        // Hide loading and show content
+        const loadingMessage = document.getElementById('loadingMessage');
+        const resultContent = document.getElementById('resultContent');
+        
+        if (loadingMessage) loadingMessage.style.display = "none";
+        if (resultContent) resultContent.style.display = "flex";
+    }
 }
+
+// Initialize the generator when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    window.habboscope = new HabboscopeGenerator();
+});
