@@ -14,6 +14,41 @@ class HabboscopeGenerator {
             "... connecting to the habboverse ..."
         ];
 
+        /* Magical Symbols */
+.magical-symbol {
+    font-family: "Volter Goldfish";
+    font-size: 24px;
+    position: absolute;
+    color: #ffd700;
+    animation: fadeInOut 3s infinite;
+    opacity: 0;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+/* Add back the original symbols in the result container */
+#result .magical-symbol#symbol1 {
+    top: 20px;
+    left: 30px;
+    content: '|';  /* Original heart symbol */
+}
+
+#result .magical-symbol#symbol2 {
+    top: 100px;
+    right: 40px;
+    content: 'º';  /* Original lightning symbol */
+}
+
+#result .magical-symbol#symbol3 {
+    bottom: 50px;
+    left: 50px;
+    content: 'ì';  /* Original hypnotic symbol */
+}
+
         // Original expressions from your code
         this.expressions = {
             sad: ["sad", "under the weather", "deflated", "uninspired", "sad"],
