@@ -71,48 +71,49 @@
             transform: scale(1.05);
         }
 
+        /* Result container styles */
         #result {
-    margin-top: 20px;
-    padding: 15px;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-image: url('horoscopebg.png');
-    background-size: cover;
-    color: white;
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    transition: all 0.3s ease-in-out;
-}
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-image: url('horoscopebg.png');
+            background-size: cover;
+            color: white;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
 
-#resultContent {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    width: 100%;
-    padding: 10px;
-}
+        #resultContent {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            padding: 10px;
+        }
 
-#avatar img, #starSign {
-    width: 200px;
-    height: 150px;
-    object-fit: contain;
-}
+        #avatar img, #starSign {
+            width: 200px;
+            height: 150px;
+            object-fit: contain;
+        }
 
-#avatar {
-    flex: 1;
-    text-align: center;
-}
+        #avatar {
+            flex: 1;
+            text-align: center;
+        }
 
-#starSign {
-    flex: 1;
-    text-align: center;
-}
+        #starSign {
+            flex: 1;
+            text-align: center;
+        }
 
         /* Loading animation */
         #loadingMessage {
@@ -128,23 +129,36 @@
             100% { opacity: 1; }
         }
 
-        /* Floating elements animation */
-        .floating-element {
-            position: absolute;
-            pointer-events: none;
-            animation: float 6s ease-in-out infinite;
-            opacity: 0.6;
+        /* Magical Symbols */
+        .magical-symbol {
+            font-family: "Volter Goldfish";
             font-size: 24px;
-            z-index: 1;
+            position: absolute;
+            color: #ffd700;
+            animation: fadeInOut 3s infinite;
+            opacity: 0;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(10deg);
-            }
+        /* Individual symbol positioning */
+        #result .magical-symbol#symbol1 {
+            top: 20px;
+            left: 30px;
+        }
+
+        #result .magical-symbol#symbol2 {
+            top: 100px;
+            right: 40px;
+        }
+
+        #result .magical-symbol#symbol3 {
+            bottom: 50px;
+            left: 50px;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1); }
         }
 
         /* Time-based themes */
@@ -224,8 +238,8 @@
         </div>
         <p id="horoscopeText"></p>
         <span class="magical-symbol" id="symbol1">|</span>
-<span class="magical-symbol" id="symbol2">º</span>
-<span class="magical-symbol" id="symbol3">ì</span>
+        <span class="magical-symbol" id="symbol2">º</span>
+        <span class="magical-symbol" id="symbol3">ì</span>
     </div>
 
     <footer style="font-size: 0.8em; color: #999; padding: 0 20px">
