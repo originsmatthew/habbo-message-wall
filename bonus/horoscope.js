@@ -137,11 +137,43 @@ class HabboscopeGenerator {
             loadingMessage.style.display = "block";
         }
 
-        // Hide content while loading
-        if (resultContent) resultContent.style.display = "none";
+        // Only hide the content elements, not the container
         if (starSign) starSign.style.display = "none";
         if (avatar) avatar.innerHTML = '';
         if (horoscopeText) horoscopeText.innerText = '';
+    }
+
+    updateUI(habboName, horoscopeSign, horoscopeMessage, expressionKey, handItemCrr) {
+        // Update avatar
+        const avatar = document.getElementById('avatar');
+        if (avatar) {
+            avatar.innerHTML = `<img src="https://habboden.com/habbo-imaging/${habboName}?size=b&action=std&direction=2&head_direction=2&gesture=${expressionKey}&crr=${handItemCrr}" alt="${habboName}" />`;
+        }
+
+        // Update star sign
+        const starSign = document.getElementById('starSign');
+        if (starSign) {
+            starSign.src = `horoscopeimages/${horoscopeSign}.png`;
+            starSign.style.display = "block";
+        }
+
+        // Update horoscope text
+        const horoscopeText = document.getElementById('horoscopeText');
+        if (horoscopeText) {
+            horoscopeText.innerText = horoscopeMessage;
+        }
+
+        // Hide loading message
+        const loadingMessage = document.getElementById('loadingMessage');
+        if (loadingMessage) {
+            loadingMessage.style.display = "none";
+        }
+
+        // Make sure content is displayed
+        const resultContent = document.getElementById('resultContent');
+        if (resultContent) {
+            resultContent.style.display = "flex";
+        }
     }
 
     generateAndDisplayHoroscope(habboName, horoscopeSign) {
