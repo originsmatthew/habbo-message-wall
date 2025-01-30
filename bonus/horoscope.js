@@ -189,7 +189,7 @@ init() {
 
         setTimeout(() => {
             const avatar1Html = `<img src="https://habboden.com/habbo-imaging/${habbo1}?size=b&action=std&direction=2&head_direction=2&gesture=sml" alt="${habbo1}" class="interactive-element" />`;
-            const avatar2Html = `<img src="https://habboden.com/habbo-imaging/${habbo2}?size=b&action=std&direction=2&head_direction=2&gesture=sml" alt="${habbo2}" class="interactive-element" />`;
+            const avatar2Html = `<img src="https://habboden.com/habbo-imaging/${habbo2}?size=b&action=std&direction=6&head_direction=6&gesture=sml" alt="${habbo2}" class="interactive-element" />`;
             
             document.getElementById('avatar').innerHTML = avatar1Html;
             document.getElementById('starSign').innerHTML = avatar2Html;
