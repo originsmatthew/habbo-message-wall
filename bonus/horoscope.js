@@ -101,77 +101,13 @@ class HabboscopeGenerator {
             ]
         };
 
-        // Zodiac compatibility data
-        this.zodiacCompatibility = {
-            Aries: {
-                great: ["Leo", "Sagittarius", "Gemini"],
-                good: ["Libra", "Aquarius"],
-                challenging: ["Cancer", "Capricorn"]
-            },
-            Taurus: {
-                great: ["Virgo", "Capricorn", "Cancer"],
-                good: ["Scorpio", "Pisces"],
-                challenging: ["Leo", "Aquarius"]
-            },
-            Gemini: {
-                great: ["Libra", "Aquarius", "Aries"],
-                good: ["Leo", "Sagittarius"],
-                challenging: ["Virgo", "Pisces"]
-            },
-            Cancer: {
-                great: ["Scorpio", "Pisces", "Taurus"],
-                good: ["Virgo", "Capricorn"],
-                challenging: ["Aries", "Libra"]
-            },
-            Leo: {
-                great: ["Aries", "Sagittarius", "Gemini"],
-                good: ["Libra", "Aquarius"],
-                challenging: ["Taurus", "Scorpio"]
-            },
-            Virgo: {
-                great: ["Taurus", "Capricorn", "Cancer"],
-                good: ["Scorpio", "Pisces"],
-                challenging: ["Gemini", "Sagittarius"]
-            },
-            Libra: {
-                great: ["Gemini", "Aquarius", "Leo"],
-                good: ["Aries", "Sagittarius"],
-                challenging: ["Cancer", "Capricorn"]
-            },
-            Scorpio: {
-                great: ["Cancer", "Pisces", "Taurus"],
-                good: ["Virgo", "Capricorn"],
-                challenging: ["Leo", "Aquarius"]
-            },
-            Sagittarius: {
-                great: ["Aries", "Leo", "Gemini"],
-                good: ["Libra", "Aquarius"],
-                challenging: ["Virgo", "Pisces"]
-            },
-            Capricorn: {
-                great: ["Taurus", "Virgo", "Cancer"],
-                good: ["Scorpio", "Pisces"],
-                challenging: ["Aries", "Libra"]
-            },
-            Aquarius: {
-                great: ["Gemini", "Libra", "Aries"],
-                good: ["Leo", "Sagittarius"],
-                challenging: ["Taurus", "Scorpio"]
-            },
-            Pisces: {
-                great: ["Cancer", "Scorpio", "Taurus"],
-                good: ["Virgo", "Capricorn"],
-                challenging: ["Gemini", "Sagittarius"]
-            }
-        };
-
         this.init();
     }
 
-    init() {
-        // Set up event listeners
+init() {
         const horoscopeButton = document.getElementById('getHoroscope');
         const compatibilityButton = document.getElementById('checkCompatibility');
+        const getCompatibilityButton = document.getElementById('getCompatibility');
         
         if (horoscopeButton) {
             horoscopeButton.addEventListener('click', () => this.generateHoroscope());
@@ -181,102 +117,88 @@ class HabboscopeGenerator {
             compatibilityButton.addEventListener('click', () => this.toggleCompatibilityMode());
         }
 
+        if (getCompatibilityButton) {
+            getCompatibilityButton.addEventListener('click', () => {
+                const habbo1 = document.getElementById('habboName').value;
+                const habbo2 = document.getElementById('habboName2').value;
+                
+                if (!habbo1 || !habbo2) {
+                    alert("Please enter both Habbo names!");
+                    return;
+                }
+                
+                this.generateCompatibility(habbo1, habbo2);
+            });
+        }
+
         this.setTimeBasedClass();
     }
 
-    // Modified toggleCompatibilityMode method
-toggleCompatibilityMode() {
-    const compareSign = document.getElementById('compareSign');
-    const horoscopeSign = document.getElementById('horoscopeSign');
-    const checkButton = document.getElementById('checkCompatibility');
-    const habboName = document.getElementById('habboName');
-    
-    if (compareSign.style.display === 'none') {
-        // Show compatibility mode
-        compareSign.style.display = 'inline-block';
-        checkButton.textContent = 'Get Compatibility';
-        habboName.style.display = 'none'; // Hide name input in compatibility mode
-    } else {
-        // Check compatibility
-        if (!horoscopeSign.value || !compareSign.value) {
-            alert("Please select both zodiac signs!");
-            return;
-        }
-        this.checkCompatibility(horoscopeSign.value, compareSign.value);
-        compareSign.style.display = 'none';
-        checkButton.textContent = 'Check Compatibility';
-        habboName.style.display = 'inline-block'; // Show name input again
-    }
-}
-
-    checkCompatibility(sign1, sign2) {
-        const compatibility = this.getCompatibilityMessage(sign1, sign2);
+    toggleCompatibilityMode() {
+        const normalInputs = document.getElementById('habboName');
+        const horoscopeSign = document.getElementById('horoscopeSign');
+        const compatibilityInputs = document.getElementById('compatibilityInputs');
+        const checkButton = document.getElementById('checkCompatibility');
+        const getHoroscopeButton = document.getElementById('getHoroscope');
         
-        // Generate and display compatibility message
-        const message = `${sign1} and ${sign2}: ${compatibility.message}`;
-        
-        // Update UI with compatibility result
-        this.updateUIWithCompatibility(message, compatibility.level);
-    }
-
-    getCompatibilityMessage(sign1, sign2) {
-        const compatibility = this.zodiacCompatibility[sign1];
-        let compatibilityLevel = '';
-        let messages = [];
-
-        if (compatibility.great.includes(sign2)) {
-            compatibilityLevel = 'great';
-            messages = [
-                "You two could become inseparable friends!",
-                "The stars align perfectly for this friendship!",
-                "A legendary Habbo friendship in the making!",
-                "Together you could host amazing events!",
-                "Your combined energy could light up the whole hotel!"
-            ];
-        } else if (compatibility.good.includes(sign2)) {
-            compatibilityLevel = 'good';
-            messages = [
-                "A solid friendship with lots of potential!",
-                "You'll enjoy trading and gaming together!",
-                "Good vibes between your signs!",
-                "You'll make a great team in games!",
-                "Your different strengths complement each other well!"
-            ];
-        } else if (compatibility.challenging.includes(sign2)) {
-            compatibilityLevel = 'challenging';
-            messages = [
-                "You might need to work a bit harder to understand each other!",
-                "Different styles but that can make things interesting!",
-                "Focus on what you have in common!",
-                "Keep an open mind - opposites can attract!",
-                "You could learn a lot from each other!"
-            ];
+        if (compatibilityInputs.style.display === 'none') {
+            // Show compatibility mode
+            normalInputs.style.display = 'none';
+            horoscopeSign.style.display = 'none';
+            getHoroscopeButton.style.display = 'none';
+            compatibilityInputs.style.display = 'block';
+            checkButton.textContent = 'Back to Habboscope';
         } else {
-            compatibilityLevel = 'neutral';
-            messages = [
-                "You'll get along just fine!",
-                "A balanced friendship awaits!",
-                "Your differences make things interesting!",
-                "You'll enjoy exploring the hotel together!",
-                "A fresh perspective for both of you!"
-            ];
+            // Return to normal mode
+            normalInputs.style.display = 'inline-block';
+            horoscopeSign.style.display = 'inline-block';
+            getHoroscopeButton.style.display = 'inline-block';
+            compatibilityInputs.style.display = 'none';
+            checkButton.textContent = 'Check Compatibility';
         }
-
-        return {
-            level: compatibilityLevel,
-            message: messages[Math.floor(Math.random() * messages.length)]
-        };
     }
 
-    updateUIWithCompatibility(message, level) {
-        const horoscopeText = document.getElementById('horoscopeText');
-        if (horoscopeText) {
-            horoscopeText.innerText = message;
-        }
+    generateCompatibility(habbo1, habbo2) {
+        this.showLoading();
 
-        // Reset the compatibility mode
-        document.getElementById('compareSign').style.display = 'none';
-        document.getElementById('checkCompatibility').textContent = 'Check Compatibility';
+        const compatibilityLevels = [
+            { level: 'Legendary', messages: [
+                `${habbo1} and ${habbo2} - your friendship could light up the entire hotel!`,
+                `${habbo1} and ${habbo2} - together you could host the most amazing events!`,
+                `${habbo1} and ${habbo2} - the stars predict an iconic Habbo duo in the making!`
+            ]},
+            { level: 'Amazing', messages: [
+                `${habbo1} and ${habbo2} - your combined room building skills are off the charts!`,
+                `${habbo1} and ${habbo2} - trading together will bring great fortune to you both!`,
+                `${habbo1} and ${habbo2} - you'll make an unstoppable team in games!`
+            ]},
+            { level: 'Great', messages: [
+                `${habbo1} and ${habbo2} - you'll have lots of fun exploring the hotel together!`,
+                `${habbo1} and ${habbo2} - your friendship has great potential for adventures!`,
+                `${habbo1} and ${habbo2} - together you could create some amazing pixel art!`
+            ]},
+            { level: 'Good', messages: [
+                `${habbo1} and ${habbo2} - you'll enjoy playing games and trading together!`,
+                `${habbo1} and ${habbo2} - your different styles complement each other well!`,
+                `${habbo1} and ${habbo2} - many fun moments await in your friendship!`
+            ]}
+        ];
+
+        const randomLevel = compatibilityLevels[Math.floor(Math.random() * compatibilityLevels.length)];
+        const randomMessage = randomLevel.messages[Math.floor(Math.random() * randomLevel.messages.length)];
+
+        setTimeout(() => {
+            const avatar1Html = `<img src="https://habboden.com/habbo-imaging/${habbo1}?size=b&action=std&direction=2&head_direction=2&gesture=sml" alt="${habbo1}" class="interactive-element" />`;
+            const avatar2Html = `<img src="https://habboden.com/habbo-imaging/${habbo2}?size=b&action=std&direction=2&head_direction=2&gesture=sml" alt="${habbo2}" class="interactive-element" />`;
+            
+            document.getElementById('avatar').innerHTML = avatar1Html;
+            document.getElementById('starSign').innerHTML = avatar2Html;
+            document.getElementById('starSign').style.display = 'block';
+            document.getElementById('horoscopeText').innerText = randomMessage;
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('resultContent').style.display = 'flex';
+            document.getElementById('shareToX').style.display = 'flex';
+        }, 2000);
     }
 
     generateHoroscope() {
@@ -285,6 +207,11 @@ toggleCompatibilityMode() {
 
         if (!habboName) {
             alert("Please enter your Habbo name!");
+            return;
+        }
+
+        if (!horoscopeSign) {
+            alert("Please select your star sign!");
             return;
         }
 
@@ -312,11 +239,11 @@ toggleCompatibilityMode() {
         if (avatar) avatar.innerHTML = '';
         if (horoscopeText) horoscopeText.innerText = '';
         if (shareToX) shareToX.style.display = 'none';
+        if (resultContent) resultContent.style.display = 'none';
     }
 
     generateAndDisplayHoroscope(habboName, horoscopeSign) {
         const randomExpressionKey = Object.keys(this.expressions)[Math.floor(Math.random() * Object.keys(this.expressions).length)];
-        const randomExpressionPhrase = this.expressions[randomExpressionKey][Math.floor(Math.random() * this.expressions[randomExpressionKey].length)];
         const randomHandItem = this.handItems[Math.floor(Math.random() * this.handItems.length)];
 
         // Generate horoscope message using new enhanced system
@@ -397,9 +324,8 @@ toggleCompatibilityMode() {
 
         const starSign = document.getElementById('starSign');
         if (starSign) {
-            starSign.src = `horoscopeimages/${horoscopeSign}.png`;
+            starSign.innerHTML = `<img src="horoscopeimages/${horoscopeSign}.png" alt="${horoscopeSign}" class="interactive-element" />`;
             starSign.style.display = "block";
-            starSign.className = "interactive-element";
         }
 
         const horoscopeText = document.getElementById('horoscopeText');
@@ -415,28 +341,42 @@ toggleCompatibilityMode() {
         if (resultContent) resultContent.style.display = "flex";
         if (shareToX) {
             shareToX.style.display = "flex";
-            shareToX.onclick = () => this.shareToX(habboName, horoscopeSign, horoscopeMessage);
+            shareToX.onclick = () => this.shareToX();
         }
     }
 
     shareToX() {
-        const horoscopeText = document.getElementById('horoscopeText').innerText;
-        const habboName = document.getElementById('habboName').value;
-        const horoscopeSign = document.getElementById('horoscopeSign').value;
+        const resultDiv = document.getElementById('result');
         
-        // Create the tweet text
-        const tweetText = `My Habboscope for today: "${horoscopeText}" 
+        // Hide share button temporarily for the screenshot
+        const shareButton = document.getElementById('shareToX');
+        shareButton.style.display = 'none';
         
-Check yours at: https://habbokindness.com/habboscope 
-#Habbo #Habboscope #${horoscopeSign}`;
+        html2canvas(resultDiv).then(canvas => {
+            // Show share button again
+            shareButton.style.display = 'flex';
+            
+            // Save the canvas as an image file
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'habboscope.png';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                // Get the horoscope text
+                const horoscopeText = document.getElementById('horoscopeText').innerText;
+                const tweetText = `My Habboscope: ${horoscopeText.substring(0, 180)}${horoscopeText.length > 180 ? '...' : ''} via @OriginsMatthew #Habbo`;
 
-        // Encode the tweet text
-        const encodedTweet = encodeURIComponent(tweetText);
-        
-        // Open X's share window
-        window.open(`https://twitter.com/intent/tweet?text=${encodedTweet}`, 
-                    'Share to X', 
-                    'width=600,height=400');
+                // Open X's composer in a new window
+                window.open(
+                    `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`,
+                    '_blank',
+                    'width=600,height=400,location=yes,left=200,top=200'
+                );
+            });
+        });
     }
 }
 
