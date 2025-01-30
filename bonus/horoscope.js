@@ -14,42 +14,7 @@ class HabboscopeGenerator {
             "... connecting to the habboverse ..."
         ];
 
-        /* Magical Symbols */
-.magical-symbol {
-    font-family: "Volter Goldfish";
-    font-size: 24px;
-    position: absolute;
-    color: #ffd700;
-    animation: fadeInOut 3s infinite;
-    opacity: 0;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
-    100% { opacity: 0; transform: scale(1); }
-}
-
-/* Add back the original symbols in the result container */
-#result .magical-symbol#symbol1 {
-    top: 20px;
-    left: 30px;
-    content: '|';  /* Original heart symbol */
-}
-
-#result .magical-symbol#symbol2 {
-    top: 100px;
-    right: 40px;
-    content: 'º';  /* Original lightning symbol */
-}
-
-#result .magical-symbol#symbol3 {
-    bottom: 50px;
-    left: 50px;
-    content: 'ì';  /* Original hypnotic symbol */
-}
-
-        // Original expressions from your code
+        // Original expressions
         this.expressions = {
             sad: ["sad", "under the weather", "deflated", "uninspired", "sad"],
             spk: ["chatty", "like you're an open book", "you're full of words", "you're eager to talk", "you're ready to share", "expressive"],
@@ -98,17 +63,12 @@ class HabboscopeGenerator {
     }
 
     init() {
-        // Set up event listeners
         const horoscopeButton = document.getElementById('getHoroscope');
         if (horoscopeButton) {
             horoscopeButton.addEventListener('click', () => this.generateHoroscope());
         }
 
-        // Check time of day and apply appropriate class
         this.setTimeBasedClass();
-        
-        // Initialize any floating elements
-        this.initializeFloatingElements();
     }
 
     setTimeBasedClass() {
@@ -126,22 +86,7 @@ class HabboscopeGenerator {
         }
     }
 
-    initializeFloatingElements() {
-        const result = document.getElementById('result');
-        if (result) {
-            // Add some subtle floating stars
-            for (let i = 0; i < 3; i++) {
-                const star = document.createElement('div');
-                star.className = 'magical-symbol floating-element';
-                star.textContent = '✦';
-                star.style.left = `${Math.random() * 80 + 10}%`;
-                star.style.top = `${Math.random() * 80 + 10}%`;
-                result.appendChild(star);
-            }
-        }
-    }
-
-    async generateHoroscope() {
+    generateHoroscope() {
         const habboName = document.getElementById('habboName').value;
         const horoscopeSign = document.getElementById('horoscopeSign').value;
 
@@ -150,10 +95,8 @@ class HabboscopeGenerator {
             return;
         }
 
-        // Hide current content and show loading
         this.showLoading();
 
-        // Simulate loading time for effect
         setTimeout(() => {
             this.generateAndDisplayHoroscope(habboName, horoscopeSign);
         }, 2000);
@@ -166,53 +109,17 @@ class HabboscopeGenerator {
         const avatar = document.getElementById('avatar');
         const horoscopeText = document.getElementById('horoscopeText');
 
-        // Show loading message
         if (loadingMessage) {
             loadingMessage.innerText = this.loadingPhrases[Math.floor(Math.random() * this.loadingPhrases.length)];
             loadingMessage.style.display = "block";
         }
 
-        // Only hide the content elements, not the container
         if (starSign) starSign.style.display = "none";
         if (avatar) avatar.innerHTML = '';
         if (horoscopeText) horoscopeText.innerText = '';
     }
 
-    updateUI(habboName, horoscopeSign, horoscopeMessage, expressionKey, handItemCrr) {
-        // Update avatar
-        const avatar = document.getElementById('avatar');
-        if (avatar) {
-            avatar.innerHTML = `<img src="https://habboden.com/habbo-imaging/${habboName}?size=b&action=std&direction=2&head_direction=2&gesture=${expressionKey}&crr=${handItemCrr}" alt="${habboName}" />`;
-        }
-
-        // Update star sign
-        const starSign = document.getElementById('starSign');
-        if (starSign) {
-            starSign.src = `horoscopeimages/${horoscopeSign}.png`;
-            starSign.style.display = "block";
-        }
-
-        // Update horoscope text
-        const horoscopeText = document.getElementById('horoscopeText');
-        if (horoscopeText) {
-            horoscopeText.innerText = horoscopeMessage;
-        }
-
-        // Hide loading message
-        const loadingMessage = document.getElementById('loadingMessage');
-        if (loadingMessage) {
-            loadingMessage.style.display = "none";
-        }
-
-        // Make sure content is displayed
-        const resultContent = document.getElementById('resultContent');
-        if (resultContent) {
-            resultContent.style.display = "flex";
-        }
-    }
-
     generateAndDisplayHoroscope(habboName, horoscopeSign) {
-        // Generate random elements
         const randomExpressionKey = Object.keys(this.expressions)[Math.floor(Math.random() * Object.keys(this.expressions).length)];
         const randomExpressionPhrase = this.expressions[randomExpressionKey][Math.floor(Math.random() * this.expressions[randomExpressionKey].length)];
         const randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
@@ -221,7 +128,6 @@ class HabboscopeGenerator {
         const randomLetterPhrase = this.letterPhrases[Math.floor(Math.random() * this.letterPhrases.length)];
         const randomHandItem = this.handItems[Math.floor(Math.random() * this.handItems.length)];
 
-        // Generate horoscope message
         let horoscopeMessage = this.constructHoroscopeMessage(
             randomExpressionPhrase,
             randomColor,
@@ -231,10 +137,8 @@ class HabboscopeGenerator {
             randomHandItem
         );
 
-        // Add time-based modifier
         horoscopeMessage += ' ' + this.getTimeBasedModifier();
 
-        // Update UI
         this.updateUI(habboName, horoscopeSign, horoscopeMessage, randomExpressionKey, randomHandItem.crr);
     }
 
@@ -274,13 +178,11 @@ class HabboscopeGenerator {
     }
 
     updateUI(habboName, horoscopeSign, horoscopeMessage, expressionKey, handItemCrr) {
-        // Update avatar
         const avatar = document.getElementById('avatar');
         if (avatar) {
             avatar.innerHTML = `<img src="https://habboden.com/habbo-imaging/${habboName}?size=b&action=std&direction=2&head_direction=2&gesture=${expressionKey}&crr=${handItemCrr}" alt="${habboName}" class="interactive-element" />`;
         }
 
-        // Update star sign
         const starSign = document.getElementById('starSign');
         if (starSign) {
             starSign.src = `horoscopeimages/${horoscopeSign}.png`;
@@ -288,13 +190,11 @@ class HabboscopeGenerator {
             starSign.className = "interactive-element";
         }
 
-        // Update horoscope text
         const horoscopeText = document.getElementById('horoscopeText');
         if (horoscopeText) {
             horoscopeText.innerText = horoscopeMessage;
         }
 
-        // Hide loading and show content
         const loadingMessage = document.getElementById('loadingMessage');
         const resultContent = document.getElementById('resultContent');
         
