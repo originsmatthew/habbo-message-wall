@@ -71,6 +71,26 @@
             transform: scale(1.05);
         }
 
+        #shareToX {
+            background-color: #000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px auto;
+            padding: 8px 16px;
+        }
+
+        #shareToX img {
+            width: 20px;
+            height: 20px;
+        }
+
+        #shareToX:hover {
+            background-color: #333;
+        }
+
         /* Result container styles */
         #result {
             margin-top: 20px;
@@ -130,56 +150,55 @@
         }
 
         /* Magical Symbols */
-.magical-symbol {
-    font-family: "Volter Goldfish";
-    font-size: 24px;
-    position: absolute;
-    color: #ffd700;
-    animation: float 6s ease-in-out infinite;
-    z-index: 10;
-}
+        .magical-symbol {
+            font-family: "Volter Goldfish";
+            font-size: 24px;
+            position: absolute;
+            color: #ffd700;
+            animation: float 6s ease-in-out infinite;
+            z-index: 10;
+        }
 
-/* Individual symbol animations with different delays and positions */
-#symbol1 {
-    top: 20px;
-    left: 30px;
-    animation: float 6s ease-in-out infinite;
-}
+        #symbol1 {
+            top: 20px;
+            left: 30px;
+            animation: float 6s ease-in-out infinite;
+        }
 
-#symbol2 {
-    top: 100px;
-    right: 40px;
-    animation: float 6s ease-in-out 2s infinite;
-}
+        #symbol2 {
+            top: 100px;
+            right: 40px;
+            animation: float 6s ease-in-out 2s infinite;
+        }
 
-#symbol3 {
-    bottom: 50px;
-    left: 50px;
-    animation: float 6s ease-in-out 4s infinite;
-}
+        #symbol3 {
+            bottom: 50px;
+            left: 50px;
+            animation: float 6s ease-in-out 4s infinite;
+        }
 
-@keyframes float {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-        opacity: 0.2;
-    }
-    25% {
-        transform: translate(5px, -5px) rotate(5deg);
-        opacity: 1;
-    }
-    50% {
-        transform: translate(0, -10px) rotate(0deg);
-        opacity: 0.6;
-    }
-    75% {
-        transform: translate(-5px, -5px) rotate(-5deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(0, 0) rotate(0deg);
-        opacity: 0.2;
-    }
-}
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.2;
+            }
+            25% {
+                transform: translate(5px, -5px) rotate(5deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(0, -10px) rotate(0deg);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translate(-5px, -5px) rotate(-5deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.2;
+            }
+        }
 
         /* Time-based themes */
         .time-morning {
@@ -196,16 +215,6 @@
 
         .time-night {
             background: linear-gradient(180deg, #e6e6ff 0%, #f0f0f0 100%);
-        }
-
-        /* Interactive elements */
-        .interactive-element {
-            transition: all 0.2s ease-in-out;
-        }
-
-        .interactive-element:hover {
-            transform: scale(1.1);
-            filter: brightness(1.2);
         }
 
         /* Responsive design */
@@ -246,7 +255,22 @@
             <option value="Aquarius">Aquarius</option>
             <option value="Pisces">Pisces</option>
         </select>
+        <select id="compareSign" style="display: none;">
+            <option value="Aries">Aries</option>
+            <option value="Taurus">Taurus</option>
+            <option value="Gemini">Gemini</option>
+            <option value="Cancer">Cancer</option>
+            <option value="Leo">Leo</option>
+            <option value="Virgo">Virgo</option>
+            <option value="Libra">Libra</option>
+            <option value="Scorpio">Scorpio</option>
+            <option value="Sagittarius">Sagittarius</option>
+            <option value="Capricorn">Capricorn</option>
+            <option value="Aquarius">Aquarius</option>
+            <option value="Pisces">Pisces</option>
+        </select>
         <button id="getHoroscope" class="interactive-element">Get My Habboscope</button>
+        <button id="checkCompatibility" class="interactive-element">Check Compatibility</button>
     </div>
 
     <div id="result">
@@ -260,6 +284,11 @@
         <span class="magical-symbol" id="symbol1">|</span>
         <span class="magical-symbol" id="symbol2">º</span>
         <span class="magical-symbol" id="symbol3">ì</span>
+        
+        <button id="shareToX" class="interactive-element" style="display: none;">
+            <img src="x-share.png" alt="X Logo">
+            Share
+        </button>
     </div>
 
     <footer style="font-size: 0.8em; color: #999; padding: 0 20px">
