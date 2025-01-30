@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Habboscope Generator</title>
     <style>
-        /* Font-face declarations */
+        /* Original Font-face declarations */
         @font-face {
             font-family: "Volter Goldfish";
             src: url("../fonts/Volter (Goldfish).ttf") format("truetype");
@@ -20,17 +20,20 @@
             font-style: normal;
         }
 
+        /* Base styles */
         body {
             font-family: "Volter Goldfish", Arial, sans-serif;
             text-align: center;
             background-color: #f0f0f0;
             margin: 0;
             padding: 20px;
+            transition: background-color 0.5s ease;
         }
 
         h1 {
             font-size: 24px;
             margin-bottom: 10px;
+            font-family: "Volter Goldfish Bold";
         }
 
         .description {
@@ -48,7 +51,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             width: 200px;
-            font-family: "Volter Goldfish"; /* Use Volter font */
+            font-family: "Volter Goldfish";
         }
 
         button {
@@ -59,11 +62,13 @@
             border-radius: 5px;
             cursor: pointer;
             margin: 5px;
-            font-family: "Volter Goldfish Bold"; /* Apply font */
+            font-family: "Volter Goldfish Bold";
+            transition: all 0.3s ease;
         }
 
         button:hover {
             background-color: #ff3300;
+            transform: scale(1.05);
         }
 
         #result {
@@ -76,11 +81,17 @@
             color: white;
             width: 80%;
             max-width: 600px;
-            margin: 20px auto; /* Center the container */
+            margin: 20px auto;
             display: flex;
             align-items: center;
             flex-direction: column;
-            position: relative; /* For absolute positioning of magic symbols */
+            position: relative;
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+        }
+
+        #result.show {
+            opacity: 1;
         }
 
         #horoscopeHeader {
@@ -91,43 +102,31 @@
 
         #resultContent {
             display: flex;
-            align-items: center; /* Vertically align the avatar and star sign */
-            justify-content: space-between; /* Space them out horizontally */
-            gap: 20px; /* Add space between the avatar and star sign */
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
             width: 100%;
             padding: 10px;
         }
 
         #avatar img, #starSign {
-            width: 200px; /* Fixed size for avatar and star sign */
+            width: 200px;
             height: 150px;
-            object-fit: contain; /* Ensure proper scaling */
+            object-fit: contain;
+            transition: transform 0.3s ease;
         }
 
         #avatar {
-            flex: 1; /* Allow the avatar to take equal space */
+            flex: 1;
             text-align: center;
         }
 
         #starSign {
-            flex: 1; /* Allow the star sign to take equal space */
+            flex: 1;
             text-align: center;
         }
 
-        /* Adjustments for smaller screens */
-        @media (max-width: 600px) {
-            #resultContent {
-                flex-direction: column; /* Stack avatar and star sign vertically on small screens */
-                gap: 10px;
-            }
-
-            #avatar img, #starSign {
-                width: 80px; /* Slightly smaller images for small screens */
-                height: 80px;
-            }
-        }
-
-        /* Magical Loading Animation */
+        /* Loading animation */
         #loadingMessage {
             font-size: 18px;
             color: #ff6600;
@@ -141,24 +140,71 @@
             100% { opacity: 1; }
         }
 
-        /* Magical Symbols (Heart, Lightning, Hypnotic Symbol) */
-        .magical-symbol {
-            font-size: 24px;
+        /* Floating elements animation */
+        .floating-element {
             position: absolute;
-            color: #ffd700; /* Gold color to match stars */
-            animation: fadeInOut 3s infinite;
-            opacity: 0;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+            font-size: 24px;
+            z-index: 1;
         }
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 0; transform: scale(1); }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Time-based themes */
+        .time-morning {
+            background: linear-gradient(180deg, #ffecd2 0%, #f0f0f0 100%);
+        }
+
+        .time-afternoon {
+            background: linear-gradient(180deg, #f0f0f0 0%, #ffedcc 100%);
+        }
+
+        .time-evening {
+            background: linear-gradient(180deg, #ffedcc 0%, #e6e6ff 100%);
+        }
+
+        .time-night {
+            background: linear-gradient(180deg, #e6e6ff 0%, #f0f0f0 100%);
+        }
+
+        /* Interactive elements */
+        .interactive-element {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            #resultContent {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #avatar img, #starSign {
+                width: 150px;
+                height: 150px;
+            }
+
+            #result {
+                width: 95%;
+            }
         }
     </style>
 </head>
 <body>
-
     <h1>Habboscope Generator</h1>
     <div class="description">Enter your name, select your Habboscope sign, and find out what the stars have in store for you today!</div>
     
@@ -178,47 +224,37 @@
             <option value="Aquarius">Aquarius</option>
             <option value="Pisces">Pisces</option>
         </select>
-        <button id="getHoroscope">Get My Habboscope</button>
+        <button id="getHoroscope" class="interactive-element">Get My Habboscope</button>
     </div>
 
-    <!-- Horoscope result will appear here -->
     <div id="result">
-        <!-- Loading Message inside result -->
         <div id="loadingMessage" style="display: none;"></div>
-        
-        <!-- Horoscope content -->
         <div id="horoscopeHeader"></div>
         <div id="resultContent">
-            <div id="avatar"></div> <!-- Avatar will be injected here by JavaScript -->
-            <img id="starSign" alt="Horoscope Sign" style="display: none;" /> <!-- Hidden initially -->
+            <div id="avatar"></div>
+            <img id="starSign" alt="Horoscope Sign" style="display: none;" />
         </div>
         <p id="horoscopeText"></p>
-
-        <!-- Magical Symbols inside result container -->
-        <span class="magical-symbol" id="symbol1" style="top: 20px; left: 30px;">|</span> <!-- Heart -->
-        <span class="magical-symbol" id="symbol2" style="top: 100px; right: 40px;">º</span> <!-- Lightning -->
-        <span class="magical-symbol" id="symbol3" style="bottom: 50px; left: 50px;">ì</span> <!-- Hypnotic Symbol -->
     </div>
 
+    <footer style="font-size: 0.8em; color: #999; padding: 0 20px">
+        <p>
+            <br>We are not affiliated with, endorsed, sponsored, or specifically approved by Sulake Oy or its Affiliates. <br> We may use the trademarks and other intellectual property of Habbo, which is permitted under the Habbo Fan Site Policy. <br>The use of this Habbo Imager kindly provided by <a href="https://habboden.com" target="_blank">HabboDen</a>.
+        </p>
+        <p>
+            Page created and maintained by <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a>. Dedicated to user BobBarker.
+        </p>
+        <p>
+            <a href="../index.html">HabboKindness.com</a> | <a href="privacy-policy.html">Privacy Policy</a>
+        </p>
+        <img
+            src="https://habboden.com/habbo-imaging/Matthew?size=b&action=wav&gesture=sml"
+            alt="Matthew's Avatar"
+            style="width: 50px; height: auto; margin-top: 10px"
+        />
+    </footer>
+
+    <!-- Script must be loaded after the DOM -->
     <script src="horoscope.js"></script>
 </body>
-
-<footer style="font-size: 0.8em; color: #999; padding: 0 20px">
-  <p>
-    <br>We are not affiliated with, endorsed, sponsored, or specifically approved by Sulake Oy or its Affiliates. <br> We may use the trademarks and other intellectual property of Habbo, which is permitted under the Habbo Fan Site Policy. <br>The use of this Habbo Imager kindly provided by <a href="https://habboden.com" target="_blank">HabboDen</a>.
-  </p>
-  <p>
-    Page created and maintained by <a href="https://x.com/OriginsMatthew" target="_blank">Matthew</a>. Dedicated to user BobBarker.
-  </p>
-  <p>
-     <a href="../index.html">HabboKindness.com</a> | <a href="privacy-policy.html">Privacy Policy</a>
-  </p>
-  <img
-    src="https://habboden.com/habbo-imaging/Matthew?size=b&action=wav&gesture=sml"
-    alt="Matthew's Avatar"
-    style="width: 50px; height: auto; margin-top: 10px"
-  />
-</footer>
-</body>
-</html>
 </html>
