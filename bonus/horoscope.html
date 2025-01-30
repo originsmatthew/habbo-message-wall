@@ -130,36 +130,56 @@
         }
 
         /* Magical Symbols */
-        .magical-symbol {
-            font-family: "Volter Goldfish";
-            font-size: 24px;
-            position: absolute;
-            color: #ffd700;
-            animation: fadeInOut 3s infinite;
-            opacity: 0;
-        }
+.magical-symbol {
+    font-family: "Volter Goldfish";
+    font-size: 24px;
+    position: absolute;
+    color: #ffd700;
+    animation: float 6s ease-in-out infinite;
+    z-index: 10;
+}
 
-        /* Individual symbol positioning */
-        #result .magical-symbol#symbol1 {
-            top: 20px;
-            left: 30px;
-        }
+/* Individual symbol animations with different delays and positions */
+#symbol1 {
+    top: 20px;
+    left: 30px;
+    animation: float 6s ease-in-out infinite;
+}
 
-        #result .magical-symbol#symbol2 {
-            top: 100px;
-            right: 40px;
-        }
+#symbol2 {
+    top: 100px;
+    right: 40px;
+    animation: float 6s ease-in-out 2s infinite;
+}
 
-        #result .magical-symbol#symbol3 {
-            bottom: 50px;
-            left: 50px;
-        }
+#symbol3 {
+    bottom: 50px;
+    left: 50px;
+    animation: float 6s ease-in-out 4s infinite;
+}
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 0; transform: scale(1); }
-        }
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.2;
+    }
+    25% {
+        transform: translate(5px, -5px) rotate(5deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(0, -10px) rotate(0deg);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translate(-5px, -5px) rotate(-5deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.2;
+    }
+}
 
         /* Time-based themes */
         .time-morning {
