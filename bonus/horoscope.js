@@ -184,17 +184,30 @@ class HabboscopeGenerator {
         this.setTimeBasedClass();
     }
 
-    toggleCompatibilityMode() {
-        const compareSign = document.getElementById('compareSign');
-        const horoscopeSign = document.getElementById('horoscopeSign');
-        
-        if (compareSign.style.display === 'none') {
-            compareSign.style.display = 'inline-block';
-            document.getElementById('checkCompatibility').textContent = 'Get Compatibility';
-        } else {
-            this.checkCompatibility(horoscopeSign.value, compareSign.value);
+    // Modified toggleCompatibilityMode method
+toggleCompatibilityMode() {
+    const compareSign = document.getElementById('compareSign');
+    const horoscopeSign = document.getElementById('horoscopeSign');
+    const checkButton = document.getElementById('checkCompatibility');
+    const habboName = document.getElementById('habboName');
+    
+    if (compareSign.style.display === 'none') {
+        // Show compatibility mode
+        compareSign.style.display = 'inline-block';
+        checkButton.textContent = 'Get Compatibility';
+        habboName.style.display = 'none'; // Hide name input in compatibility mode
+    } else {
+        // Check compatibility
+        if (!horoscopeSign.value || !compareSign.value) {
+            alert("Please select both zodiac signs!");
+            return;
         }
+        this.checkCompatibility(horoscopeSign.value, compareSign.value);
+        compareSign.style.display = 'none';
+        checkButton.textContent = 'Check Compatibility';
+        habboName.style.display = 'inline-block'; // Show name input again
     }
+}
 
     checkCompatibility(sign1, sign2) {
         const compatibility = this.getCompatibilityMessage(sign1, sign2);
